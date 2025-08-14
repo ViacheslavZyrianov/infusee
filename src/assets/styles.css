@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overscroll-behavior: none
+}
+
+.v-toolbar__prepend,
+.v-toolbar__append {
+  z-index: 1;
+}
+
+ul {
+  list-style: inside;
+}
