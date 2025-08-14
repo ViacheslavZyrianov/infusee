@@ -46,10 +46,12 @@ export default defineConfig({
       workbox: {
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [
-          /^\/rest\/v1\//, // Supabase API calls
-          /\/assets\//, // Static assets from Vite build
-          /\.json$/, // Any JSON files
-          /\.ico$/, // Favicons
+          /^\/rest\/v1\//, // Supabase API
+          /\/assets\//, // Vite build assets
+          /\/icons\//, // PWA icons
+          /\/favicon\.svg$/, // favicon
+          /\.json$/, // JSON files
+          /\.ico$/, // favicons
           /\.png$/, // PNG images
           /\.jpg$/, // JPG images
           /\.svg$/, // SVG files
