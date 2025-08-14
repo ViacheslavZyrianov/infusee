@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
-import tabBarItems from "./items";
-import { useRoute } from "vue-router";
+import { ref, Ref } from 'vue'
+import tabBarItems from './items'
+import { useRoute } from 'vue-router'
 
-const route = useRoute();
+const route = useRoute()
 
-const currentRoute: Ref<string> = ref(String(route.name));
+const currentRoute: Ref<string> = ref(String(route.name))
 
 const generateIconColor = (path: string): string =>
-  currentRoute.value === path ? "primary" : "grey";
+  currentRoute.value === path ? 'primary' : 'grey'
 </script>
 
 <template>

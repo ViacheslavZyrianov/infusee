@@ -3,7 +3,7 @@
 }
 
 html {
-  overscroll-behavior: none
+  overscroll-behavior: none;
 }
 
 .v-toolbar__prepend,
