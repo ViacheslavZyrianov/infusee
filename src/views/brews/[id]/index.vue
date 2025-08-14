@@ -18,7 +18,9 @@ const ratingFields = {
   Body: 'rating_body',
   Aftertaste: 'rating_aftertaste',
   Sweetness: 'rating_sweetness',
-}
+} as const
+
+type RatingKey = (typeof ratingFields)[keyof typeof ratingFields]
 
 onMounted(async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
@@ -65,7 +67,13 @@ onMounted(async () => {
       <v-row dense>
         <v-col cols="6" md="4" v-for="(key, label) in ratingFields" :key="key">
           <div class="font-weight-bold">{{ label }}:</div>
-          <v-rating :model-value="brew[key]" length="5" density="compact" readonly size="18" />
+          <v-rating
+            :model-value="brew[key as RatingKey]"
+            length="5"
+            density="compact"
+            readonly
+            size="18"
+          />
         </v-col>
       </v-row>
 

@@ -18,4 +18,4 @@ export type Brew = {
   notes: string | null
 }
 
-export type BrewRead = Brew & { id: string }
+export type BrewRead = Brew & { id: string; created_at: string }

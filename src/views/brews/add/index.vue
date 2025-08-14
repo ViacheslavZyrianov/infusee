@@ -10,7 +10,25 @@ const router = useRouter()
 const brewStore = useBrewStore()
 
 const brewFormRef: Ref<{ form: Brew }> = ref({
-  form: {},
+  form: {
+    name: '',
+    brew_method: null,
+    country: null,
+    roaster: null,
+    rating_aroma: 0,
+    rating_flavor: 0,
+    rating_acidity: 0,
+    rating_bitterness: 0,
+    rating_sweetness: 0,
+    rating_body: 0,
+    rating_aftertaste: 0,
+    grind: null,
+    dose: null,
+    channeling: null,
+    output: null,
+    price: null,
+    notes: null,
+  },
 })
 
 const onSave = async () => {

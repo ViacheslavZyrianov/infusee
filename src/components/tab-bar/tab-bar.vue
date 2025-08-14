@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import tabBarItems from './items'
 import { useRoute } from 'vue-router'
 

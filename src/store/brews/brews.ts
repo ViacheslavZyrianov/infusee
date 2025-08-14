@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase.ts'
-import { ref } from 'vue'
+import { type Ref, ref } from 'vue'
+import type { BrewRead } from '@/store/brews/types.ts'
+import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 
 export default defineStore('brews', () => {
-  const brews = ref([])
+  const brews: Ref<BrewRead[]> = ref([])
 
   const getBrews = async () => {
     const {
@@ -11,19 +13,19 @@ export default defineStore('brews', () => {
     } = await supabase.auth.getUser()
     if (!user) throw new Error('Not logged in')
 
-    const { data, error } = await supabase
+    const response = (await supabase
       .from('brews')
       .select(
         'id, user_id, name, brew_method, country, roaster, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
       )
       .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
+      .order('created_at', { ascending: false })) as PostgrestSingleResponse<BrewRead[]>
 
-    if (error) {
-      throw new Error(`Error posting brew: ${error.message}`)
+    if (response.error) {
+      throw new Error(`Error posting brew: ${response.error.message}`)
     }
 
-    brews.value = data || []
+    brews.value = response.data || []
   }
 
   return { brews, getBrews }
