@@ -11,6 +11,10 @@ html {
   z-index: 1;
 }
 
+.v-bottom-navigation {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 ul {
   list-style: inside;
 }
