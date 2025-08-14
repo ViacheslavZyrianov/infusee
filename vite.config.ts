@@ -43,6 +43,18 @@ export default defineConfig({
       injectManifest: {
         swSrc: 'src/sw.js',
       },
+      workbox: {
+        navigateFallback: '/index.html',
+        navigateFallbackDenylist: [
+          /^\/rest\/v1\//, // Supabase API calls
+          /\/assets\//, // Static assets from Vite build
+          /\.json$/, // Any JSON files
+          /\.ico$/, // Favicons
+          /\.png$/, // PNG images
+          /\.jpg$/, // JPG images
+          /\.svg$/, // SVG files
+        ],
+      },
       devOptions: {
         enabled: process.env.NODE_ENV === 'development',
       },
