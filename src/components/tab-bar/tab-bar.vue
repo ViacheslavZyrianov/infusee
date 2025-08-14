@@ -24,9 +24,3 @@ const generateIconColor = (path: string): string =>
     />
   </v-bottom-navigation>
 </template>
-
-<style>
-.v-bottom-navigation {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-</style>
