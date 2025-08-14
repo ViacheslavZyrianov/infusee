@@ -49,7 +49,7 @@ defineExpose({
       :items="countries.countries"
     >
       <template v-slot:item="{ props }">
-        <v-list-item v-bind="props" :title="countries.getFlagAndName(props.value)" />
+        <v-list-item v-bind="props" :title="countries.getFlagAndName(props.value as string)" />
       </template>
       <template v-slot:selection="{ item }">{{ item.raw.flag }} {{ item.title }} </template>
     </v-autocomplete>

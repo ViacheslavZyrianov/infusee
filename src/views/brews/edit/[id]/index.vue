@@ -11,7 +11,25 @@ const router = useRouter()
 const brewStore = useBrewStore()
 
 const brewFormRef: Ref<{ form: Brew }> = ref({
-  form: {},
+  form: {
+    name: '',
+    brew_method: null,
+    country: null,
+    roaster: null,
+    rating_aroma: 0,
+    rating_flavor: 0,
+    rating_acidity: 0,
+    rating_bitterness: 0,
+    rating_sweetness: 0,
+    rating_body: 0,
+    rating_aftertaste: 0,
+    grind: null,
+    dose: null,
+    channeling: null,
+    output: null,
+    price: null,
+    notes: null,
+  },
 })
 
 const id: ComputedRef<string> = computed(() => route.params.id as string)
@@ -22,10 +40,25 @@ const onCancel = () => {
 
 const getBrew = async () => {
   const brew = await brewStore.getBrew(id.value)
-
-  Object.keys(brewFormRef.value.form).forEach((key) => {
-    brewFormRef.value.form[key] = brew[key]
-  })
+  brewFormRef.value.form = {
+    name: brew.name,
+    brew_method: brew.brew_method,
+    country: brew.country,
+    roaster: brew.roaster,
+    rating_aroma: brew.rating_aroma,
+    rating_flavor: brew.rating_flavor,
+    rating_acidity: brew.rating_acidity,
+    rating_bitterness: brew.rating_bitterness,
+    rating_sweetness: brew.rating_sweetness,
+    rating_body: brew.rating_body,
+    rating_aftertaste: brew.rating_aftertaste,
+    grind: brew.grind,
+    dose: brew.dose,
+    channeling: brew.channeling,
+    output: brew.output,
+    price: brew.price,
+    notes: brew.notes,
+  }
 }
 
 const onSave = async () => {

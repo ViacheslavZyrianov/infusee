@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
-import type { Brew } from '@/store/brews/types.ts'
+import type { BrewRead } from '@/store/brews/types.ts'
 import { useCountries } from '@/composables/useCountries.ts'
 
 const props = defineProps({
   brew: {
-    type: Object as () => Brew,
+    type: Object as () => BrewRead,
     required: true,
   },
 })
@@ -71,7 +71,8 @@ const onDelete = () => {
     </div>
 
     <v-card-subtitle>
-      {{ countries.getFlagAndName(brew.country) }} · {{ brew.brew_method.toUpperCase() }} ·
+      <template v-if="brew.country"> {{ countries.getFlagAndName(brew.country) }} · </template>
+      <template v-if="brew.brew_method"> {{ brew.brew_method.toUpperCase() }} · </template>
       {{ brew.roaster }}
     </v-card-subtitle>
 
