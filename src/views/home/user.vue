@@ -59,7 +59,10 @@ const onSignOut = async () => {
         <v-divider class="my-6" />
 
         <div class="d-flex ga-4">
-          <v-btn class="flex-grow-1" prepend-icon="mdi-coffee" href="/brews"> Start brewing </v-btn>
+          <v-btn class="flex-grow-1" prepend-icon="mdi-coffee" :to="{ path: '/brews' }">
+            Start brewing
+          </v-btn>
+
           <v-btn class="flex-grow-1" color="error" prepend-icon="mdi-logout" @click="onSignOut">
             Sign out
           </v-btn>
