@@ -27,7 +27,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-chip text="0.3" />
+  <v-chip text="0.4" />
   <user-view v-if="userData" :user="userData" @sign-out="onSignOut" />
   <guest-view v-else />
 </template>
