@@ -26,6 +26,37 @@ const form: Brew = reactive({
   notes: null,
 })
 
+const ratings = [
+  {
+    name: 'Aroma',
+    model: 'rating_aroma',
+  },
+  {
+    name: 'Flavor',
+    model: 'rating_flavor',
+  },
+  {
+    name: 'Acidity',
+    model: 'rating_acidity',
+  },
+  {
+    name: 'Bitterness',
+    model: 'rating_bitterness',
+  },
+  {
+    name: 'Sweetness',
+    model: 'rating_sweetness',
+  },
+  {
+    name: 'Body',
+    model: 'rating_body',
+  },
+  {
+    name: 'Aftertaste',
+    model: 'rating_aftertaste',
+  },
+]
+
 defineExpose({
   form,
 })
@@ -46,6 +77,7 @@ defineExpose({
       placeholder="Choose country of origin"
       item-title="name"
       item-value="code"
+      eager
       :items="countries.countries"
     >
       <template v-slot:item="{ props }">
@@ -57,70 +89,10 @@ defineExpose({
     <div class="mb-4">
       <v-label class="mb-2">Rating</v-label>
       <div class="d-flex flex-column">
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Aroma</div>
+        <div v-for="rating in ratings" :key="rating.model" class="d-flex align-center">
+          <div class="text-body-2 mr-auto">{{ rating.name }}</div>
           <v-rating
-            v-model="form.rating_aroma"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Flavor</div>
-          <v-rating
-            v-model="form.rating_flavor"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Acidity</div>
-          <v-rating
-            v-model="form.rating_acidity"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Bitterness</div>
-          <v-rating
-            v-model="form.rating_bitterness"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Sweetness</div>
-          <v-rating
-            v-model="form.rating_sweetness"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Body</div>
-          <v-rating
-            v-model="form.rating_body"
-            :length="5"
-            :size="24"
-            clearable
-            active-color="primary"
-          />
-        </div>
-        <div class="d-flex">
-          <div class="text-body-2 mr-auto">Aftertaste</div>
-          <v-rating
-            v-model="form.rating_aftertaste"
+            v-model="form[rating.model]"
             :length="5"
             :size="24"
             clearable
