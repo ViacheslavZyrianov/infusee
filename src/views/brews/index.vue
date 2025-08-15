@@ -18,7 +18,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <teleport to="#app-bar-action--right">
+  <teleport defer to="#app-bar-action--right">
     <v-btn prepend-icon="mdi-plus" to="/brews/add">Add brew</v-btn>
   </teleport>
   <brew-item
