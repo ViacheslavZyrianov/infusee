@@ -3,24 +3,14 @@ import { useRoute } from 'vue-router'
 import useBrewStore from '@/store/brews/brew'
 import { onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
+import { useRatings } from '@/composables/useRatings.ts'
 
 const route = useRoute()
+const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 
 const brewStore = useBrewStore()
 
 const brew: Ref<BrewRead | null> = ref(null)
-
-const ratingFields = {
-  Aroma: 'rating_aroma',
-  Flavor: 'rating_flavor',
-  Acidity: 'rating_acidity',
-  Bitterness: 'rating_bitterness',
-  Body: 'rating_body',
-  Aftertaste: 'rating_aftertaste',
-  Sweetness: 'rating_sweetness',
-} as const
-
-type RatingKey = (typeof ratingFields)[keyof typeof ratingFields]
 
 onMounted(async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
@@ -65,10 +55,10 @@ onMounted(async () => {
     <v-card-text>
       <!-- Ratings Section -->
       <v-row dense>
-        <v-col cols="6" md="4" v-for="(key, label) in ratingFields" :key="key">
-          <div class="font-weight-bold">{{ label }}:</div>
+        <v-col cols="6" md="4" v-for="ratingKey in ratingKeys" :key="ratingModel(ratingKey)">
+          <div class="font-weight-bold">{{ ratingLabel(ratingKey) }}:</div>
           <v-rating
-            :model-value="brew[key as RatingKey]"
+            :model-value="brew[ratingModel(ratingKey)]"
             length="5"
             density="compact"
             readonly

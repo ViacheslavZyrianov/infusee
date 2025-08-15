@@ -3,8 +3,10 @@ import { reactive } from 'vue'
 import brewMethods from './brewMethods.ts'
 import type { Brew } from '@/store/brews/types.ts'
 import { useCountries } from '@/composables/useCountries.ts'
+import { useRatings } from '@/composables/useRatings.ts'
 
 const countries = useCountries()
+const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 
 const form: Brew = reactive({
   name: '',
@@ -25,37 +27,6 @@ const form: Brew = reactive({
   price: null,
   notes: null,
 })
-
-const ratings = [
-  {
-    name: 'Aroma',
-    model: 'rating_aroma',
-  },
-  {
-    name: 'Flavor',
-    model: 'rating_flavor',
-  },
-  {
-    name: 'Acidity',
-    model: 'rating_acidity',
-  },
-  {
-    name: 'Bitterness',
-    model: 'rating_bitterness',
-  },
-  {
-    name: 'Sweetness',
-    model: 'rating_sweetness',
-  },
-  {
-    name: 'Body',
-    model: 'rating_body',
-  },
-  {
-    name: 'Aftertaste',
-    model: 'rating_aftertaste',
-  },
-]
 
 defineExpose({
   form,
@@ -89,10 +60,14 @@ defineExpose({
     <div class="mb-4">
       <v-label class="mb-2">Rating</v-label>
       <div class="d-flex flex-column">
-        <div v-for="rating in ratings" :key="rating.model" class="d-flex align-center">
-          <div class="text-body-2 mr-auto">{{ rating.name }}</div>
+        <div
+          v-for="ratingKey in ratingKeys"
+          :key="ratingModel(ratingKey)"
+          class="d-flex align-center"
+        >
+          <div class="text-body-2 mr-auto">{{ ratingLabel(ratingKey) }}</div>
           <v-rating
-            v-model="form[rating.model]"
+            v-model="form[ratingModel(ratingKey)]"
             :length="5"
             :size="24"
             clearable

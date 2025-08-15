@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, type ComputedRef } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useCountries } from '@/composables/useCountries.ts'
+import { useRatings } from '@/composables/useRatings.ts'
 
 const props = defineProps({
   brew: {
@@ -13,26 +13,7 @@ const props = defineProps({
 const emit = defineEmits(['delete'])
 
 const countries = useCountries()
-
-const averageRating: ComputedRef<number> = computed(() => {
-  const ratingFields = [
-    'rating_aroma',
-    'rating_flavor',
-    'rating_acidity',
-    'rating_bitterness',
-    'rating_sweetness',
-    'rating_body',
-    'rating_aftertaste',
-  ] as const
-
-  const ratings = ratingFields
-    .map((field) => props.brew[field])
-    .filter((v) => typeof v === 'number' && v > 0)
-
-  if (ratings.length === 0) return 0
-
-  return Number((ratings.reduce((sum, val) => sum + val, 0) / ratings.length).toFixed(1))
-})
+const { ratingAverage } = useRatings()
 
 const onDelete = () => {
   if (confirm(`Are you sure you want to delete "${props.brew.name}"?`)) {
@@ -83,9 +64,9 @@ const onDelete = () => {
         {{ new Date(brew.created_at).toLocaleDateString() }}
       </span>
       <div class="d-flex align-center">
-        <span class="mr-1">{{ averageRating }}</span>
+        <span class="mr-1">{{ ratingAverage(brew) }}</span>
         <v-rating
-          :model-value="averageRating"
+          :model-value="ratingAverage(brew)"
           :length="5"
           :size="24"
           readonly
