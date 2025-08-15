@@ -72,10 +72,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <teleport to="#app-bar-action--left">
+  <teleport defer to="#app-bar-action--left">
     <v-btn variant="outlined" @click="onCancel">Cancel</v-btn>
   </teleport>
-  <teleport to="#app-bar-action--right">
+  <teleport defer to="#app-bar-action--right">
     <v-btn @click="onSave">Save</v-btn>
   </teleport>
   <brew-form ref="brewFormRef" />

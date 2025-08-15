@@ -28,11 +28,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <teleport to="#app-bar-action--left">
+  <teleport defer to="#app-bar-action--left">
     <v-btn to="/brews" icon="mdi-arrow-left" variant="text" color="grey-darken-4" />
   </teleport>
 
-  <teleport to="#app-bar-action--right">
+  <teleport defer to="#app-bar-action--right">
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-icon
