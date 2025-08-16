@@ -1,5 +1,6 @@
 import brews from './brews.ts'
 import coffees from './coffees.ts'
+import roasters from './roasters.ts'
 
 export default [
   {
@@ -26,6 +27,7 @@ export default [
   },
   ...brews,
   ...coffees,
+  ...roasters,
   {
     path: '/privacy-policy',
     name: 'PrivacyPolicy',
