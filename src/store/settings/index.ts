@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, type Ref } from 'vue'
+import useCurrencies from '@/composables/useCurrencies.ts'
 
 export const useSettingsStore = defineStore('settings', () => {
-  const isThemeDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
-  const isShowDayNightCodes = ref(true)
+  const isThemeDark: Ref<boolean> = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const isShowDayNightCodes: Ref<boolean> = ref(true)
+
+  const currencies = useCurrencies()
+  const currency: Ref<string> = ref(currencies.defaultCurrency)
 
   const getTheme = computed(() => (isThemeDark.value ? 'dark' : 'light'))
 
@@ -14,6 +18,7 @@ export const useSettingsStore = defineStore('settings', () => {
   return {
     isThemeDark,
     isShowDayNightCodes,
+    currency,
     getTheme,
     toggleTheme,
   }
