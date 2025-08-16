@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
-import brewMethods from './brewMethods.ts'
 import type { Brew } from '@/store/brews/types.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useRatings } from '@/composables/useRatings.ts'
+import useBrewMethods from '@/composables/useBrewMethods.ts'
 
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
+const { brewMethods } = useBrewMethods()
 
 const form: Brew = reactive({
   coffee_id: null,
