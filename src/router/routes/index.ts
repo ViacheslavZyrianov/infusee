@@ -1,4 +1,5 @@
 import brews from './brews.ts'
+import coffees from './coffees.ts'
 
 export default [
   {
@@ -24,6 +25,7 @@ export default [
     component: () => import('@/views/settings/index.vue'),
   },
   ...brews,
+  ...coffees,
   {
     path: '/privacy-policy',
     name: 'PrivacyPolicy',
