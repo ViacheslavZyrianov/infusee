@@ -1,7 +1,6 @@
 export type Brew = {
   coffee_id: string | null
   brew_method: string | null
-  country: string | null
   roaster: string | null
   rating_aroma: number
   rating_flavor: number
