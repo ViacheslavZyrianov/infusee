@@ -33,6 +33,16 @@ export default createVuetify({
   },
   defaults: {
     VBtn,
+    VBtnGroup: {
+      style: {
+        'border-color': 'rgba(0, 0, 0, 0.38)',
+      },
+      VBtn: {
+        style: {
+          'border-color': 'rgba(0, 0, 0, 0.38)',
+        },
+      },
+    },
     VCard: {
       class: 'pa-4',
       VCardTitle: {
@@ -56,5 +66,15 @@ export default createVuetify({
     VTextarea: field,
     VSelect: field,
     VAutocomplete: field,
+    VSwitch: {
+      color: 'primary',
+    },
+    VBottomNavigation: {
+      VBtn: {
+        style: {
+          'min-width': '0',
+        },
+      },
+    },
   },
 })
