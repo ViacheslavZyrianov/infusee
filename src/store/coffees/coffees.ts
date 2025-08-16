@@ -7,7 +7,7 @@ import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 export default defineStore('coffees', () => {
   const coffees: Ref<CoffeeRead[]> = ref([])
 
-  const getCoffees = async () => {
+  const getCoffees = async (query?: string) => {
     const {
       data: { user },
     } = await supabase.auth.getUser()
@@ -15,7 +15,7 @@ export default defineStore('coffees', () => {
 
     const response = (await supabase
       .from('coffees')
-      .select('*')
+      .select(query || '*')
       .eq('user_id', user.id)
       .order('name', { ascending: true })) as PostgrestSingleResponse<CoffeeRead[]>
 
