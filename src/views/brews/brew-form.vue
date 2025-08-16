@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { onMounted, reactive } from 'vue'
 import brewMethods from './brewMethods.ts'
 import type { Brew } from '@/store/brews/types.ts'
+import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useCountries } from '@/composables/useCountries.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 
 const countries = useCountries()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
+const coffeesStore = useCoffeesStore()
 
 const form: Brew = reactive({
-  name: '',
+  coffee_id: null,
   brew_method: null,
   country: null,
   roaster: null,
@@ -28,6 +30,14 @@ const form: Brew = reactive({
   notes: null,
 })
 
+const getCoffees = async () => {
+  await coffeesStore.getCoffees('id, name')
+}
+
+onMounted(async () => {
+  await getCoffees()
+})
+
 defineExpose({
   form,
 })
@@ -35,7 +45,14 @@ defineExpose({
 
 <template>
   <v-card>
-    <v-text-field v-model="form.name" label="Name" placeholder="Enter coffee name" required />
+    <v-autocomplete
+      v-model="form.coffee_id"
+      label="Coffee"
+      placeholder="Select coffee"
+      item-title="name"
+      item-value="id"
+      :items="coffeesStore.coffees"
+    />
     <v-select
       v-model="form.brew_method"
       label="Brew method"
