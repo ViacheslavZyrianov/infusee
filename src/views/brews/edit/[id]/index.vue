@@ -40,7 +40,7 @@ const onCancel = () => {
 
 const getBrew = async () => {
   const brew = await brewStore.getBrew(id.value)
-  brewFormRef.value.form = {
+  Object.assign(brewFormRef.value.form, {
     name: brew.name,
     brew_method: brew.brew_method,
     country: brew.country,
@@ -58,7 +58,7 @@ const getBrew = async () => {
     output: brew.output,
     price: brew.price,
     notes: brew.notes,
-  }
+  })
 }
 
 const onSave = async () => {
@@ -78,7 +78,7 @@ onMounted(async () => {
   <teleport defer to="#app-bar-action--right">
     <v-btn @click="onSave">Save</v-btn>
   </teleport>
-  <brew-form ref="brewFormRef" />
+  <brew-form v-if="!brewStore.isLoading" ref="brewFormRef" />
 </template>
 
 <style scoped></style>
