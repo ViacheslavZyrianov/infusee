@@ -4,7 +4,6 @@ export type Coffee = {
   is_specialty: boolean
   is_public: boolean
   country: string | null
-  variety: string
   processing: string | null
   roast_level: string
   notes: string

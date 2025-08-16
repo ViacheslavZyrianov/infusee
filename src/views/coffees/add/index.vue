@@ -16,7 +16,6 @@ const coffeeFormRef: Ref<{ form: Coffee }> = ref({
     is_specialty: false,
     is_public: false,
     country: null,
-    variety: '',
     processing: null,
     roast_level: '',
     notes: '',
