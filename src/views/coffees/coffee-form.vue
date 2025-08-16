@@ -17,7 +17,7 @@ const form: Coffee = reactive({
   processing: null,
   roast_level: '',
   notes: '',
-  brew_date: null,
+  brew_date: new Date(),
 })
 
 const isDatepickerOpened: Ref<boolean> = ref(false)
@@ -29,21 +29,13 @@ const rules: Record<string, ValidationRule> = {
   score: (v) => (typeof v === 'number' ? (v >= 0 && v <= 100) || 'Score must be 0–100' : true),
 }
 
-const formattedDate: ComputedRef<string> = computed(() =>
-  form.brew_date ? dayjs(form.brew_date).format('DD.MM.YYYY') : 'Select brew date',
-)
-
-const datepickerBrewDateAppendedInnerIcon: ComputedRef<string | undefined> = computed(() =>
-  form.brew_date ? 'mdi-close-circle' : 'mdi-calendar-month-outline',
-)
+const formattedDate: ComputedRef<string> = computed(() => {
+  const brewDate = dayjs(form.brew_date)
+  return brewDate.isSame(dayjs(), 'day') ? 'Today' : brewDate.format('DD.MM.YYYY')
+})
 
 const onSelectBrewDate = () => {
   isDatepickerOpened.value = false
-}
-
-const onClearBrewDate = (event: MouseEvent) => {
-  event.stopPropagation()
-  form.brew_date = null
 }
 
 defineExpose({
@@ -119,11 +111,9 @@ defineExpose({
           v-bind="props"
           v-model="formattedDate"
           label="Brew Date"
-          placeholder="kekw"
           readonly
           variant="outlined"
-          :append-inner-icon="datepickerBrewDateAppendedInnerIcon"
-          @click:appendInner="onClearBrewDate"
+          append-inner-icon="mdi-calendar-month-outline"
         />
       </template>
 
