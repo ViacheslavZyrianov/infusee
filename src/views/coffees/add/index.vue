@@ -34,7 +34,7 @@ const onSave = async () => {
     <v-btn variant="outlined" to="/coffees">Cancel</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
-    <v-btn @click="onSave">Save</v-btn>
+    <v-btn color="success" @click="onSave">Save</v-btn>
   </teleport>
   <coffee-form ref="coffeeFormRef" />
 </template>
