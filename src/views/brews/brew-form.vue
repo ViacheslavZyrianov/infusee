@@ -23,7 +23,6 @@ const form: Brew = reactive({
   dose: null,
   channeling: null,
   output: null,
-  price: null,
   notes: null,
 })
 
@@ -102,7 +101,6 @@ defineExpose({
         type="number"
       />
     </div>
-    <v-text-field v-model="form.price" label="Price" placeholder="Enter price" type="number" />
     <v-textarea v-model="form.notes" label="Notes" placeholder="Add some notes" />
   </v-card>
 </template>
