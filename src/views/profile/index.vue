@@ -18,6 +18,9 @@ onMounted(async () => {
 </script>
 
 <template>
+  <teleport defer to="#app-bar-action--right">
+    <v-btn icon="mdi-cog-outline" to="/settings" color="gray" variant="text" rounded="xl" />
+  </teleport>
   <v-card class="pa-4 text-center">
     <v-avatar size="120" class="mx-auto mb-4">
       <v-img v-if="userStore.user.avatar" :src="userStore.user.avatar" alt="User avatar" />
