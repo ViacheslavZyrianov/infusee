@@ -1,7 +1,28 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUIStore } from '@/store/ui'
+
+const uiStore = useUIStore()
+</script>
 
 <template>
-  <h1>settings</h1>
+  <v-list>
+    <v-list-item>
+      <v-list-item-title>Theme</v-list-item-title>
+      <template #append>
+        <div class="d-flex align-center">
+          <v-switch
+            v-model="uiStore.isThemeDark"
+            color="primary"
+            hide-details
+            density="compact"
+            inset
+            true-icon="mdi-brightness-2"
+            false-icon="mdi-brightness-5"
+          />
+        </div>
+      </template>
+    </v-list-item>
+  </v-list>
 </template>
 
 <style scoped></style>
