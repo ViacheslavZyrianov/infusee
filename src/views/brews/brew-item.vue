@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { BrewRead } from '@/store/brews/types.ts'
-import { useCountries } from '@/composables/useCountries.ts'
 import { useRatings } from '@/composables/useRatings.ts'
+import useCoffeeStore from '@/store/coffees/coffee.ts'
+import { onMounted, ref, type Ref } from 'vue'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 const props = defineProps({
   brew: {
@@ -12,21 +14,33 @@ const props = defineProps({
 
 const emit = defineEmits(['delete'])
 
-const countries = useCountries()
 const { ratingAverage } = useRatings()
+const coffeeStore = useCoffeeStore()
+
+const coffee: Ref<CoffeeRead | null> = ref(null)
 
 const onDelete = () => {
-  if (confirm(`Are you sure you want to delete "${props.brew.name}"?`)) {
+  if (confirm(`Are you sure you want to delete this brew?`)) {
     emit('delete')
   }
 }
+
+const getCoffee = async () => {
+  if (!props.brew?.coffee_id) return
+
+  coffee.value = await coffeeStore.getCoffee(props.brew.coffee_id)
+}
+
+onMounted(async () => {
+  await getCoffee()
+})
 </script>
 
 <template>
   <v-card class="pa-3" max-width="350" outlined>
     <div class="d-flex align-center mb-2">
       <v-card-title class="flex-grow-1 text-truncate" style="width: calc(100% - 20px)">
-        {{ brew.name }}
+        {{ coffee?.name }}
       </v-card-title>
 
       <v-menu>
@@ -44,9 +58,9 @@ const onDelete = () => {
         <v-list class="pa-0" density="compact">
           <v-list-item class="px-6 text-body-2" :to="`/brews/${brew.id}`">View</v-list-item>
           <v-divider />
-          <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`"
-            >Edit</v-list-item
-          >
+          <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`">
+            Edit
+          </v-list-item>
           <v-divider />
           <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">Delete</v-list-item>
         </v-list>
@@ -54,9 +68,15 @@ const onDelete = () => {
     </div>
 
     <v-card-subtitle>
-      <template v-if="brew.country"> {{ countries.getFlagAndName(brew.country) }} · </template>
-      <template v-if="brew.brew_method"> {{ brew.brew_method.toUpperCase() }} · </template>
-      {{ brew.roaster }}
+      <v-chip-group>
+        <v-chip
+          v-if="brew.brew_method"
+          :text="brew.brew_method"
+          size="small"
+          prepend-icon="mdi-flask-outline"
+        />
+        <v-chip v-if="brew.roaster" :text="brew.roaster" size="small" prepend-icon="mdi-fire" />
+      </v-chip-group>
     </v-card-subtitle>
 
     <v-divider class="my-2" />
