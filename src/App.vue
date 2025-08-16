@@ -3,10 +3,10 @@ import { computed, type ComputedRef } from 'vue'
 import { useRoute } from 'vue-router'
 import FullPageLayout from '@/layouts/full-page.vue'
 import DefaultLayout from '@/layouts/default.vue'
-import { useUIStore } from '@/store/ui'
+import { useSettingsStore } from '@/store/settings'
 
 const route = useRoute()
-const uiStore = useUIStore()
+const settingsStore = useSettingsStore()
 
 const layout: ComputedRef<unknown> = computed(() => {
   switch (route.meta.layout) {
@@ -19,7 +19,7 @@ const layout: ComputedRef<unknown> = computed(() => {
 </script>
 
 <template>
-  <v-theme-provider :theme="uiStore.getTheme" with-background>
+  <v-theme-provider :theme="settingsStore.getTheme" with-background>
     <component :is="layout">
       <router-view />
     </component>
