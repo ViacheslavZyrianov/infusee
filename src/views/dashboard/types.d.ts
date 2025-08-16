@@ -3,4 +3,5 @@ export type WidgetData = {
   subtitle: string
   size: 'half' | 'full'
   color?: string
+  to?: string
 }
