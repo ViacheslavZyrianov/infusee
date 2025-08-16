@@ -30,9 +30,15 @@ export default defineStore('brews', () => {
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not logged in')
+
     const { count, error } = await supabase
       .from('brews')
       .select('*', { count: 'exact', head: true }) // head: true → no rows returned, just count
+      .eq('user_id', user.id)
       .gte('created_at', dayjs().startOf('day').toISOString())
       .lte('created_at', dayjs().endOf('day').toISOString())
 
