@@ -16,7 +16,7 @@ const form: Coffee = reactive({
   processing: null,
   roast_level: '',
   notes: '',
-  brew_date: new Date(),
+  brew_date: new Date().toISOString(),
 })
 
 const isDatepickerOpened: Ref<boolean> = ref(false)
