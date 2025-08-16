@@ -79,9 +79,6 @@ const onDelete = () => {
           <strong>Origin: </strong>
           <span>{{ countries.getFlagAndName(coffee.country) }}</span>
         </v-col>
-        <v-col cols="12" sm="6" v-if="coffee.variety">
-          <strong>Variety:</strong> <span>{{ coffee.variety }}</span>
-        </v-col>
         <v-col cols="12" sm="6" v-if="coffee.processing">
           <strong>Processing: </strong>
           <span>{{ getProcessingOptionTitleByValue(coffee.processing) }}</span>

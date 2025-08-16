@@ -13,7 +13,6 @@ const form: Coffee = reactive({
   is_specialty: false,
   is_public: false,
   country: null,
-  variety: '',
   processing: null,
   roast_level: '',
   notes: '',
@@ -72,8 +71,6 @@ defineExpose({
       </template>
       <template v-slot:selection="{ item }">{{ item.raw.flag }} {{ item.title }} </template>
     </v-autocomplete>
-
-    <v-text-field v-model="form.variety" label="Variety" />
 
     <v-select v-model="form.processing" :items="processingOptions" label="Processing" clearable />
 
