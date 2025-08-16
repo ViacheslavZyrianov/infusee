@@ -1,19 +1,34 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useBrewStore from '@/store/brews/brew'
+import useCoffeeStore from '@/store/coffees/coffee.ts'
 import { onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 const route = useRoute()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 
 const brewStore = useBrewStore()
+const coffeeStore = useCoffeeStore()
 
 const brew: Ref<BrewRead | null> = ref(null)
+const coffee: Ref<CoffeeRead | null> = ref(null)
+
+const getBrew = async () => {
+  brew.value = await brewStore.getBrew(route.params.id as string)
+}
+
+const getCoffee = async () => {
+  if (!brew.value?.coffee_id) return
+
+  coffee.value = await coffeeStore.getCoffee(brew.value.coffee_id)
+}
 
 onMounted(async () => {
-  brew.value = await brewStore.getBrew(route.params.id as string)
+  await getBrew()
+  await getCoffee()
 })
 </script>
 
@@ -45,11 +60,19 @@ onMounted(async () => {
     </v-menu>
   </teleport>
 
-  <v-card v-if="brew" class="mx-auto my-4" max-width="600">
-    <v-card-title class="text-h6">{{ brew.name }}</v-card-title>
+  <v-card v-if="brew" max-width="600">
+    <v-card-title class="text-h6">{{ coffee?.name }}</v-card-title>
 
-    <v-card-subtitle class="grey--text text--darken-1">
-      {{ brew.brew_method }} - {{ brew.roaster }} - {{ brew.country }}
+    <v-card-subtitle>
+      <v-chip-group>
+        <v-chip
+          v-if="brew.brew_method"
+          :text="brew.brew_method"
+          size="small"
+          prepend-icon="mdi-flask-outline"
+        />
+        <v-chip v-if="brew.roaster" :text="brew.roaster" size="small" prepend-icon="mdi-fire" />
+      </v-chip-group>
     </v-card-subtitle>
 
     <v-divider class="my-3" />
