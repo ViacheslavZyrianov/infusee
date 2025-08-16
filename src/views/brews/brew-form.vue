@@ -7,7 +7,7 @@ import useBrewMethods from '@/composables/useBrewMethods.ts'
 
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
-const { brewMethods } = useBrewMethods()
+const { brewMethodsOptions } = useBrewMethods()
 
 const form: Brew = reactive({
   coffee_id: null,
@@ -54,7 +54,7 @@ defineExpose({
       v-model="form.brew_method"
       label="Brew method"
       placeholder="Choose brewing method"
-      :items="brewMethods"
+      :items="brewMethodsOptions"
     />
     <v-text-field v-model="form.roaster" label="Roaster" placeholder="Enter roaster name" />
     <div class="mb-4">
