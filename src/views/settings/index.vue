@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useUIStore } from '@/store/ui'
+import { useSettingsStore } from '@/store/settings'
 
-const uiStore = useUIStore()
+const settingsStore = useSettingsStore()
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const uiStore = useUIStore()
       <template #append>
         <div class="d-flex align-center">
           <v-switch
-            v-model="uiStore.isThemeDark"
+            v-model="settingsStore.isThemeDark"
             color="primary"
             hide-details
             density="compact"

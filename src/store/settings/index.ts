@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useUIStore = defineStore('ui', () => {
+export const useSettingsStore = defineStore('settings', () => {
   const isThemeDark = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
   const isShowDayNightCodes = ref(true)
 
