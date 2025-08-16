@@ -8,6 +8,7 @@ export type Coffee = {
   roast_level: string | null
   notes: string
   brew_date: string
+  price: number | null
   user_id?: string
 }
 

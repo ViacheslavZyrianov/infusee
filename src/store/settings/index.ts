@@ -7,7 +7,7 @@ export const useSettingsStore = defineStore('settings', () => {
   const isShowDayNightCodes: Ref<boolean> = ref(true)
 
   const currencies = useCurrencies()
-  const currency: Ref<string> = ref(currencies.defaultCurrency)
+  const currency: Ref<keyof typeof currencies.currencies> = ref(currencies.defaultCurrency)
 
   const getTheme = computed(() => (isThemeDark.value ? 'dark' : 'light'))
 
