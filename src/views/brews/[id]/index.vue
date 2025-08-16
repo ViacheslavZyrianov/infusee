@@ -34,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <teleport defer to="#app-bar-action--left">
-    <v-btn to="/brews" icon="mdi-arrow-left" variant="text" color="grey-darken-4" />
+    <v-btn to="/brews" icon="mdi-arrow-left" variant="text" color="grey-darken-1" />
   </teleport>
 
   <teleport defer to="#app-bar-action--right">
