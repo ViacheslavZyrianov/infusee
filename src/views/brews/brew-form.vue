@@ -48,7 +48,6 @@ defineExpose({
       placeholder="Choose country of origin"
       item-title="name"
       item-value="code"
-      eager
       :items="countries.countries"
     >
       <template v-slot:item="{ props }">
