@@ -44,9 +44,11 @@ const onDelete = () => {
         <v-list class="pa-0" density="compact">
           <v-list-item class="px-6 text-body-2" :to="`/brews/${brew.id}`">View</v-list-item>
           <v-divider />
-          <v-list-item class="px-6 text-body-2" :to="`/brews/edit/${brew.id}`">Edit</v-list-item>
+          <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`"
+            >Edit</v-list-item
+          >
           <v-divider />
-          <v-list-item class="px-6 text-body-2" @click="onDelete">Delete</v-list-item>
+          <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">Delete</v-list-item>
         </v-list>
       </v-menu>
     </div>
