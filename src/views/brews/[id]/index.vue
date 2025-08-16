@@ -104,7 +104,6 @@ onMounted(async () => {
         <v-col cols="6" md="4" v-if="brew.output">
           <strong>Output:</strong> {{ brew.output }}ml
         </v-col>
-        <v-col cols="6" md="4" v-if="brew.price"> <strong>Price:</strong> {{ brew.price }} </v-col>
       </v-row>
 
       <v-divider class="my-3" />

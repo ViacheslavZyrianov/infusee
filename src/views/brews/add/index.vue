@@ -26,7 +26,6 @@ const brewFormRef: Ref<{ form: Brew }> = ref({
     dose: null,
     channeling: null,
     output: null,
-    price: null,
     notes: null,
   },
 })
