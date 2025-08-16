@@ -14,7 +14,7 @@ const form: Coffee = reactive({
   is_public: false,
   country: null,
   processing: null,
-  roast_level: '',
+  roast_level: null,
   notes: '',
   brew_date: new Date().toISOString(),
 })
@@ -74,27 +74,7 @@ defineExpose({
 
     <v-select v-model="form.processing" :items="processingOptions" label="Processing" clearable />
 
-    <div class="mb-6">
-      <div class="text-caption opacity-70">Roast level</div>
-      <v-btn-toggle
-        v-model="form.roast_level"
-        color="primary"
-        variant="outlined"
-        group
-        divided
-        rounded="xl"
-        class="d-flex"
-      >
-        <v-btn
-          v-for="roastLevelOption in roastLevelOptions"
-          :key="roastLevelOption.value"
-          :value="roastLevelOption.value"
-          class="flex-grow-1"
-        >
-          {{ roastLevelOption.title }}
-        </v-btn>
-      </v-btn-toggle>
-    </div>
+    <v-select v-model="form.roast_level" :items="roastLevelOptions" label="Roast level" clearable />
 
     <v-menu
       v-model="isDatepickerOpened"
