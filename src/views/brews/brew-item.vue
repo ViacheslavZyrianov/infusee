@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
+import useBrewMethods from '@/composables/useBrewMethods.ts'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
 import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { CoffeeRead } from '@/store/coffees/types'
 import dayjs from 'dayjs'
+
+const { ratingAverage } = useRatings()
+const { getBrewMethodTitleByValue } = useBrewMethods()
 
 const props = defineProps({
   brew: {
@@ -15,7 +19,6 @@ const props = defineProps({
 
 const emit = defineEmits(['delete'])
 
-const { ratingAverage } = useRatings()
 const coffeeStore = useCoffeeStore()
 
 const coffee: Ref<CoffeeRead | null> = ref(null)
@@ -73,7 +76,11 @@ onMounted(async () => {
     </div>
 
     <div class="d-flex flex-wrap ga-2">
-      <v-chip v-if="brew.brew_method" :text="brew.brew_method" prepend-icon="mdi-flask-outline" />
+      <v-chip
+        v-if="brew.brew_method"
+        :text="getBrewMethodTitleByValue(brew.brew_method)"
+        prepend-icon="mdi-flask-outline"
+      />
       <v-chip v-if="brew.roaster" :text="brew.roaster" prepend-icon="mdi-fire" />
     </div>
 
