@@ -7,7 +7,7 @@ const currencies = useCurrencies()
 </script>
 
 <template>
-  <v-list>
+  <v-list rounded>
     <v-list-item>
       <v-list-item-title>Theme</v-list-item-title>
       <template #append>
@@ -32,6 +32,7 @@ const currencies = useCurrencies()
           :items="currencies.currencyOptions"
           color="primary"
           hide-details
+          density="compact"
         />
       </template>
     </v-list-item>
