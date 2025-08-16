@@ -72,31 +72,24 @@ const onDelete = () => {
 
     <v-divider class="my-4" />
 
-    <!-- Attributes Section -->
-    <v-card-text>
-      <v-row dense>
-        <v-col v-if="coffee.country" cols="12" sm="6">
-          <strong>Origin: </strong>
-          <span>{{ countries.getFlagAndName(coffee.country) }}</span>
-        </v-col>
-        <v-col cols="12" sm="6" v-if="coffee.processing">
-          <strong>Processing: </strong>
-          <span>{{ getProcessingOptionTitleByValue(coffee.processing) }}</span>
-        </v-col>
-        <v-col cols="12" sm="6" v-if="coffee.roast_level">
-          <strong>Roast level: </strong>
-          <span>{{ getRoastLevelOptionTitleByValue(coffee.roast_level) }}</span>
-        </v-col>
-        <v-col cols="12" sm="6" v-if="formattedDate">
-          <strong>Brew Date:</strong> <span>{{ formattedDate }}</span>
-        </v-col>
-      </v-row>
-
-      <!-- Notes Section -->
-      <template v-if="coffee.notes">
-        <v-divider class="my-4" />
-        <p class="mb-0 text-grey-darken-2">{{ coffee.notes }}</p>
-      </template>
+    <v-card-text class="d-flex flex-wrap justify-between ga-2">
+      <v-chip v-if="coffee.country">
+        {{ countries.getFlagAndName(coffee.country) }}
+      </v-chip>
+      <v-chip v-if="coffee.processing" prepend-icon="mdi-flask-outline">
+        {{ getProcessingOptionTitleByValue(coffee.processing) }}
+      </v-chip>
+      <v-chip v-if="coffee.roast_level" prepend-icon="mdi-fire">
+        {{ getRoastLevelOptionTitleByValue(coffee.roast_level) }}
+      </v-chip>
+      <v-chip v-if="formattedDate" prepend-icon="mdi-calendar-month">
+        {{ formattedDate }}
+      </v-chip>
     </v-card-text>
+
+    <template v-if="coffee.notes">
+      <v-divider class="my-4" />
+      <p class="mb-0 text-grey-darken-2">{{ coffee.notes }}</p>
+    </template>
   </v-card>
 </template>
