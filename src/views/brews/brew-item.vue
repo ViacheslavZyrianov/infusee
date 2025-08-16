@@ -2,8 +2,9 @@
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
-import { onMounted, ref, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { CoffeeRead } from '@/store/coffees/types'
+import dayjs from 'dayjs'
 
 const props = defineProps({
   brew: {
@@ -18,6 +19,10 @@ const { ratingAverage } = useRatings()
 const coffeeStore = useCoffeeStore()
 
 const coffee: Ref<CoffeeRead | null> = ref(null)
+
+const formattedDate: ComputedRef<string> = computed(() =>
+  dayjs(props.brew.created_at).format('DD.MM.YYYY HH:mm'),
+)
 
 const onDelete = () => {
   if (confirm(`Are you sure you want to delete this brew?`)) {
@@ -83,7 +88,7 @@ onMounted(async () => {
 
     <v-card-text class="d-flex justify-space-between align-center">
       <span class="text-caption text-grey-darken-1">
-        {{ new Date(brew.created_at).toLocaleDateString() }}
+        {{ formattedDate }}
       </span>
       <div class="d-flex align-center">
         <span class="mr-1">{{ ratingAverage(brew) }}</span>
