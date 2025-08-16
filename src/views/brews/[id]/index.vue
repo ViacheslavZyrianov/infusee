@@ -61,19 +61,12 @@ onMounted(async () => {
   </teleport>
 
   <v-card v-if="brew" max-width="600">
-    <v-card-title class="text-h6">{{ coffee?.name }}</v-card-title>
+    <v-card-title class="mb-4">{{ coffee?.name }}</v-card-title>
 
-    <v-card-subtitle>
-      <v-chip-group>
-        <v-chip
-          v-if="brew.brew_method"
-          :text="brew.brew_method"
-          size="small"
-          prepend-icon="mdi-flask-outline"
-        />
-        <v-chip v-if="brew.roaster" :text="brew.roaster" size="small" prepend-icon="mdi-fire" />
-      </v-chip-group>
-    </v-card-subtitle>
+    <div class="d-flex flex-wrap ga-2">
+      <v-chip v-if="brew.brew_method" :text="brew.brew_method" prepend-icon="mdi-flask-outline" />
+      <v-chip v-if="brew.roaster" :text="brew.roaster" prepend-icon="mdi-fire" />
+    </div>
 
     <v-divider class="my-3" />
 
