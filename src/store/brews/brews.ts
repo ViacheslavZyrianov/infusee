@@ -3,6 +3,7 @@ import supabase from '@/plugins/supabase.ts'
 import { type Ref, ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
+import dayjs from 'dayjs'
 
 export default defineStore('brews', () => {
   const brews: Ref<BrewRead[]> = ref([])
@@ -28,5 +29,17 @@ export default defineStore('brews', () => {
     brews.value = response.data || []
   }
 
-  return { brews, getBrews }
+  const getBrewsTodayCount = async (): Promise<number> => {
+    const { count, error } = await supabase
+      .from('brews')
+      .select('*', { count: 'exact', head: true }) // head: true → no rows returned, just count
+      .gte('created_at', dayjs().startOf('day').toISOString())
+      .lte('created_at', dayjs().endOf('day').toISOString())
+
+    if (error) throw error
+
+    return count || 0
+  }
+
+  return { brews, getBrews, getBrewsTodayCount }
 })
