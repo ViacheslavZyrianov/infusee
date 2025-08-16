@@ -42,7 +42,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-card class="pa-3" max-width="350" outlined>
+  <v-card class="pa-3" outlined>
     <div class="d-flex align-center mb-2">
       <v-card-title class="flex-grow-1 text-truncate" style="width: calc(100% - 20px)">
         {{ coffee?.name }}
