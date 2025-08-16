@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import type { Coffee, CoffeeRead } from '@/store/coffees/types.ts'
 import supabase from '@/plugins/supabase.ts'
 import { ref, type Ref } from 'vue'
+import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 
 export default defineStore('coffee', () => {
   const isLoading: Ref<boolean> = ref(false)
@@ -27,15 +28,19 @@ export default defineStore('coffee', () => {
   const getCoffee = async (coffeeId: string): Promise<CoffeeRead> => {
     isLoading.value = true
 
-    const { data, error } = await supabase.from('coffees').select('*').eq('id', coffeeId).single()
+    const response = (await supabase
+      .from('coffees')
+      .select('*')
+      .eq('id', coffeeId)
+      .single()) as PostgrestSingleResponse<CoffeeRead>
 
     isLoading.value = false
 
-    if (error) {
-      throw new Error(`Error fetching coffee: ${error.message}`)
+    if (response.error) {
+      throw new Error(`Error fetching coffee: ${response.error.message}`)
     }
 
-    return data
+    return response.data
   }
 
   const updateCoffee = async (id: string, form: Coffee) => {
