@@ -15,6 +15,7 @@ const getBrewsTodayCount = async () => {
     subtitle: `Brew${brewsTodayCount === 1 ? '' : 's'} today`,
     size: 'half',
     color: 'deep-orange-lighten-1',
+    to: '/brews',
   })
 }
 
