@@ -21,12 +21,14 @@ onMounted(async () => {
   <teleport defer to="#app-bar-action--right">
     <v-btn prepend-icon="mdi-plus" to="/brews/add">Add brew</v-btn>
   </teleport>
-  <brew-item
-    v-for="brew in brewsStore.brews"
-    :key="brew.id"
-    :brew="brew"
-    @delete="onDelete(brew.id)"
-  />
+  <div class="d-flex flex-column ga-4">
+    <brew-item
+      v-for="brew in brewsStore.brews"
+      :key="brew.id"
+      :brew="brew"
+      @delete="onDelete(brew.id)"
+    />
+  </div>
 </template>
 
 <style scoped></style>
