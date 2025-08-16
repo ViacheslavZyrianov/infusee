@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/store/settings'
+import useCurrencies from '@/composables/useCurrencies.ts'
 
 const settingsStore = useSettingsStore()
+const currencies = useCurrencies()
 </script>
 
 <template>
@@ -20,6 +22,17 @@ const settingsStore = useSettingsStore()
             false-icon="mdi-brightness-5"
           />
         </div>
+      </template>
+    </v-list-item>
+    <v-list-item>
+      <v-list-item-title>Currency</v-list-item-title>
+      <template #append>
+        <v-select
+          v-model="settingsStore.currency"
+          :items="currencies.currencyOptions"
+          color="primary"
+          hide-details
+        />
       </template>
     </v-list-item>
   </v-list>
