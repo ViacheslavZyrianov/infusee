@@ -4,8 +4,12 @@ import type { Coffee } from '@/store/coffees/types'
 import dayjs from 'dayjs'
 import { processingOptions, roastLevelOptions } from '@/views/coffees/data.ts'
 import { useCountries } from '@/composables/useCountries.ts'
+import useCurrencies from '@/composables/useCurrencies.ts'
+import { useSettingsStore } from '@/store/settings'
 
 const countries = useCountries()
+const currencies = useCurrencies()
+const settingsStore = useSettingsStore()
 
 const form: Coffee = reactive({
   name: '',
@@ -15,6 +19,7 @@ const form: Coffee = reactive({
   country: null,
   processing: null,
   roast_level: null,
+  price: null,
   notes: '',
   brew_date: new Date().toISOString(),
 })
@@ -103,6 +108,20 @@ defineExpose({
         @update:model-value="onSelectBrewDate"
       />
     </v-menu>
+
+    <v-text-field
+      v-model="form.price"
+      type="number"
+      label="Price"
+      placeholder="Enter coffee price"
+      clearable
+    >
+      <template #append-inner>
+        <div style="width: 24px" class="text-center">
+          {{ currencies.getCurrencySymbol(settingsStore.currency) }}
+        </div>
+      </template>
+    </v-text-field>
 
     <v-textarea v-model="form.notes" label="Notes" rows="4" />
   </v-card>

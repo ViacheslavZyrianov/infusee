@@ -1,13 +1,13 @@
 import type { SelectItem } from '@/types/types'
 
-const currencies = {
-  UAH: { title: 'Ukrainian Hryvnia', symbol: '₴' },
-  USD: { title: 'US Dollar', symbol: '$' },
-  EUR: { title: 'Euro', symbol: '€' },
-  CAD: { title: 'Canadian Dollar', symbol: 'C$' },
-}
-
 export default () => {
+  const currencies = {
+    UAH: { title: 'Ukrainian Hryvnia', symbol: '₴' },
+    USD: { title: 'US Dollar', symbol: '$' },
+    EUR: { title: 'Euro', symbol: '€' },
+    CAD: { title: 'Canadian Dollar', symbol: 'C$' },
+  }
+
   const defaultCurrency: keyof typeof currencies = 'UAH'
 
   const currencyOptions: SelectItem[] = Object.entries(currencies).map(([value, { title }]) => ({
@@ -25,6 +25,7 @@ export default () => {
     `${currencies[currency]?.title} ${currencies[currency]?.symbol}` || ''
 
   return {
+    currencies,
     defaultCurrency,
     currencyOptions,
     getCurrencyTitle,
