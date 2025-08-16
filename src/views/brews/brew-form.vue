@@ -3,17 +3,14 @@ import { onMounted, reactive } from 'vue'
 import brewMethods from './brewMethods.ts'
 import type { Brew } from '@/store/brews/types.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
-import { useCountries } from '@/composables/useCountries.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 
-const countries = useCountries()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
 
 const form: Brew = reactive({
   coffee_id: null,
   brew_method: null,
-  country: null,
   roaster: null,
   rating_aroma: 0,
   rating_flavor: 0,
@@ -59,19 +56,6 @@ defineExpose({
       placeholder="Choose brewing method"
       :items="brewMethods"
     />
-    <v-autocomplete
-      v-model="form.country"
-      label="Country of origin"
-      placeholder="Choose country of origin"
-      item-title="name"
-      item-value="code"
-      :items="countries.countries"
-    >
-      <template v-slot:item="{ props }">
-        <v-list-item v-bind="props" :title="countries.getFlagAndName(props.value as string)" />
-      </template>
-      <template v-slot:selection="{ item }">{{ item.raw.flag }} {{ item.title }} </template>
-    </v-autocomplete>
     <v-text-field v-model="form.roaster" label="Roaster" placeholder="Enter roaster name" />
     <div class="mb-4">
       <v-label class="mb-2">Rating</v-label>
