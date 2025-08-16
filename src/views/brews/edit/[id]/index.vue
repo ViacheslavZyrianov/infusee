@@ -27,7 +27,6 @@ const brewFormRef: Ref<{ form: Brew }> = ref({
     dose: null,
     channeling: null,
     output: null,
-    price: null,
     notes: null,
   },
 })
@@ -56,7 +55,6 @@ const getBrew = async () => {
     dose: brew.dose,
     channeling: brew.channeling,
     output: brew.output,
-    price: brew.price,
     notes: brew.notes,
   })
 }

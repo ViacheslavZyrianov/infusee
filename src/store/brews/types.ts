@@ -13,7 +13,6 @@ export type Brew = {
   dose: string | null
   channeling: string | null
   output: string | null
-  price: string | null
   notes: string | null
 }
 

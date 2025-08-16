@@ -13,7 +13,7 @@ export default defineStore('brew', () => {
     } = await supabase.auth.getUser()
     if (!user) throw new Error('Not logged in')
 
-    const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output', 'price']
+    const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output']
 
     const payload = {
       user_id: user.id,
@@ -53,7 +53,7 @@ export default defineStore('brew', () => {
     const { data } = await supabase.auth.getSession()
     if (!data?.session?.user.id) throw new Error('Not logged in')
 
-    const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output', 'price']
+    const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output']
 
     const payload = {
       user_id: data.session.user.id,
