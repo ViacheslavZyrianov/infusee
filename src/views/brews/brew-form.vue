@@ -51,12 +51,7 @@ defineExpose({
       item-value="id"
       :items="coffeesStore.coffees"
     />
-    <v-select
-      v-model="form.brew_method"
-      label="Brew method"
-      placeholder="Choose brewing method"
-      :items="brewMethodsOptions"
-    >
+    <v-select v-model="form.brew_method" label="Select brew method" :items="brewMethodsOptions">
       <template #subheader="{ props: { title, icon } }">
         <div class="d-flex align-center pa-4 opacity-50">
           <v-icon :icon="icon as string" size="18" class="mr-2" />
