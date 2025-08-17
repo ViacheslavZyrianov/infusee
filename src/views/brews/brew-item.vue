@@ -2,9 +2,7 @@
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
-import useCoffeeStore from '@/store/coffees/coffee.ts'
-import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
-import type { CoffeeRead } from '@/store/coffees/types'
+import { computed, type ComputedRef } from 'vue'
 import dayjs from 'dayjs'
 
 const { ratingAverage } = useRatings()
@@ -19,10 +17,6 @@ const props = defineProps({
 
 const emit = defineEmits(['delete'])
 
-const coffeeStore = useCoffeeStore()
-
-const coffee: Ref<CoffeeRead | null> = ref(null)
-
 const formattedDate: ComputedRef<string> = computed(() =>
   dayjs(props.brew.created_at).format('DD.MM.YYYY HH:mm'),
 )
@@ -32,23 +26,13 @@ const onDelete = () => {
     emit('delete')
   }
 }
-
-const getCoffee = async () => {
-  if (!props.brew?.coffee_id) return
-
-  coffee.value = await coffeeStore.getCoffee(props.brew.coffee_id)
-}
-
-onMounted(async () => {
-  await getCoffee()
-})
 </script>
 
 <template>
   <v-card class="pa-3" outlined>
     <div class="d-flex align-center mb-2">
       <v-card-title class="flex-grow-1 text-truncate" style="width: calc(100% - 20px)">
-        {{ coffee?.name }}
+        {{ brew.coffees.name }}
       </v-card-title>
 
       <v-menu>
