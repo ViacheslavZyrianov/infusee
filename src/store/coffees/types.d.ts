@@ -15,7 +15,11 @@ export type Coffee = {
 
 export type CoffeeRead = Coffee & { id: number }
 
-export type Loading = {
+export type CoffeesLoading = {
+  getCoffees?: boolean
+}
+
+export type CoffeeLoading = {
   getCoffees?: boolean
   postCoffee?: boolean
   getCoffee?: boolean
