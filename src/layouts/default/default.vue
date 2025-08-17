@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
 import { useRoute } from 'vue-router'
-import TabBar from '@/components/tab-bar/tab-bar.vue'
+import TabBar from './tab-bar/tab-bar.vue'
 
 const route = useRoute()
 

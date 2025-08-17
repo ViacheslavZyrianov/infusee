@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, type Ref, computed, type ComputedRef } from 'vue'
-import tabBarItems from './items'
+import tabBarItems from './items.ts'
 import { useRoute } from 'vue-router'
 import supabase from '@/plugins/supabase.ts'
 

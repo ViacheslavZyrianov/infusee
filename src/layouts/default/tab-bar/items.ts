@@ -1,4 +1,4 @@
-import type { TabBarItem } from '@/components/tab-bar/types'
+import type { TabBarItem } from '@/layouts/default/tab-bar/types'
 
 const tabBarItems: TabBarItem[] = [
   { icon: 'mdi-view-dashboard-outline', path: '/dashboard' },
