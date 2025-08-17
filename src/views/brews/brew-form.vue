@@ -49,7 +49,7 @@ defineExpose({
       label="Select coffee"
       item-title="name"
       item-value="id"
-      :items="coffeesStore.coffees"
+      :items="coffees"
     />
     <v-select v-model="form.brew_method" label="Select brew method" :items="brewMethodsOptions">
       <template #subheader="{ props: { title, icon } }">
