@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase.ts'
-import type { BrewRead, Loading } from '@/store/brews/types.ts'
+import type { BrewRead, BrewsLoading } from '@/store/brews/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import dayjs from 'dayjs'
 import { reactive } from 'vue'
 
 export default defineStore('brews', () => {
-  const isLoading: Loading = reactive({
+  const isLoading: BrewsLoading = reactive({
     getBrews: true,
     getBrewsTodayCount: true,
   })
