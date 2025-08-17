@@ -19,6 +19,7 @@ export default () => {
     { title: 'Vacuum Pot', value: 'vacuumPot' },
     { title: 'Soft Brew', value: 'softBrew' },
     { title: 'Snap Coffee', value: 'snapCoffee' },
+    { title: 'Hario Switch', value: 'harioSwitch' },
   ]
 
   const getBrewMethodTitleByValue = (value: string): string =>
