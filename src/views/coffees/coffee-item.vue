@@ -1,23 +1,18 @@
 <script setup lang="ts">
-import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
-import type { CoffeeRead } from '@/store/coffees/types'
+import { computed, type ComputedRef } from 'vue'
+import type { CoffeeAndRoasterRead } from '@/store/coffees/types'
 import { useCountries } from '@/composables/useCountries.ts'
 import dayjs from 'dayjs'
 import {
   getProcessingOptionTitleByValue,
   getRoastLevelOptionTitleByValue,
 } from '@/views/coffees/data.ts'
-import useRoastersStore from '@/store/roasters/roasters.ts'
-import type { RoasterRead } from '@/store/roasters/types'
 
 const countries = useCountries()
-const roastersStore = useRoastersStore()
-
-const roasters: Ref<RoasterRead[]> = ref([])
 
 const props = defineProps({
   coffee: {
-    type: Object as () => CoffeeRead,
+    type: Object as () => CoffeeAndRoasterRead,
     required: true,
   },
 })
@@ -37,14 +32,6 @@ const onDelete = () => {
     emit('delete')
   }
 }
-
-const getRoasters = async () => {
-  roasters.value = await roastersStore.getRoasters()
-}
-
-onMounted(async () => {
-  await getRoasters()
-})
 </script>
 
 <template>
@@ -101,8 +88,8 @@ onMounted(async () => {
 
     <div class="text-body-2 text-grey-darken-2 mb-2"><v-icon icon="mdi-fire" /> Roast details</div>
     <div class="d-flex flex-wrap ga-2">
-      <v-chip v-if="coffee.roaster_id && roasters[coffee.roaster_id]" size="small">
-        {{ roasters[coffee.roaster_id].title }}
+      <v-chip v-if="coffee.roasters?.title" size="small">
+        {{ coffee.roasters.title }}
       </v-chip>
       <v-chip v-if="coffee.roast_level" size="small">
         {{ getRoastLevelOptionTitleByValue(coffee.roast_level) }}
