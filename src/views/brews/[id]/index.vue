@@ -19,6 +19,10 @@ const formattedDate: ComputedRef<string> = computed(() =>
   dayjs(brew.value?.created_at).format('DD.MM.YYYY HH:mm'),
 )
 
+const isLoading: ComputedRef<boolean> = computed(
+  () => brew.value === null || brewStore.isLoading.getBrew,
+)
+
 const getBrew = async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
 }
@@ -56,7 +60,20 @@ onMounted(async () => {
     </v-menu>
   </teleport>
 
-  <v-card v-if="brew" max-width="600">
+  <v-card v-if="isLoading">
+    <v-card-title class="d-flex flex-column mb-4">
+      <v-skeleton-loader type="text" width="60%" class="mb-2" />
+      <v-skeleton-loader type="text" width="40%" />
+    </v-card-title>
+
+    <v-card-text>
+      <v-skeleton-loader type="chip" class="mb-3" />
+
+      <v-skeleton-loader type="paragraph" width="100%" />
+    </v-card-text>
+  </v-card>
+
+  <v-card v-else-if="brew && !isLoading">
     <v-card-title class="d-flex flex-column gr-1 mb-4">
       <span>{{ brew.coffees.name }}</span>
       <span class="text-caption text-grey">{{ formattedDate }}</span>
