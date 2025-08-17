@@ -12,7 +12,6 @@ const { brewMethodsOptions } = useBrewMethods()
 const form: Brew = reactive({
   coffee_id: null,
   brew_method: null,
-  roaster: null,
   rating_aroma: 0,
   rating_flavor: 0,
   rating_acidity: 0,
@@ -64,7 +63,6 @@ defineExpose({
       </template>
     </v-select>
 
-    <v-text-field v-model="form.roaster" label="Roaster" placeholder="Enter roaster name" />
     <div class="mb-4">
       <v-label class="mb-2">Rating</v-label>
       <div class="d-flex flex-column">
