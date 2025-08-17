@@ -41,7 +41,6 @@ const getBrew = async () => {
   Object.assign(brewFormRef.value.form, {
     coffee_id: brew.coffee_id,
     brew_method: brew.brew_method,
-    roaster: brew.roaster,
     rating_aroma: brew.rating_aroma,
     rating_flavor: brew.rating_flavor,
     rating_acidity: brew.rating_acidity,
