@@ -11,7 +11,7 @@ const brewStore = useBrewStore()
 
 const brewFormRef: Ref<{ form: Brew }> = ref({
   form: {
-    name: '',
+    coffee_id: null,
     brew_method: null,
     country: null,
     roaster: null,
