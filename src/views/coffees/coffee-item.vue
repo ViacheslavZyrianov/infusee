@@ -25,7 +25,7 @@ const props = defineProps({
 const emit = defineEmits(['delete'])
 
 const formattedDate: ComputedRef<string | null> = computed(() =>
-  props.coffee?.brew_date ? dayjs(props.coffee?.brew_date).format('DD.MM.YYYY') : null,
+  props.coffee?.roast_date ? dayjs(props.coffee?.roast_date).format('DD.MM.YYYY') : null,
 )
 
 const chipCuppingScoreColor: ComputedRef<string> = computed(() =>
@@ -50,10 +50,7 @@ onMounted(async () => {
 <template>
   <v-card v-if="coffee" class="pa-4" outlined elevation="3">
     <div class="d-flex align-start justify-space-between">
-      <v-card-title
-        class="d-flex flex-column gr-1 text-truncate mb-4"
-        style="width: calc(100% - 62px)"
-      >
+      <v-card-title class="d-flex flex-column gr-1 text-truncate" style="width: calc(100% - 62px)">
         <div class="d-flex align-center">
           <v-chip
             v-if="coffee.cupping_score"
@@ -88,7 +85,10 @@ onMounted(async () => {
       </v-menu>
     </div>
 
-    <v-card-text class="d-flex flex-wrap justify-between ga-2">
+    <v-card-text
+      v-if="coffee.country || coffee.processing"
+      class="d-flex flex-wrap justify-between ga-2 mt-4"
+    >
       <v-chip v-if="coffee.country">
         {{ countries.getFlagAndName(coffee.country) }}
       </v-chip>
@@ -99,8 +99,8 @@ onMounted(async () => {
 
     <v-divider class="my-4" />
 
-    <div class="text-body-2 text-grey-darken-2"><v-icon icon="mdi-fire" /> Roast details</div>
-    <div class="d-flex flex-wrap ga-2 pl-6">
+    <div class="text-body-2 text-grey-darken-2 mb-2"><v-icon icon="mdi-fire" /> Roast details</div>
+    <div class="d-flex flex-wrap ga-2">
       <v-chip v-if="coffee.roaster_id && roasters[coffee.roaster_id]" size="small">
         {{ roasters[coffee.roaster_id].title }}
       </v-chip>
