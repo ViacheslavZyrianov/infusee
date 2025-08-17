@@ -1,4 +1,4 @@
-import type { SelectItem } from '@/types/types'
+import type { SelectItem } from '@/types/types.ts'
 
 export const processingOptions: SelectItem[] = [
   {
