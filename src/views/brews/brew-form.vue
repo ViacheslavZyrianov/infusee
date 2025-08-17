@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref, type Ref } from 'vue'
 import type { Brew } from '@/store/brews/types.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
@@ -26,8 +27,10 @@ const form: Brew = reactive({
   notes: null,
 })
 
+const coffees: Ref<Pick<CoffeeRead, 'id' | 'name'>[]> = ref([])
+
 const getCoffees = async () => {
-  await coffeesStore.getCoffees('id, name')
+  coffees.value = await coffeesStore.getCoffees('id, name')
 }
 
 onMounted(async () => {

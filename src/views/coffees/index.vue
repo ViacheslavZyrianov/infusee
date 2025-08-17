@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
-import { onMounted } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import CoffeeItem from './coffee-item.vue'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 const coffeesStore = useCoffeesStore()
 const coffeeStore = useCoffeeStore()
 
+const coffees: Ref<CoffeeRead[]> = ref([])
+
+const getCoffees = async () => {
+  coffees.value = await coffeesStore.getCoffees()
+}
+
 const onDelete = async (id: number) => {
   await coffeeStore.deleteCoffee(id)
-  await coffeesStore.getCoffees()
+  await getCoffees()
 }
 
 onMounted(async () => {
-  await coffeesStore.getCoffees()
+  await getCoffees()
 })
 </script>
 
@@ -22,12 +29,15 @@ onMounted(async () => {
     <v-btn prepend-icon="mdi-plus" to="/coffees/add">Add coffee</v-btn>
   </teleport>
   <div class="d-flex flex-column ga-4">
-    <coffee-item
-      v-for="coffee in coffeesStore.coffees"
-      :key="coffee.id"
-      :coffee="coffee"
-      @delete="onDelete(coffee.id)"
-    />
+    <v-skeleton-loader v-if="coffeesStore.isLoading.getCoffees" />
+    <template v-else>
+      <coffee-item
+        v-for="coffee in coffees"
+        :key="coffee.id"
+        :coffee="coffee"
+        @delete="onDelete(coffee.id)"
+      />
+    </template>
   </div>
 </template>
 
