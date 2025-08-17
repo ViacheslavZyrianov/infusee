@@ -2,7 +2,7 @@
 import { computed, type ComputedRef } from 'vue'
 import { useRoute } from 'vue-router'
 import FullPageLayout from '@/layouts/full-page.vue'
-import DefaultLayout from '@/layouts/default.vue'
+import DefaultLayout from '@/layouts/default/default.vue'
 import { useSettingsStore } from '@/store/settings'
 
 const route = useRoute()
