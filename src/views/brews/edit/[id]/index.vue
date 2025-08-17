@@ -12,9 +12,8 @@ const brewStore = useBrewStore()
 
 const brewFormRef: Ref<{ form: Brew }> = ref({
   form: {
-    name: '',
+    coffee_id: null,
     brew_method: null,
-    country: null,
     roaster: null,
     rating_aroma: 0,
     rating_flavor: 0,
@@ -40,9 +39,8 @@ const onCancel = () => {
 const getBrew = async () => {
   const brew = await brewStore.getBrew(id.value)
   Object.assign(brewFormRef.value.form, {
-    name: brew.name,
+    coffee_id: brew.coffee_id,
     brew_method: brew.brew_method,
-    country: brew.country,
     roaster: brew.roaster,
     rating_aroma: brew.rating_aroma,
     rating_flavor: brew.rating_flavor,
