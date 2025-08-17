@@ -46,8 +46,7 @@ defineExpose({
   <v-card>
     <v-autocomplete
       v-model="form.coffee_id"
-      label="Coffee"
-      placeholder="Select coffee"
+      label="Select coffee"
       item-title="name"
       item-value="id"
       :items="coffeesStore.coffees"
