@@ -55,7 +55,15 @@ defineExpose({
       label="Brew method"
       placeholder="Choose brewing method"
       :items="brewMethodsOptions"
-    />
+    >
+      <template #subheader="{ props: { title, icon } }">
+        <div class="d-flex align-center pa-4 opacity-50">
+          <v-icon :icon="icon as string" size="18" class="mr-2" />
+          <span class="text-body-2">{{ title }}</span>
+        </div>
+      </template>
+    </v-select>
+
     <v-text-field v-model="form.roaster" label="Roaster" placeholder="Enter roaster name" />
     <div class="mb-4">
       <v-label class="mb-2">Rating</v-label>
