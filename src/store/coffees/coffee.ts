@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import type { Coffee, CoffeeRead, Loading } from '@/store/coffees/types.ts'
+import type { Coffee, CoffeeRead, CoffeeLoading } from '@/store/coffees/types.ts'
 import supabase from '@/plugins/supabase.ts'
 import { reactive } from 'vue'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 
 export default defineStore('coffee', () => {
-  const isLoading: Loading = reactive({
+  const isLoading: CoffeeLoading = reactive({
     getCoffee: true,
     postCoffee: true,
     updateCoffee: true,
