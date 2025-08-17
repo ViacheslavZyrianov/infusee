@@ -81,7 +81,6 @@ onMounted(async () => {
         :text="getBrewMethodTitleByValue(brew.brew_method)"
         prepend-icon="mdi-flask-outline"
       />
-      <v-chip v-if="brew.roaster" :text="brew.roaster" prepend-icon="mdi-fire" />
     </div>
 
     <v-divider class="my-2" />
