@@ -24,3 +24,10 @@ export type BrewsLoading = {
   getBrews: boolean
   getBrewsTodayCount: boolean
 }
+
+export type BrewLoading = {
+  getBrew: boolean
+  postBrew: boolean
+  updateBrew: boolean
+  deleteBrew: boolean
+}
