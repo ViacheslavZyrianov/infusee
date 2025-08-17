@@ -1,3 +1,5 @@
+import type { RoasterRead } from '@/store/roasters/types'
+
 export type Coffee = {
   name: string
   roaster_id: string | null
@@ -14,6 +16,10 @@ export type Coffee = {
 }
 
 export type CoffeeRead = Coffee & { id: number }
+
+export type CoffeeAndRoasterRead = Coffee & { roasters: Pick<RoasterRead, 'title'> } & {
+  id: number
+}
 
 export type CoffeesLoading = {
   getCoffees?: boolean
