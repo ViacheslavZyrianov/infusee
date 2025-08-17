@@ -27,7 +27,7 @@ const form: Coffee = reactive({
   processing: null,
   price: null,
   notes: '',
-  brew_date: new Date().toISOString(),
+  roast_date: new Date().toISOString(),
 })
 
 const isDatepickerOpened: Ref<boolean> = ref(false)
@@ -40,7 +40,7 @@ const rules: Record<string, ValidationRule> = {
 }
 
 const formattedDate: ComputedRef<string> = computed(() => {
-  const brewDate = dayjs(form.brew_date)
+  const brewDate = dayjs(form.roast_date)
   return brewDate.isSame(dayjs(), 'day') ? 'Today' : brewDate.format('DD.MM.YYYY')
 })
 
@@ -85,6 +85,8 @@ defineExpose({
       <v-switch v-model="form.is_specialty" label="Specialty" class="flex-shrink-0" />
     </div>
 
+    <v-select v-model="form.roast_level" :items="roastLevelOptions" label="Roast level" clearable />
+
     <v-autocomplete
       v-model="form.country"
       label="Country of origin"
@@ -101,8 +103,6 @@ defineExpose({
 
     <v-select v-model="form.processing" :items="processingOptions" label="Processing" clearable />
 
-    <v-select v-model="form.roast_level" :items="roastLevelOptions" label="Roast level" clearable />
-
     <v-menu
       v-model="isDatepickerOpened"
       :close-on-content-click="false"
@@ -114,7 +114,7 @@ defineExpose({
         <v-text-field
           v-bind="props"
           v-model="formattedDate"
-          label="Brew Date"
+          label="Roast date"
           readonly
           variant="outlined"
           append-inner-icon="mdi-calendar-month-outline"
@@ -122,7 +122,7 @@ defineExpose({
       </template>
 
       <v-date-picker
-        v-model="form.brew_date"
+        v-model="form.roast_date"
         no-title
         first-day-of-week="1"
         hide-header

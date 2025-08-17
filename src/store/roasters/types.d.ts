@@ -5,4 +5,4 @@ export type Roaster = {
   notes: string
 }
 
-export type RoasterRead = Roaster & { id: string }
+export type RoasterRead = Roaster & { id: number }
