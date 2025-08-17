@@ -1,5 +1,3 @@
-// useRatings.ts
-
 /**
  * Ratings definition: maps a friendly key to its model field and display label.
  */
