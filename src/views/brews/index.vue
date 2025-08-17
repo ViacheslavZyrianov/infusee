@@ -29,7 +29,9 @@ onMounted(async () => {
     <v-btn prepend-icon="mdi-plus" to="/brews/add">Add brew</v-btn>
   </teleport>
   <div class="d-flex flex-column ga-4">
-    <v-skeleton-loader v-if="brewsStore.isLoading.getBrews" type="article" height="136px" />
+    <template v-if="brewsStore.isLoading.getBrews">
+      <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" />
+    </template>
     <template v-else>
       <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
     </template>
