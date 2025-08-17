@@ -20,7 +20,7 @@ export type Brew = {
 
 export type BrewRead = Brew & { id: string; coffees: Pick<CoffeeRead, 'name'>; created_at: string }
 
-export type Loading = {
+export type BrewsLoading = {
   getBrews: boolean
   getBrewsTodayCount: boolean
 }
