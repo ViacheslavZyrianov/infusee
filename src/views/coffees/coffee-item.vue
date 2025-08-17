@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, type ComputedRef } from 'vue'
+import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { CoffeeRead } from '@/store/coffees/types'
 import { useCountries } from '@/composables/useCountries.ts'
 import dayjs from 'dayjs'
@@ -7,8 +7,13 @@ import {
   getProcessingOptionTitleByValue,
   getRoastLevelOptionTitleByValue,
 } from '@/views/coffees/data.ts'
+import useRoastersStore from '@/store/roasters/roasters.ts'
+import type { RoasterRead } from '@/store/roasters/types'
 
 const countries = useCountries()
+const roastersStore = useRoastersStore()
+
+const roasters: Ref<RoasterRead[]> = ref([])
 
 const props = defineProps({
   coffee: {
@@ -32,20 +37,33 @@ const onDelete = () => {
     emit('delete')
   }
 }
+
+const getRoasters = async () => {
+  roasters.value = await roastersStore.getRoasters()
+}
+
+onMounted(async () => {
+  await getRoasters()
+})
 </script>
 
 <template>
   <v-card v-if="coffee" class="pa-4" outlined elevation="3">
-    <div class="d-flex align-center justify-space-between">
-      <v-chip
-        v-if="coffee.cupping_score"
-        :text="coffee.cupping_score"
-        size="small"
-        :color="chipCuppingScoreColor"
-        class="mr-2 flex-shrink-0"
-      />
-      <v-card-title class="text-truncate" style="width: calc(100% - 62px)">
-        {{ coffee.name }}
+    <div class="d-flex align-start justify-space-between">
+      <v-card-title
+        class="d-flex flex-column gr-1 text-truncate mb-4"
+        style="width: calc(100% - 62px)"
+      >
+        <div class="d-flex align-center">
+          <v-chip
+            v-if="coffee.cupping_score"
+            :text="coffee.cupping_score"
+            size="small"
+            :color="chipCuppingScoreColor"
+            class="mr-2 flex-shrink-0"
+          />
+          <span>{{ coffee?.name }}</span>
+        </div>
       </v-card-title>
 
       <v-menu>
@@ -70,8 +88,6 @@ const onDelete = () => {
       </v-menu>
     </div>
 
-    <v-divider class="my-4" />
-
     <v-card-text class="d-flex flex-wrap justify-between ga-2">
       <v-chip v-if="coffee.country">
         {{ countries.getFlagAndName(coffee.country) }}
@@ -79,17 +95,26 @@ const onDelete = () => {
       <v-chip v-if="coffee.processing" prepend-icon="mdi-flask-outline">
         {{ getProcessingOptionTitleByValue(coffee.processing) }}
       </v-chip>
-      <v-chip v-if="coffee.roast_level" prepend-icon="mdi-fire">
-        {{ getRoastLevelOptionTitleByValue(coffee.roast_level) }}
-      </v-chip>
-      <v-chip v-if="formattedDate" prepend-icon="mdi-calendar-month">
-        {{ formattedDate }}
-      </v-chip>
     </v-card-text>
 
+    <v-divider class="my-4" />
+
+    <div class="text-body-2 text-grey-darken-2"><v-icon icon="mdi-fire" /> Roast details</div>
+    <div class="d-flex flex-wrap ga-2 pl-6">
+      <v-chip v-if="coffee.roaster_id && roasters[coffee.roaster_id]" size="small">
+        {{ roasters[coffee.roaster_id].title }}
+      </v-chip>
+      <v-chip v-if="coffee.roast_level" size="small">
+        {{ getRoastLevelOptionTitleByValue(coffee.roast_level) }}
+      </v-chip>
+      <v-chip v-if="formattedDate" size="small">
+        {{ formattedDate }}
+      </v-chip>
+    </div>
+
     <template v-if="coffee.notes">
-      <v-divider class="my-4" />
-      <p class="mb-0 text-grey-darken-2">{{ coffee.notes }}</p>
+      <v-divider class="mt-4" />
+      <p class="mb-0 mt-4 text-grey-darken-2 text-body-2">{{ coffee.notes }}</p>
     </template>
   </v-card>
 </template>

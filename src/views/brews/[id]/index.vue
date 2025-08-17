@@ -73,14 +73,11 @@ onMounted(async () => {
       <span class="text-caption text-grey">{{ formattedDate }}</span>
     </v-card-title>
 
-    <div class="d-flex flex-wrap ga-2">
-      <v-chip
-        v-if="brew.brew_method"
-        :text="getBrewMethodTitleByValue(brew.brew_method)"
-        prepend-icon="mdi-flask-outline"
-      />
-      <v-chip v-if="brew.roaster" :text="brew.roaster" prepend-icon="mdi-fire" />
-    </div>
+    <v-chip
+      v-if="brew.brew_method"
+      :text="getBrewMethodTitleByValue(brew.brew_method)"
+      prepend-icon="mdi-flask-outline"
+    />
 
     <v-divider class="my-3" />
 
