@@ -38,7 +38,11 @@ export default defineStore('brew', () => {
   const getBrew = async (brewId: string): Promise<BrewRead> => {
     isLoading.value = true
 
-    const { data, error } = await supabase.from('brews').select('*').eq('id', brewId).single()
+    const { data, error } = await supabase
+      .from('brews')
+      .select('*, coffees (name)')
+      .eq('id', brewId)
+      .single()
 
     isLoading.value = false
 
