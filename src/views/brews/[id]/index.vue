@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useBrewStore from '@/store/brews/brew'
-import useCoffeeStore from '@/store/coffees/coffee.ts'
 import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
-import type { CoffeeRead } from '@/store/coffees/types'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
 import dayjs from 'dayjs'
 
@@ -14,10 +12,8 @@ const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const { getBrewMethodTitleByValue } = useBrewMethods()
 
 const brewStore = useBrewStore()
-const coffeeStore = useCoffeeStore()
 
 const brew: Ref<BrewRead | null> = ref(null)
-const coffee: Ref<CoffeeRead | null> = ref(null)
 
 const formattedDate: ComputedRef<string> = computed(() =>
   dayjs(brew.value?.created_at).format('DD.MM.YYYY HH:mm'),
@@ -27,15 +23,8 @@ const getBrew = async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
 }
 
-const getCoffee = async () => {
-  if (!brew.value?.coffee_id) return
-
-  coffee.value = await coffeeStore.getCoffee(brew.value.coffee_id)
-}
-
 onMounted(async () => {
   await getBrew()
-  await getCoffee()
 })
 </script>
 
@@ -69,7 +58,7 @@ onMounted(async () => {
 
   <v-card v-if="brew" max-width="600">
     <v-card-title class="d-flex flex-column gr-1 mb-4">
-      <span>{{ coffee?.name }}</span>
+      <span>{{ brew.coffees.name }}</span>
       <span class="text-caption text-grey">{{ formattedDate }}</span>
     </v-card-title>
 
@@ -82,7 +71,6 @@ onMounted(async () => {
     <v-divider class="my-3" />
 
     <v-card-text>
-      <!-- Ratings Section -->
       <v-row dense>
         <v-col cols="6" md="4" v-for="ratingKey in ratingKeys" :key="ratingModel(ratingKey)">
           <div class="font-weight-bold">{{ ratingLabel(ratingKey) }}:</div>
@@ -98,7 +86,6 @@ onMounted(async () => {
 
       <v-divider class="my-3" />
 
-      <!-- Other Details -->
       <v-row dense>
         <v-col cols="6" md="4" v-if="brew.grind"> <strong>Grind:</strong> {{ brew.grind }} </v-col>
         <v-col cols="6" md="4" v-if="brew.dose"> <strong>Dose:</strong> {{ brew.dose }}g </v-col>
