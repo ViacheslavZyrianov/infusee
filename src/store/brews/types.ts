@@ -1,4 +1,5 @@
 import type { BrewMethodKey } from '@/composables/useBrewMethods.ts'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 export type Brew = {
   coffee_id: string | null
@@ -17,4 +18,9 @@ export type Brew = {
   notes: string | null
 }
 
-export type BrewRead = Brew & { id: string; created_at: string }
+export type BrewRead = Brew & { id: string; coffees: Pick<CoffeeRead, 'name'>; created_at: string }
+
+export type Loading = {
+  getBrews: boolean
+  getBrewsTodayCount: boolean
+}
