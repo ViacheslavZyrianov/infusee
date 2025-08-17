@@ -1,14 +1,19 @@
 import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase.ts'
-import { type Ref, ref } from 'vue'
-import type { BrewRead } from '@/store/brews/types.ts'
+import type { BrewRead, Loading } from '@/store/brews/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import dayjs from 'dayjs'
+import { reactive } from 'vue'
 
 export default defineStore('brews', () => {
-  const brews: Ref<BrewRead[]> = ref([])
+  const isLoading: Loading = reactive({
+    getBrews: true,
+    getBrewsTodayCount: true,
+  })
 
-  const getBrews = async () => {
+  const getBrews = async (): Promise<BrewRead[]> => {
+    isLoading.getBrews = true
+
     const {
       data: { user },
     } = await supabase.auth.getUser()
@@ -17,16 +22,18 @@ export default defineStore('brews', () => {
     const response = (await supabase
       .from('brews')
       .select(
-        'id, user_id, coffee_id, brew_method, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
+        'id, user_id, coffees (name), brew_method, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
       )
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })) as PostgrestSingleResponse<BrewRead[]>
 
+    isLoading.getBrews = false
+
     if (response.error) {
-      throw new Error(`Error posting brew: ${response.error.message}`)
+      throw new Error(`Error fetching brews: ${response.error.message}`)
     }
 
-    brews.value = response.data || []
+    return response.data || []
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
@@ -47,5 +54,5 @@ export default defineStore('brews', () => {
     return count || 0
   }
 
-  return { brews, getBrews, getBrewsTodayCount }
+  return { isLoading, getBrews, getBrewsTodayCount }
 })
