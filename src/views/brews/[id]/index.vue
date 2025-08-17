@@ -6,9 +6,11 @@ import { onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import type { CoffeeRead } from '@/store/coffees/types'
+import useBrewMethods from '@/composables/useBrewMethods.ts'
 
 const route = useRoute()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
+const { getBrewMethodTitleByValue } = useBrewMethods()
 
 const brewStore = useBrewStore()
 const coffeeStore = useCoffeeStore()
@@ -64,7 +66,11 @@ onMounted(async () => {
     <v-card-title class="mb-4">{{ coffee?.name }}</v-card-title>
 
     <div class="d-flex flex-wrap ga-2">
-      <v-chip v-if="brew.brew_method" :text="brew.brew_method" prepend-icon="mdi-flask-outline" />
+      <v-chip
+        v-if="brew.brew_method"
+        :text="getBrewMethodTitleByValue(brew.brew_method)"
+        prepend-icon="mdi-flask-outline"
+      />
       <v-chip v-if="brew.roaster" :text="brew.roaster" prepend-icon="mdi-fire" />
     </div>
 
