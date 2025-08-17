@@ -2,11 +2,12 @@
 import { useRoute } from 'vue-router'
 import useBrewStore from '@/store/brews/brew'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
-import { onMounted, ref, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import type { CoffeeRead } from '@/store/coffees/types'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
+import dayjs from 'dayjs'
 
 const route = useRoute()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
@@ -17,6 +18,10 @@ const coffeeStore = useCoffeeStore()
 
 const brew: Ref<BrewRead | null> = ref(null)
 const coffee: Ref<CoffeeRead | null> = ref(null)
+
+const formattedDate: ComputedRef<string> = computed(() =>
+  dayjs(brew.value?.created_at).format('DD.MM.YYYY HH:mm'),
+)
 
 const getBrew = async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
@@ -63,7 +68,10 @@ onMounted(async () => {
   </teleport>
 
   <v-card v-if="brew" max-width="600">
-    <v-card-title class="mb-4">{{ coffee?.name }}</v-card-title>
+    <v-card-title class="d-flex flex-column gr-1 mb-4">
+      <span>{{ coffee?.name }}</span>
+      <span class="text-caption text-grey">{{ formattedDate }}</span>
+    </v-card-title>
 
     <div class="d-flex flex-wrap ga-2">
       <v-chip
@@ -111,11 +119,6 @@ onMounted(async () => {
       <div v-if="brew.notes">
         <strong>Notes:</strong>
         <p>{{ brew.notes }}</p>
-      </div>
-
-      <!-- Created date -->
-      <div class="grey--text text--darken-1 text-caption mt-2">
-        Created at: {{ new Date(brew.created_at).toLocaleString() }}
       </div>
     </v-card-text>
   </v-card>
