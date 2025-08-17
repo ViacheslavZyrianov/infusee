@@ -1,24 +1,30 @@
 <script setup lang="ts">
-import { computed, type ComputedRef, reactive, ref, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, reactive, ref, type Ref } from 'vue'
 import type { Coffee } from '@/store/coffees/types'
 import dayjs from 'dayjs'
 import { processingOptions, roastLevelOptions } from '@/views/coffees/data.ts'
 import { useCountries } from '@/composables/useCountries.ts'
 import useCurrencies from '@/composables/useCurrencies.ts'
 import { useSettingsStore } from '@/store/settings'
+import useRoastersStore from '@/store/roasters/roasters.ts'
+import type { RoasterRead } from '@/store/roasters/types'
+
+const roasters: Ref<RoasterRead[]> = ref([])
 
 const countries = useCountries()
 const currencies = useCurrencies()
 const settingsStore = useSettingsStore()
+const roastersStore = useRoastersStore()
 
 const form: Coffee = reactive({
   name: '',
+  roaster_id: null,
+  roast_level: null,
   cupping_score: null,
   is_specialty: false,
   is_public: false,
   country: null,
   processing: null,
-  roast_level: null,
   price: null,
   notes: '',
   brew_date: new Date().toISOString(),
@@ -42,6 +48,14 @@ const onSelectBrewDate = () => {
   isDatepickerOpened.value = false
 }
 
+const getRoasters = async () => {
+  roasters.value = await roastersStore.getRoasters()
+}
+
+onMounted(async () => {
+  await getRoasters()
+})
+
 defineExpose({
   form,
 })
@@ -50,6 +64,14 @@ defineExpose({
 <template>
   <v-card class="pa-4">
     <v-text-field v-model="form.name" label="Coffee Name" :rules="[rules.required]" />
+
+    <v-autocomplete
+      v-model="form.roaster_id"
+      label="Roaster"
+      placeholder="Select roaster"
+      :items="roasters"
+      item-value="id"
+    />
 
     <div class="d-flex align-center ga-4">
       <v-text-field
