@@ -17,7 +17,7 @@ export default defineStore('brews', () => {
     const response = (await supabase
       .from('brews')
       .select(
-        'id, user_id, coffee_id, brew_method, roaster, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
+        'id, user_id, coffee_id, brew_method, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
       )
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })) as PostgrestSingleResponse<BrewRead[]>
