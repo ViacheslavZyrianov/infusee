@@ -24,7 +24,7 @@ const formattedDate: ComputedRef<string | null> = computed(() =>
 )
 
 const chipCuppingScoreColor: ComputedRef<string> = computed(() =>
-  props.coffee?.is_specialty ? 'amber-darken-3' : 'grey-darken-1',
+  props.coffee?.cupping_score >= 80 ? 'amber-darken-3' : 'grey-darken-1',
 )
 
 const onDelete = () => {
