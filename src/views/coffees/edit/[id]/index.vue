@@ -14,7 +14,6 @@ const coffeeFormRef: Ref<{ form: Coffee }> = ref({
   form: {
     name: '',
     cupping_score: null,
-    is_specialty: false,
     is_public: false,
     country: null,
     processing: null,
@@ -35,13 +34,11 @@ const getCoffee = async () => {
   Object.assign(coffeeFormRef.value.form, {
     name: coffee.name,
     cupping_score: coffee.cupping_score,
-    is_specialty: coffee.is_specialty,
     is_public: coffee.is_public,
     country: coffee.country,
     processing: coffee.processing,
     roast_level: coffee.roast_level,
     notes: coffee.notes,
-    brew_date: coffee.brew_date,
   })
 }
 
