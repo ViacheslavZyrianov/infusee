@@ -73,7 +73,7 @@ onMounted(async () => {
   <teleport defer to="#app-bar-action--right">
     <v-btn color="success" @click="onSave">Save</v-btn>
   </teleport>
-  <brew-form v-if="!brewStore.isLoading" ref="brewFormRef" />
+  <brew-form v-if="!brewStore.isLoading.getBrew" ref="brewFormRef" />
 </template>
 
 <style scoped></style>
