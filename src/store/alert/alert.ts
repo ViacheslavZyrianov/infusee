@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { type Ref, ref } from 'vue'
-import { AlertType } from '@/store/alert/types'
+import { AlertType } from '@/store/alert/types.ts'
 
 export const useAlertStore = defineStore('alert', () => {
   const message = ref('')
