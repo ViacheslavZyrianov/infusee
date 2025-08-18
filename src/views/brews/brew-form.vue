@@ -32,7 +32,7 @@ const form: Brew = reactive({
 const formRef:Ref<InstanceType<typeof VForm> | null> = ref(null)
 const coffees: Ref<Pick<CoffeeRead, 'id' | 'name'>[]> = ref([])
 
-const selectCoffeeRules = composeRules(required('You must select coffee You must select coffee You must select coffee You must select coffee You must select coffee'))
+const selectCoffeeRules = composeRules(required('You must select coffee'))
 
 const getCoffees = async () => {
   coffees.value = await coffeesStore.getCoffees('id, name')
