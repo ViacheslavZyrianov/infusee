@@ -9,28 +9,13 @@ const router = useRouter()
 
 const brewStore = useBrewStore()
 
-const brewFormRef: Ref<{ form: Brew }> = ref({
-  form: {
-    coffee_id: null,
-    brew_method: null,
-    country: null,
-    roaster: null,
-    rating_aroma: 0,
-    rating_flavor: 0,
-    rating_acidity: 0,
-    rating_bitterness: 0,
-    rating_sweetness: 0,
-    rating_body: 0,
-    rating_aftertaste: 0,
-    grind: null,
-    dose: null,
-    channeling: null,
-    output: null,
-    notes: null,
-  },
-})
+const brewFormRef:Ref<InstanceType<typeof BrewForm> | null> = ref(null)
 
 const onSave = async () => {
+  const result = await brewFormRef.value?.validate()  
+
+  if (!result?.valid || !brewFormRef.value) return
+
   await brewStore.postBrew(brewFormRef.value.form)
   router.push('/brews')
 }
