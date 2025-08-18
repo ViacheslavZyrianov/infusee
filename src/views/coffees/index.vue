@@ -29,7 +29,9 @@ onMounted(async () => {
     <v-btn prepend-icon="mdi-plus" to="/coffees/add">Add coffee</v-btn>
   </teleport>
   <div class="d-flex flex-column ga-4">
-    <v-skeleton-loader v-if="coffeesStore.isLoading.getCoffees" />
+    <template v-if="coffeesStore.isLoading.getCoffees">
+      <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" />
+    </template>
     <template v-else>
       <coffee-item
         v-for="coffee in coffees"
