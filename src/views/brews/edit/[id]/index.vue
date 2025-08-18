@@ -2,7 +2,6 @@
 import { computed, type ComputedRef, onMounted, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BrewForm from '@/views/brews/brew-form.vue'
-import type { Brew } from '@/store/brews/types.ts'
 import useBrewStore from '@/store/brews/brew.ts'
 
 const route = useRoute()
@@ -10,25 +9,7 @@ const router = useRouter()
 
 const brewStore = useBrewStore()
 
-const brewFormRef: Ref<{ form: Brew }> = ref({
-  form: {
-    coffee_id: null,
-    brew_method: null,
-    roaster: null,
-    rating_aroma: 0,
-    rating_flavor: 0,
-    rating_acidity: 0,
-    rating_bitterness: 0,
-    rating_sweetness: 0,
-    rating_body: 0,
-    rating_aftertaste: 0,
-    grind: null,
-    dose: null,
-    channeling: null,
-    output: null,
-    notes: null,
-  },
-})
+const brewFormRef: Ref<InstanceType<typeof BrewForm> | null> = ref(null)
 
 const id: ComputedRef<string> = computed(() => route.params.id as string)
 
@@ -37,6 +18,8 @@ const onCancel = () => {
 }
 
 const getBrew = async () => {
+  if (!brewFormRef.value?.form) return
+
   const brew = await brewStore.getBrew(id.value)
   Object.assign(brewFormRef.value.form, {
     coffee_id: brew.coffee_id,
@@ -57,6 +40,10 @@ const getBrew = async () => {
 }
 
 const onSave = async () => {
+  const result = await brewFormRef.value?.validate()
+
+  if (!result?.valid || !brewFormRef.value) return
+
   await brewStore.updateBrew(id.value, brewFormRef.value.form)
   router.push(`/brews/${id.value}`)
 }
@@ -71,7 +58,14 @@ onMounted(async () => {
     <v-btn variant="outlined" @click="onCancel">Cancel</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
-    <v-btn color="success" @click="onSave">Save</v-btn>
+    <v-btn
+      :loading="brewStore.isLoading.updateBrew"
+      :disabled="brewStore.isLoading.updateBrew"
+      color="success"
+      @click="onSave"
+    >
+      Save
+    </v-btn>
   </teleport>
   <brew-form v-if="!brewStore.isLoading.getBrew" ref="brewFormRef" />
 </template>
