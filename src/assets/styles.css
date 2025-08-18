@@ -15,6 +15,16 @@ html {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.v-text-field .v-input__details {
+    padding-top: 6px;
+    padding-bottom: 12px;
+    min-height: 0;
+}
+
+.v-input .v-input__details .v-messages:empty {
+  display: none;
+}
+
 ul {
   list-style: inside;
 }
