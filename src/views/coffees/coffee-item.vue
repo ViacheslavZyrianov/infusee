@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
-import type { CoffeeAndRoasterRead } from '@/store/coffees/types'
+import type { CoffeeRead } from '@/store/coffees/types'
 import { useCountries } from '@/composables/useCountries.ts'
 import dayjs from 'dayjs'
 import {
@@ -12,7 +12,7 @@ const countries = useCountries()
 
 const props = defineProps({
   coffee: {
-    type: Object as () => CoffeeAndRoasterRead,
+    type: Object as () => CoffeeRead,
     required: true,
   },
 })
