@@ -7,9 +7,9 @@ import { reactive } from 'vue'
 export default defineStore('brew', () => {
   const isLoading: BrewLoading = reactive({
     getBrew: true,
-    postBrew: true,
-    updateBrew: true,
-    deleteBrew: true,
+    postBrew: false,
+    updateBrew: false,
+    deleteBrew: false,
   })
 
   const getBrew = async (brewId: string): Promise<BrewRead> => {
