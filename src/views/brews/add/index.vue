@@ -25,7 +25,7 @@ const onSave = async () => {
     <v-btn variant="outlined" to="/brews">Cancel</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
-    <v-btn color="success" @click="onSave">Save</v-btn>
+    <v-btn :loading="brewStore.isLoading.postBrew" :disabled="brewStore.isLoading.postBrew" color="success" @click="onSave">Save</v-btn>
   </teleport>
   <brew-form ref="brewFormRef" />
 </template>
