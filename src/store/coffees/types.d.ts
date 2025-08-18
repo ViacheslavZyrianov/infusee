@@ -15,11 +15,7 @@ export type Coffee = {
   user_id?: string
 }
 
-export type CoffeeRead = Coffee & { id: number }
-
-export type CoffeeAndRoasterRead = Coffee & { roasters: Pick<RoasterRead, 'title'> } & {
-  id: number
-}
+export type CoffeeRead = Coffee & { id: number; roasters: Pick<RoasterRead, 'title'> }
 
 export type CoffeesLoading = {
   getCoffees?: boolean
