@@ -23,8 +23,12 @@ const isLoading: ComputedRef<boolean> = computed(
   () => brew.value === null || brewStore.isLoading.getBrew,
 )
 
-const isDetails: ComputedRef<boolean> = computed(() => 
-  Boolean(brew.value?.grind) || Boolean(brew.value?.dose) || Boolean(brew.value?.channeling) || Boolean(brew.value?.output)
+const isDetails: ComputedRef<boolean> = computed(
+  () =>
+    Boolean(brew.value?.grind) ||
+    Boolean(brew.value?.dose) ||
+    Boolean(brew.value?.channeling) ||
+    Boolean(brew.value?.output),
 )
 
 const getBrew = async () => {
@@ -63,8 +67,6 @@ onMounted(async () => {
       </v-list>
     </v-menu>
   </teleport>
-
-  <pre>{{ isRating }}</pre>
 
   <v-card v-if="isLoading">
     <v-card-title class="d-flex flex-column mb-4">
@@ -111,7 +113,9 @@ onMounted(async () => {
         <v-divider class="my-3" />
 
         <v-row dense>
-          <v-col cols="6" md="4" v-if="brew.grind"> <strong>Grind:</strong> {{ brew.grind }} </v-col>
+          <v-col cols="6" md="4" v-if="brew.grind">
+            <strong>Grind:</strong> {{ brew.grind }}
+          </v-col>
           <v-col cols="6" md="4" v-if="brew.dose"> <strong>Dose:</strong> {{ brew.dose }}g </v-col>
           <v-col cols="6" md="4" v-if="brew.channeling">
             <strong>Channeling:</strong> {{ brew.channeling }}s
