@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase.ts'
-import { reactive, type Ref, ref } from 'vue'
-import type { CoffeeAndRoasterRead, CoffeeRead, CoffeesLoading } from '@/store/coffees/types.ts'
+import { reactive } from 'vue'
+import type { CoffeeRead, CoffeesLoading } from '@/store/coffees/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 
 export default defineStore('coffees', () => {
-  const coffees: Ref<CoffeeRead[]> = ref([])
   const isLoading: CoffeesLoading = reactive({
     getCoffees: true,
   })
@@ -22,7 +21,7 @@ export default defineStore('coffees', () => {
       .from('coffees')
       .select(query || '*, roasters (title)')
       .eq('user_id', user.id)
-      .order('name', { ascending: true })) as PostgrestSingleResponse<CoffeeAndRoasterRead[]>
+      .order('name', { ascending: true })) as PostgrestSingleResponse<CoffeeRead[]>
 
     isLoading.getCoffees = false
 
@@ -33,5 +32,5 @@ export default defineStore('coffees', () => {
     return response.data || []
   }
 
-  return { coffees, isLoading, getCoffees }
+  return { isLoading, getCoffees }
 })
