@@ -7,9 +7,9 @@ import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 export default defineStore('coffee', () => {
   const isLoading: CoffeeLoading = reactive({
     getCoffee: true,
-    postCoffee: true,
-    updateCoffee: true,
-    deleteCoffee: true,
+    postCoffee: false,
+    updateCoffee: false,
+    deleteCoffee: false,
   })
 
   const postCoffee = async (form: Coffee) => {
