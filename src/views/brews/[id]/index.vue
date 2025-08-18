@@ -23,6 +23,10 @@ const isLoading: ComputedRef<boolean> = computed(
   () => brew.value === null || brewStore.isLoading.getBrew,
 )
 
+const isDetails: ComputedRef<boolean> = computed(() => 
+  Boolean(brew.value?.grind) || Boolean(brew.value?.dose) || Boolean(brew.value?.channeling) || Boolean(brew.value?.output)
+)
+
 const getBrew = async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
 }
@@ -59,6 +63,8 @@ onMounted(async () => {
       </v-list>
     </v-menu>
   </teleport>
+
+  <pre>{{ isRating }}</pre>
 
   <v-card v-if="isLoading">
     <v-card-title class="d-flex flex-column mb-4">
@@ -101,23 +107,23 @@ onMounted(async () => {
         </v-col>
       </v-row>
 
-      <v-divider class="my-3" />
+      <template v-if="isDetails">
+        <v-divider class="my-3" />
 
-      <v-row dense>
-        <v-col cols="6" md="4" v-if="brew.grind"> <strong>Grind:</strong> {{ brew.grind }} </v-col>
-        <v-col cols="6" md="4" v-if="brew.dose"> <strong>Dose:</strong> {{ brew.dose }}g </v-col>
-        <v-col cols="6" md="4" v-if="brew.channeling">
-          <strong>Channeling:</strong> {{ brew.channeling }}s
-        </v-col>
-        <v-col cols="6" md="4" v-if="brew.output">
-          <strong>Output:</strong> {{ brew.output }}ml
-        </v-col>
-      </v-row>
+        <v-row dense>
+          <v-col cols="6" md="4" v-if="brew.grind"> <strong>Grind:</strong> {{ brew.grind }} </v-col>
+          <v-col cols="6" md="4" v-if="brew.dose"> <strong>Dose:</strong> {{ brew.dose }}g </v-col>
+          <v-col cols="6" md="4" v-if="brew.channeling">
+            <strong>Channeling:</strong> {{ brew.channeling }}s
+          </v-col>
+          <v-col cols="6" md="4" v-if="brew.output">
+            <strong>Output:</strong> {{ brew.output }}ml
+          </v-col>
+        </v-row>
+      </template>
 
-      <v-divider class="my-3" />
-
-      <!-- Notes -->
       <div v-if="brew.notes">
+        <v-divider class="my-3" />
         <strong>Notes:</strong>
         <p>{{ brew.notes }}</p>
       </div>
