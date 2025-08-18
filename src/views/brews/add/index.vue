@@ -2,7 +2,6 @@
 import { type Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BrewForm from '@/views/brews/brew-form.vue'
-import type { Brew } from '@/store/brews/types.ts'
 import useBrewStore from '@/store/brews/brew.ts'
 
 const router = useRouter()
