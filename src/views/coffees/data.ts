@@ -1,4 +1,4 @@
-import type { SelectItem } from '@/types/types.ts'
+import type { SelectItem, SelectOption } from '@/types/types.ts'
 
 export const processingOptions: SelectItem[] = [
   {
@@ -40,8 +40,13 @@ export const roastLevelOptions: SelectItem[] = [
   { title: 'Very Dark', value: 'very_dark' },
 ]
 
-const findOptionByValue = (options: SelectItem[], value: string): string =>
-  options.find((option) => option.value === value)?.title || '-'
+const findOptionByValue = (options: SelectItem[], value: string | number): string => {
+  const option = options.find(
+    (selectOption): selectOption is SelectOption =>
+      'value' in selectOption && selectOption.value === value,
+  )
+  return option?.title ?? '-'
+}
 
 export const getProcessingOptionTitleByValue = (value: string): string =>
   findOptionByValue(processingOptions, value)
