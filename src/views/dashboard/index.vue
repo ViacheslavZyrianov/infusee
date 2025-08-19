@@ -22,37 +22,36 @@ const addWidgetBrewsTodayCount = async () => {
 }
 
 const addWidtgetEmoji = () => {
-
   const generateEmoji = () => {
     const coffeeEmojis = [
-      "☕",   // Coffee / hot beverage
-      "🫘",   // Beans (coffee beans)
-      "🫖",   // Teapot (brewing vibes, also coffee pots)
-      "🍵",   // Cup without handle (small coffee cups, matcha, espresso)
-      "🥤",   // Cup with straw (iced coffee, cold brew, frappé)
-      "🧋",   // Bubble tea (iced coffee lookalike)
-      "🥛",   // Milk (latte, cappuccino, flat white base)
-      "🍼",   // Bottle (milk/cream for coffee)
+      '☕', // Coffee / hot beverage
+      '🫘', // Beans (coffee beans)
+      '🫖', // Teapot (brewing vibes, also coffee pots)
+      '🍵', // Cup without handle (small coffee cups, matcha, espresso)
+      '🥤', // Cup with straw (iced coffee, cold brew, frappé)
+      '🧋', // Bubble tea (iced coffee lookalike)
+      '🥛', // Milk (latte, cappuccino, flat white base)
+      '🍼', // Bottle (milk/cream for coffee)
 
       // Café sweets & pairings
-      "🍩",   // Donut (coffee + donuts classic)
-      "🍪",   // Cookie (coffee & cookie combo)
-      "🥐",   // Croissant (coffee & croissant breakfast)
-      "🥯",   // Bagel (common coffee shop food)
-      "🥞",   // Pancakes (brunch café vibes)
-      "🧁",   // Cupcake (coffee & cupcake pairing)
-      "🍰",   // Cake slice
-      "🍫",   // Chocolate bar (mocha / coffee + chocolate)
-      "🍮",   // Flan / custard (common café dessert)
-      "🥧",   // Pie (coffee & pie diner vibes)
+      '🍩', // Donut (coffee + donuts classic)
+      '🍪', // Cookie (coffee & cookie combo)
+      '🥐', // Croissant (coffee & croissant breakfast)
+      '🥯', // Bagel (common coffee shop food)
+      '🥞', // Pancakes (brunch café vibes)
+      '🧁', // Cupcake (coffee & cupcake pairing)
+      '🍰', // Cake slice
+      '🍫', // Chocolate bar (mocha / coffee + chocolate)
+      '🍮', // Flan / custard (common café dessert)
+      '🥧', // Pie (coffee & pie diner vibes)
 
       // Café / bar atmosphere
-      "🍶",   // Small sake set, can look like espresso cups
-      "🍷",   // Wine glass (some cafés also serve wine)
-      "🍸",   // Cocktail glass (espresso martini!)
-      "🍹",   // Tropical drink (iced coffee mocktails)
-      "🥃",   // Tumbler glass (Irish coffee / whiskey + coffee)
-    ];
+      '🍶', // Small sake set, can look like espresso cups
+      '🍷', // Wine glass (some cafés also serve wine)
+      '🍸', // Cocktail glass (espresso martini!)
+      '🍹', // Tropical drink (iced coffee mocktails)
+      '🥃', // Tumbler glass (Irish coffee / whiskey + coffee)
+    ]
 
     emoji.value = coffeeEmojis[Math.floor(Math.random() * coffeeEmojis.length)]
   }
@@ -63,7 +62,7 @@ const addWidtgetEmoji = () => {
     title: emoji,
     size: 'half',
     color: 'deep-purple-lighten-1',
-    onClick: generateEmoji
+    onClick: generateEmoji,
   })
 }
 
@@ -79,7 +78,12 @@ onMounted(() => {
 
 <template>
   <div class="d-flex flex-wrap ga-4">
-    <widget v-for="(widget, index) in widgets" :key="index" :data="widget" @click="widget.onClick" />
+    <widget
+      v-for="(widget, index) in widgets"
+      :key="index"
+      :data="widget"
+      @click="widget.onClick"
+    />
   </div>
 </template>
 

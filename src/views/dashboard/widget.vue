@@ -17,7 +17,14 @@ const classList: ComputedRef<string> = computed(
 </script>
 
 <template>
-  <v-card rounded="xl" :class="classList" :color="data.color" :to="data.to" :ripple="false" @click="emit('click')">
+  <v-card
+    rounded="xl"
+    :class="classList"
+    :color="data.color"
+    :to="data.to"
+    :ripple="false"
+    @click="emit('click')"
+  >
     <h1 class="text-h1 font-weight-black">{{ data.title }}</h1>
     <p class="text-body-2">{{ data.subtitle }}</p>
   </v-card>

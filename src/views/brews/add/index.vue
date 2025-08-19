@@ -8,10 +8,10 @@ const router = useRouter()
 
 const brewStore = useBrewStore()
 
-const brewFormRef:Ref<InstanceType<typeof BrewForm> | null> = ref(null)
+const brewFormRef: Ref<InstanceType<typeof BrewForm> | null> = ref(null)
 
 const onSave = async () => {
-  const result = await brewFormRef.value?.validate()  
+  const result = await brewFormRef.value?.validate()
 
   if (!result?.valid || !brewFormRef.value) return
 
@@ -25,7 +25,13 @@ const onSave = async () => {
     <v-btn variant="outlined" to="/brews">Cancel</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
-    <v-btn :loading="brewStore.isLoading.postBrew" :disabled="brewStore.isLoading.postBrew" color="success" @click="onSave">Save</v-btn>
+    <v-btn
+      :loading="brewStore.isLoading.postBrew"
+      :disabled="brewStore.isLoading.postBrew"
+      color="success"
+      @click="onSave"
+      >Save</v-btn
+    >
   </teleport>
   <brew-form ref="brewFormRef" />
 </template>
