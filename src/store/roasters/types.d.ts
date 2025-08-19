@@ -6,3 +6,7 @@ export type Roaster = {
 }
 
 export type RoasterRead = Roaster & { id: number }
+
+export type RoastersLoading = {
+  getRoasters: boolean
+}

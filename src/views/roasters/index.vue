@@ -19,6 +19,11 @@ onMounted(async () => {
 
 <template>
   <div class="d-flex flex-column ga-4">
-    <roaster-item v-for="roaster in roasters" :key="roaster.id" :data="roaster" />
+    <template v-if="roastersStore.isLoading.getRoasters">
+      <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" />
+    </template>
+    <template v-else>
+      <roaster-item v-for="roaster in roasters" :key="roaster.id" :data="roaster" />
+    </template>
   </div>
 </template>
