@@ -29,6 +29,7 @@ const getCoffee = async () => {
     processing: coffee.processing,
     roast_level: coffee.roast_level,
     notes: coffee.notes,
+    roaster_id: coffee.roaster_id,
   })
 }
 
