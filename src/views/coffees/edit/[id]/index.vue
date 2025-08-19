@@ -2,7 +2,6 @@
 import { computed, type ComputedRef, onMounted, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CoffeeForm from '@/views/coffees/coffee-form.vue'
-import type { Coffee } from '@/store/coffees/types.ts'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
 
 const route = useRoute()
@@ -10,18 +9,7 @@ const router = useRouter()
 
 const coffeeStore = useCoffeeStore()
 
-const coffeeFormRef: Ref<{ form: Coffee }> = ref({
-  form: {
-    name: '',
-    cupping_score: null,
-    is_public: false,
-    country: null,
-    processing: null,
-    roast_level: '',
-    notes: '',
-    brew_date: null,
-  },
-})
+const coffeeFormRef: Ref<InstanceType<typeof CoffeeForm> | null> = ref(null)
 
 const id: ComputedRef<string> = computed(() => route.params.id as string)
 
@@ -30,6 +18,8 @@ const onCancel = () => {
 }
 
 const getCoffee = async () => {
+  if (!coffeeFormRef.value) return
+
   const coffee = await coffeeStore.getCoffee(id.value)
   Object.assign(coffeeFormRef.value.form, {
     name: coffee.name,
@@ -43,6 +33,8 @@ const getCoffee = async () => {
 }
 
 const onSave = async () => {
+  if (!coffeeFormRef.value) return
+
   await coffeeStore.updateCoffee(id.value, coffeeFormRef.value.form)
   router.push('/coffees')
 }
