@@ -49,6 +49,8 @@ export default defineStore('coffee', () => {
   }
 
   const updateCoffee = async (id: string, form: Coffee) => {
+    isLoading.updateCoffee = true
+
     const { data } = await supabase.auth.getSession()
     if (!data?.session?.user.id) throw new Error('Not logged in')
 
@@ -58,6 +60,8 @@ export default defineStore('coffee', () => {
     }
 
     const { error } = await supabase.from('coffees').update(payload).eq('id', id)
+
+    isLoading.updateCoffee = false
 
     if (error) {
       throw new Error(`Error updating coffee: ${error.message}`)
