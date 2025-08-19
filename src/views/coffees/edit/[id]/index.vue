@@ -33,7 +33,9 @@ const getCoffee = async () => {
 }
 
 const onSave = async () => {
-  if (!coffeeFormRef.value) return
+  const result = await coffeeFormRef.value?.validate()
+
+  if (!result?.valid || !coffeeFormRef.value) return
 
   await coffeeStore.updateCoffee(id.value, coffeeFormRef.value.form)
   router.push('/coffees')
@@ -49,7 +51,14 @@ onMounted(async () => {
     <v-btn variant="outlined" @click="onCancel">Cancel</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
-    <v-btn color="success" @click="onSave">Save</v-btn>
+    <v-btn
+      :loading="coffeeStore.isLoading.updateCoffee"
+      :disabled="coffeeStore.isLoading.updateCoffee"
+      color="success"
+      @click="onSave"
+    >
+      Save
+    </v-btn>
   </teleport>
   <coffee-form ref="coffeeFormRef" />
 </template>
