@@ -22,5 +22,3 @@ onMounted(async () => {
     <roaster-item v-for="roaster in roasters" :key="roaster.id" :data="roaster" />
   </div>
 </template>
-
-<style scoped></style>
