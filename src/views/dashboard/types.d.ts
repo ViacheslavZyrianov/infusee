@@ -1,4 +1,4 @@
-import type { Ref } from "vue"
+import type { Ref } from 'vue'
 
 export type WidgetData = {
   title: string | number | Ref<string>

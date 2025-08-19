@@ -29,7 +29,7 @@ const form: Brew = reactive({
   output: null,
   notes: null,
 })
-const formRef:Ref<InstanceType<typeof VForm> | null> = ref(null)
+const formRef: Ref<InstanceType<typeof VForm> | null> = ref(null)
 const coffees: Ref<Pick<CoffeeRead, 'id' | 'name'>[]> = ref([])
 
 const selectCoffeeRules = composeRules(required('You must select coffee'))
@@ -44,7 +44,7 @@ onMounted(async () => {
 
 defineExpose({
   form,
-  validate: () => formRef.value?.validate()
+  validate: () => formRef.value?.validate(),
 })
 </script>
 
@@ -89,7 +89,12 @@ defineExpose({
         </div>
       </div>
       <div class="d-flex gc-4">
-        <v-text-field v-model="form.grind" label="Grind" placeholder="Enter grinding" type="number" />
+        <v-text-field
+          v-model="form.grind"
+          label="Grind"
+          placeholder="Enter grinding"
+          type="number"
+        />
         <v-text-field
           v-model="form.dose"
           label="Dose"

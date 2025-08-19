@@ -19,8 +19,10 @@ export default () => {
    * @param message - Custom error message (default: 'Required').
    * @returns A ValidationRule function.
    */
-  const required = (message = 'Required'): ValidationRule =>
-    (value: Value) => (value !== null && value !== undefined && value !== '') || message
+  const required =
+    (message = 'Required'): ValidationRule =>
+    (value: Value) =>
+      (value !== null && value !== undefined && value !== '') || message
 
   /**
    * Creates a number range validation rule.
@@ -29,7 +31,8 @@ export default () => {
    * @param message - Custom error message.
    * @returns A ValidationRule function.
    */
-  const numberRange = (min: number, max: number, message?: string): ValidationRule =>
+  const numberRange =
+    (min: number, max: number, message?: string): ValidationRule =>
     (value: Value) =>
       typeof value !== 'number'
         ? true
@@ -41,7 +44,8 @@ export default () => {
    * @param message - Custom error message.
    * @returns A ValidationRule function.
    */
-  const minLength = (len: number, message?: string): ValidationRule =>
+  const minLength =
+    (len: number, message?: string): ValidationRule =>
     (value: Value) =>
       typeof value !== 'string'
         ? true
@@ -53,7 +57,8 @@ export default () => {
    * @param message - Custom error message.
    * @returns A ValidationRule function.
    */
-  const maxLength = (len: number, message?: string): ValidationRule =>
+  const maxLength =
+    (len: number, message?: string): ValidationRule =>
     (value: Value) =>
       typeof value !== 'string'
         ? true
@@ -65,7 +70,8 @@ export default () => {
    * @param message - Custom error message.
    * @returns A ValidationRule function.
    */
-  const regexMatch = (pattern: RegExp, message?: string): ValidationRule =>
+  const regexMatch =
+    (pattern: RegExp, message?: string): ValidationRule =>
     (value: Value) =>
       typeof value !== 'string'
         ? true
