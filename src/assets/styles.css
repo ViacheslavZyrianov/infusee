@@ -6,6 +6,12 @@ html {
   overscroll-behavior: none;
 }
 
+body {
+  margin: 0;
+  padding-top: env(safe-area-inset-top);
+  background-color: rgb(18, 18, 18);
+}
+
 .v-toolbar__prepend,
 .v-toolbar__append {
   z-index: 1;
