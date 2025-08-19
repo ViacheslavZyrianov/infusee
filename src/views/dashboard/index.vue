@@ -21,7 +21,7 @@ const addWidgetBrewsTodayCount = async () => {
   })
 }
 
-const addWidtgetEmoji = () => {
+const addWidgetEmoji = () => {
   const generateEmoji = () => {
     const coffeeEmojis = [
       '☕', // Coffee / hot beverage
@@ -68,7 +68,7 @@ const addWidtgetEmoji = () => {
 
 const addWidgets = async () => {
   await addWidgetBrewsTodayCount()
-  addWidtgetEmoji()
+  addWidgetEmoji()
 }
 
 onMounted(() => {
