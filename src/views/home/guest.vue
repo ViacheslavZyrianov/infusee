@@ -26,8 +26,9 @@ const signInWithGoogle = async () => {
     </v-card-actions>
 
     <v-card-text class="text-center mt-6 grey--text text--darken-1">
-      By signing in, you agree to our <a href="/terms-of-service">Terms of Service</a> and
-      <a href="/privacy-policy">Privacy Policy</a>.
+      By signing in, you agree to our
+      <router-link to="/terms-of-service">Terms of Service</router-link> and
+      <router-link to="/privacy-policy">Privacy Policy</router-link>.
     </v-card-text>
   </v-card>
 </template>
