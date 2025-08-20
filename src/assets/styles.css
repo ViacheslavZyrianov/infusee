@@ -38,7 +38,14 @@ body {
   padding-bottom: calc(env(safe-area-inset-bottom) + 56px + 16px) !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
-  min-height: 100vh;
+
+}
+
+/* only applies in PWA */
+@media all and (display-mode: standalone) {
+  .v-main {
+    min-height: 100vh;
+  }
 }
 
 .v-text-field .v-input__details {
