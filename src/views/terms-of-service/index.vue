@@ -109,9 +109,9 @@
     </p>
   </v-container>
   <v-footer class="position-fixed bottom-0 right-0 left-0 flex justify-center">
-    <v-btn href="/privacy-policy" variant="text" class="text-decoration-underline">
+    <v-btn to="/privacy-policy" variant="text" class="text-decoration-underline">
       Privacy Policy
     </v-btn>
-    <v-btn href="/" variant="text" class="text-decoration-underline"> Home </v-btn>
+    <v-btn to="/" variant="text" class="text-decoration-underline"> Home </v-btn>
   </v-footer>
 </template>
