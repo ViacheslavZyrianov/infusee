@@ -47,7 +47,7 @@ onMounted(async () => {
           :height="emptyImageSize"
         />
         <div class="text-h4 font-weight-bold">Still no coffees?</div>
-        <div class="text-h6 grey--text">Add your first one now!</div>
+        <div class="text-subtitle-1 grey--text text-center">Add your first one right now!</div>
         <v-btn
           prepend-icon="mdi-plus"
           to="/coffees/add"
