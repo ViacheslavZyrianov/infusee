@@ -7,6 +7,7 @@ import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 export default defineStore('coffees', () => {
   const isLoading: CoffeesLoading = reactive({
     getCoffees: true,
+    getCoffeesTotalCount: true,
   })
 
   const getCoffees = async (query?: string): Promise<CoffeeRead[]> => {
@@ -32,5 +33,25 @@ export default defineStore('coffees', () => {
     return response.data || []
   }
 
-  return { isLoading, getCoffees }
+  const getCoffeesTotalCount = async (): Promise<number> => {
+    isLoading.getCoffeesTotalCount = true
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not logged in')
+
+    const { count, error } = await supabase
+      .from('coffees')
+      .select('*', { count: 'exact', head: true }) // head: true → no rows returned, just count
+      .eq('user_id', user.id)
+
+    isLoading.getCoffeesTotalCount = false
+
+    if (error) throw error
+
+    return count || 0
+  }
+
+  return { isLoading, getCoffees, getCoffeesTotalCount }
 })
