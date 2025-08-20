@@ -29,6 +29,10 @@ body {
   opacity: 1 !important;
 }
 
+.v-bottom-navigation__content .v-btn.v-btn--selected .v-avatar{
+  border: 2px solid rgb(33, 150, 243);
+}
+
 .v-main {
   padding-top: calc(env(safe-area-inset-top) + 64px) !important;
   padding-bottom: calc(env(safe-area-inset-bottom) + 56px) !important;
