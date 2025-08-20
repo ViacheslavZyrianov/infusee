@@ -22,9 +22,7 @@ const title: ComputedRef<string> = computed(() => (route.name as string) || '')
       </template>
     </v-app-bar>
     <v-main class="fill-height">
-      <v-container>
-        <slot />
-      </v-container>
+      <slot />
     </v-main>
     <tab-bar />
   </v-app>
