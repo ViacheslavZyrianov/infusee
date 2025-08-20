@@ -8,7 +8,6 @@ html {
 
 body {
   margin: 0;
-  padding-top: env(safe-area-inset-top);
   background-color: rgb(18, 18, 18);
 }
 
@@ -17,8 +16,18 @@ body {
   z-index: 1;
 }
 
+.v-toolbar {
+  padding-top: env(safe-area-inset-top);
+}
+
 .v-bottom-navigation {
+  height: calc(56px + env(safe-area-inset-bottom)) !important;
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+.v-main {
+  padding-top: calc(env(safe-area-inset-top) + 64px) !important;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 56px) !important;
 }
 
 .v-text-field .v-input__details {
