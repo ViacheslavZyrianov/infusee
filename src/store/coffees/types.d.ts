@@ -18,6 +18,7 @@ export type CoffeeRead = Coffee & { id: number; roasters: Pick<RoasterRead, 'tit
 
 export type CoffeesLoading = {
   getCoffees?: boolean
+  getCoffeesTotalCount?: boolean
 }
 
 export type CoffeeLoading = {
