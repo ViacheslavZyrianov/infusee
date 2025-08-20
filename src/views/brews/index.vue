@@ -4,11 +4,13 @@ import useBrewStore from '@/store/brews/brew.ts'
 import { onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
 import BrewItem from './brew-item.vue'
+import brewsEmptySVG from '@/assets/img/brews-empty.svg'
 
 const brewsStore = useBrewsStore()
 const brewStore = useBrewStore()
 
 const brews: Ref<BrewRead[]> = ref([])
+const emptyImageSize = 300
 
 const onDelete = async (id: string) => {
   await brewStore.deleteBrew(id)
@@ -28,11 +30,32 @@ onMounted(async () => {
   <teleport defer to="#app-bar-action--right">
     <v-btn prepend-icon="mdi-plus" to="/brews/add">Add brew</v-btn>
   </teleport>
-  <div class="d-flex flex-column ga-4">
+  <div class="d-flex flex-column ga-4 h-100">
     <template v-if="brewsStore.isLoading.getBrews">
       <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" />
     </template>
     <template v-else>
+      <div v-if="!brews.length" class="d-flex flex-column justify-center align-center fill-height">
+        <img
+          :src="brewsEmptySVG"
+          alt=""
+          class="mt-n4 mb-4"
+          :width="emptyImageSize"
+          :height="emptyImageSize"
+        />
+        <div class="text-h4 font-weight-bold">Still no brews?</div>
+        <div class="text-h6 grey--text">Add your first one now!</div>
+        <v-btn
+          prepend-icon="mdi-plus"
+          to="/brews/add"
+          size="large"
+          variant="elevated"
+          elevation="0"
+          class="mt-4"
+        >
+          Add brew
+        </v-btn>
+      </div>
       <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
     </template>
   </div>
