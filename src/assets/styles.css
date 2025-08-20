@@ -33,7 +33,7 @@ body {
   border: 2px solid rgb(33, 150, 243);
 }
 
-.v-main {
+.v-layout--default .v-main {
   padding-top: calc(env(safe-area-inset-top) + 64px + 16px) !important;
   padding-bottom: calc(env(safe-area-inset-bottom) + 56px + 16px) !important;
   padding-left: 16px !important;
@@ -43,7 +43,7 @@ body {
 
 /* only applies in PWA */
 @media all and (display-mode: standalone) {
-  .v-main {
+  .v-layout--default .v-main {
     min-height: 100vh;
   }
 }
