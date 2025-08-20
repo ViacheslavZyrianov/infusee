@@ -6,7 +6,7 @@
     <p><strong>Last Updated:</strong> May 17, 2025</p>
 
     <p>
-      Welcome to Kavoznay! These Terms of Service ("Terms") govern your access to and use of our
+      Welcome to Infusee! These Terms of Service ("Terms") govern your access to and use of our
       website, products, and services ("Services"). Please read them carefully.
     </p>
 
@@ -53,7 +53,7 @@
     </ul>
 
     <p>
-      Kavoznay is not affiliated with or endorsed by Google LLC. Google, Google Maps, YouTube, and
+      Infusee is not affiliated with or endorsed by Google LLC. Google, Google Maps, YouTube, and
       other related marks and logos are trademarks of Google LLC.
     </p>
 
@@ -73,8 +73,8 @@
 
     <h2>5. Intellectual Property</h2>
     <p>
-      All content, trademarks, logos, and intellectual property on the Kavoznay website are the
-      property of Kavoznay or their respective owners. You may not reproduce, distribute, or modify
+      All content, trademarks, logos, and intellectual property on the Infusee website are the
+      property of Infusee or their respective owners. You may not reproduce, distribute, or modify
       any part of the Services without permission.
     </p>
 
@@ -91,7 +91,7 @@
     </p>
 
     <p>
-      Kavoznay is not responsible for any third-party services, including those provided by Google.
+      Infusee is not responsible for any third-party services, including those provided by Google.
       Use of such third-party services is at your own risk.
     </p>
 

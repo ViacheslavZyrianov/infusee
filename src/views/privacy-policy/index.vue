@@ -6,13 +6,13 @@
     <p><strong>Effective Date:</strong> May 17, 2025</p>
 
     <p>
-      At <strong>Kavoznay</strong> ("we", "us", or "our"), accessible from
+      At <strong>Infusee</strong> ("we", "us", or "our"), accessible from
       <a
-        href="https://kavoznay.onrender.com/privacy-policy"
+        href="https://infusee.onrender.com/privacy-policy"
         target="_blank"
         rel="noopener noreferrer"
       >
-        https://kavoznay.onrender.com/privacy-policy</a
+        https://infusee.onrender.com/privacy-policy</a
       >, your privacy is one of our main priorities. This Privacy Policy outlines the types of
       information we collect, how we use it, and your rights regarding your data.
     </p>
@@ -35,7 +35,7 @@
 
     <h2>2. How We Use Your Information</h2>
     <ul>
-      <li>Provide, operate, and maintain Kavoznay services</li>
+      <li>Provide, operate, and maintain Infusee services</li>
       <li>Improve, personalize, and expand our platform</li>
       <li>Communicate with you (customer support, updates, promotional content)</li>
       <li>Monitor usage and detect, prevent, and address technical issues</li>
@@ -85,7 +85,7 @@
 
     <h2>7. Third-Party Links</h2>
     <p>
-      Our website may include links to external websites that are not operated by Kavoznay. We are
+      Our website may include links to external websites that are not operated by Infusee. We are
       not responsible for the privacy practices of those sites.
     </p>
 
@@ -98,10 +98,10 @@
     <h2>9. Contact Us</h2>
     <p>If you have questions or concerns about this Privacy Policy, you can reach us at:</p>
     <p>
-      <strong>Kavoznay</strong><br />
+      <strong>Infusee</strong><br />
       Website:
-      <a href="https://kavoznay.onrender.com" target="_blank" rel="noopener noreferrer">
-        https://kavoznay.onrender.com
+      <a href="https://infusee.onrender.com" target="_blank" rel="noopener noreferrer">
+        https://infusee.onrender.com
       </a>
     </p>
   </v-container>

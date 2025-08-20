@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-6 text-center">
-    <v-card-title class="text-h5 font-weight-bold mb-4"> Install Kavoznay </v-card-title>
+    <v-card-title class="text-h5 font-weight-bold mb-4"> Install Infusee </v-card-title>
 
     <v-card-text class="d-flex flex-column ga-4">
       <div>
