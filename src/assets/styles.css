@@ -25,6 +25,10 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.v-bottom-navigation__content .v-btn {
+  opacity: 1 !important;
+}
+
 .v-main {
   padding-top: calc(env(safe-area-inset-top) + 64px) !important;
   padding-bottom: calc(env(safe-area-inset-bottom) + 56px) !important;
