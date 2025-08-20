@@ -36,8 +36,8 @@ export default defineConfig({
         start_url: '/',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#35251D',
-        theme_color: '#35251D',
+        background_color: '#121212',
+        theme_color: '#121212',
         icons,
       },
       injectManifest: {
