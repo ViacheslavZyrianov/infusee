@@ -44,6 +44,14 @@ export default [
     },
     component: () => import('@/views/terms-of-service/index.vue'),
   },
+  {
+    path: '/not-pwa',
+    name: 'NotPWA',
+    meta: {
+      layout: 'full-page',
+    },
+    component: () => import('@/views/not-pwa/index.vue'),
+  },
   // {
   //   path: '/:pathMatch(.*)*',
   //   name: 'NotFound',
