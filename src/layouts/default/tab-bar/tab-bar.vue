@@ -30,9 +30,17 @@ onMounted(async () => {
       :to="item.path"
       :icon="item.icon"
       :color="generateIconColor(item.path)"
+      variant="plain"
+      :ripple="false"
       block
     />
-    <v-btn :to="'/profile'" :color="generateIconColor('/profile')" block>
+    <v-btn
+      :to="'/profile'"
+      :color="generateIconColor('/profile')"
+      block
+      variant="plain"
+      :ripple="false"
+    >
       <v-avatar size="24">
         <v-img :src="avatar" alt="Profile" />
       </v-avatar>
