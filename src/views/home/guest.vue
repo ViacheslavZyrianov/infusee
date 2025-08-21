@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import supabase from '@/plugins/supabase'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const signInWithGoogle = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
@@ -14,21 +17,36 @@ const signInWithGoogle = async () => {
 
 <template>
   <v-card class="pa-8">
-    <v-card-title class="mb-2"> Welcome to Kavoznay! </v-card-title>
+    <v-card-title class="mb-2"> {{ t('index.guest.title') }} </v-card-title>
 
-    <v-card-subtitle>Ready to brew some magic? ✨</v-card-subtitle>
+    <v-card-subtitle>{{ t('index.guest.subtitle') }}</v-card-subtitle>
 
     <v-card-actions class="d-flex flex-column">
-      <v-btn variant="outlined" block class="mb-3" @click="signInWithGoogle">
+      <v-btn variant="tonal" block class="mb-3" @click="signInWithGoogle">
         <div class="icon-google" />
-        Sign in with Google
+        {{ t('index.guest.sign_in_with_google') }}
       </v-btn>
     </v-card-actions>
 
-    <v-card-text class="text-center mt-6 grey--text text--darken-1">
-      By signing in, you agree to our
-      <router-link to="/terms-of-service">Terms of Service</router-link> and
-      <router-link to="/privacy-policy">Privacy Policy</router-link>.
+    <v-card-text class="text-center mt-6">
+      <i18n-t keypath="index.guest.sign_in_agreement.title">
+        <template #terms_of_service>
+          <router-link
+            :to="t('index.guest.sign_in_agreement.terms_of_service.link')"
+            class="text-primary"
+          >
+            {{ t('index.guest.sign_in_agreement.terms_of_service.title') }}
+          </router-link>
+        </template>
+        <template #privacy_policy>
+          <router-link
+            :to="t('index.guest.sign_in_agreement.privacy_policy.link')"
+            class="text-primary"
+          >
+            {{ t('index.guest.sign_in_agreement.privacy_policy.title') }}
+          </router-link>
+        </template>
+      </i18n-t>
     </v-card-text>
   </v-card>
 </template>
