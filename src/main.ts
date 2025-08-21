@@ -4,7 +4,7 @@ import vuetify from './plugins/vuetify'
 import '@/assets/styles.css'
 import { registerGlobalComponents } from '@/plugins/global-components'
 import piniaPersist from 'pinia-plugin-persistedstate'
-import i18n from './plugins/i18n'
+import i18n from './plugins/i18n/index.ts'
 
 import App from './App.vue'
 import router from './router'
