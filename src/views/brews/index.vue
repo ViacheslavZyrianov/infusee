@@ -7,10 +7,12 @@ import type { BrewRead } from '@/store/brews/types.ts'
 import BrewItem from './brew-item.vue'
 import brewsEmptySVG from '@/assets/img/brews-empty.svg'
 import coffeesEmptySVG from '@/assets/img/coffees-empty.svg'
+import { useI18n } from 'vue-i18n'
 
 const brewsStore = useBrewsStore()
 const brewStore = useBrewStore()
 const coffeesStore = useCoffeesStore()
+const { t } = useI18n()
 
 const brews: Ref<BrewRead[]> = ref([])
 const emptyImageSize = 300
@@ -47,7 +49,9 @@ onMounted(async () => {
 
 <template>
   <teleport defer to="#app-bar-action--right">
-    <v-btn v-if="!isCoffeesEmpty" prepend-icon="mdi-plus" to="/brews/add">Add brew</v-btn>
+    <v-btn v-if="!isCoffeesEmpty" prepend-icon="mdi-plus" to="/brews/add">
+      {{ t('brews.actions.add') }}
+    </v-btn>
   </teleport>
   <template v-if="isLoading">
     <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" class="mb-4" />
@@ -62,8 +66,10 @@ onMounted(async () => {
           :width="emptyImageSize"
           :height="emptyImageSize"
         />
-        <div class="text-h4 font-weight-bold">Still no brews?</div>
-        <div class="text-subtitle-1 grey--text text-center">Add your first one right now!</div>
+        <div class="text-h4 font-weight-bold">{{ t('brews.empty_state.title') }}</div>
+        <div class="text-subtitle-1 grey--text text-center">
+          {{ t('brews.empty_state.subtitle') }}
+        </div>
         <v-btn
           prepend-icon="mdi-plus"
           to="/brews/add"
@@ -72,7 +78,7 @@ onMounted(async () => {
           elevation="0"
           class="mt-4"
         >
-          Add brew
+          {{ t('brews.actions.add') }}
         </v-btn>
       </div>
       <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
