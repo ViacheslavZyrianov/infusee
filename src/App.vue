@@ -18,11 +18,13 @@ const layout: ComputedRef<unknown> = computed(() => {
       return DefaultLayout
   }
 })
+
+const layoutName: ComputedRef<string> = computed(() => (route.meta.layout as string) || 'default')
 </script>
 
 <template>
   <v-theme-provider :theme="settingsStore.getTheme" with-background>
-    <component :is="layout">
+    <component :is="layout" :class="`v-layout--${layoutName}`">
       <router-view />
     </component>
 
