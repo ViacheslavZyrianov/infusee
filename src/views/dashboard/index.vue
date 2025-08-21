@@ -16,8 +16,7 @@ const addWidgetBrewsTodayCount = async () => {
   const brewsTodayCount = await brewsStore.getBrewsTodayCount()
   widgets.value.push({
     title: brewsTodayCount,
-    subtitle: t('message.hello'),
-    // subtitle: `Brew${brewsTodayCount === 1 ? '' : 's'} today`,
+    subtitle: t('dashboard.widgets.brews_today', brewsTodayCount),
     size: 'half',
     color: 'deep-orange-lighten-1',
     to: '/brews',
@@ -89,5 +88,3 @@ onMounted(() => {
     />
   </div>
 </template>
-
-<style scoped></style>
