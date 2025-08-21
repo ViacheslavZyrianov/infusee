@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, type ComputedRef } from 'vue'
 import type { UserMetadata } from '@supabase/supabase-js'
 import useUserStore from '@/store/user/user.ts'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 
 const emit = defineEmits(['signOut'])
@@ -14,11 +16,11 @@ const props = defineProps({
   },
 })
 
-const displayName = computed(() => {
-  return props.user?.full_name || props.user?.name || props.user?.email?.split('@')[0] || 'there'
-})
+const displayName: ComputedRef<string> = computed(
+  () => props.user?.full_name || props.user?.name || props.user?.email?.split('@')[0],
+)
 
-const initials = computed(() => {
+const initials: ComputedRef<string> = computed(() => {
   const base = props.user?.full_name || props.user?.name || 'User'
   return base
     .split(/\s+/)
@@ -50,21 +52,23 @@ const onSignOut = async () => {
 
       <v-col cols="12" md>
         <div class="">
-          <h1 class="text-h6 text-md-h3 font-weight-bold mr-2">Hey, {{ displayName }} 👋</h1>
+          <h1 class="text-h6 text-md-h3 font-weight-bold mr-2">
+            {{ t('index.user.title', { displayName }) }}
+          </h1>
           <h4 class="text-subtitle-2 text-md-h3 font-weight-normal">
-            Great to see you again! Ready to brew?
+            {{ t('index.user.subtitle') }}
           </h4>
         </div>
 
         <v-divider class="my-6" />
 
         <div class="d-flex ga-4">
-          <v-btn class="flex-grow-1" prepend-icon="mdi-coffee" :to="{ path: '/brews' }">
-            Start brewing
+          <v-btn class="flex-grow-1" prepend-icon="mdi-coffee" to="/brews">
+            {{ t('index.user.actions.brews') }}
           </v-btn>
 
           <v-btn class="flex-grow-1" color="error" prepend-icon="mdi-logout" @click="onSignOut">
-            Sign out
+            {{ t('general.sign_out') }}
           </v-btn>
         </div>
       </v-col>
