@@ -75,7 +75,7 @@ onMounted(async () => {
         <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
       </template>
     </template>
-    <div class="d-flex flex-column justify-center align-center fill-height">
+    <div v-if="isCoffeesEmpty" class="d-flex flex-column justify-center align-center fill-height">
       <img
         :src="coffeesEmptySVG"
         alt=""
