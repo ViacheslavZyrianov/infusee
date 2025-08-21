@@ -3,7 +3,9 @@ import type { WidgetData } from '@/views/dashboard/types'
 import { onMounted, ref, type Ref } from 'vue'
 import Widget from '@/views/dashboard/widget.vue'
 import useBrewsStore from '@/store/brews/brews.ts'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const brewsStore = useBrewsStore()
 
 const widgets: Ref<WidgetData[]> = ref([])
@@ -14,7 +16,8 @@ const addWidgetBrewsTodayCount = async () => {
   const brewsTodayCount = await brewsStore.getBrewsTodayCount()
   widgets.value.push({
     title: brewsTodayCount,
-    subtitle: `Brew${brewsTodayCount === 1 ? '' : 's'} today`,
+    subtitle: t('message.hello'),
+    // subtitle: `Brew${brewsTodayCount === 1 ? '' : 's'} today`,
     size: 'half',
     color: 'deep-orange-lighten-1',
     to: '/brews',
