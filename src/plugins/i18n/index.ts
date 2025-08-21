@@ -4,8 +4,8 @@ import uk from './uk.json'
 
 export default createI18n({
   legacy: false,
-  messages: {
-    en,
-    uk,
-  },
+  useScope: 'global',
+  locale: 'en', // default locale
+  fallbackLocale: 'en', // fallback if translation missing
+  messages: { en, uk },
 })
