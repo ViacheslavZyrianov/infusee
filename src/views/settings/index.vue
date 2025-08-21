@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/store/settings'
 import useCurrencies from '@/composables/useCurrencies.ts'
-import useLocale from '@/composables/useLocale.ts'
 
 const settingsStore = useSettingsStore()
 const currencies = useCurrencies()
-const { localesForSelect, currentLocale } = useLocale()
 </script>
 
 <template>
@@ -42,8 +40,8 @@ const { localesForSelect, currentLocale } = useLocale()
       <v-list-item-title>Language</v-list-item-title>
       <template #append>
         <v-select
-          v-model="currentLocale"
-          :items="localesForSelect"
+          v-model="settingsStore.locale"
+          :items="settingsStore.localesForSelect"
           density="compact"
           hide-details
         />
