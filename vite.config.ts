@@ -56,6 +56,9 @@ export default defineConfig({
           /\.png$/, // PNG images
           /\.jpg$/, // JPG images
           /\.svg$/, // SVG files
+          /@vite/,
+          /@id/,
+          /node_modules/,
         ],
       },
       devOptions: {
