@@ -2,13 +2,6 @@ import { defineStore } from 'pinia'
 import { ref, computed, type Ref } from 'vue'
 import useCurrencies from '@/composables/useCurrencies.ts'
 
-const supportedLocales = ['en', 'uk'] // your app's available locales
-
-const getDefaultLocale = (): string => {
-  const browserLocale = navigator.language.split('-')[0] // "en-US" -> "en"
-  return supportedLocales.includes(browserLocale) ? browserLocale : 'en'
-}
-
 export const useSettingsStore = defineStore(
   'settings',
   () => {
@@ -22,7 +15,19 @@ export const useSettingsStore = defineStore(
       isThemeDark.value = !isThemeDark.value
     }
 
-    const locale: Ref<string> = ref(getDefaultLocale())
+    const localesForSelect = [
+      { title: 'English', value: 'en' },
+      { title: 'Українська', value: 'uk' },
+    ]
+
+    // Union type of values
+    type Locale = (typeof localesForSelect)[number]['value'] // "en" | "uk"
+
+    const locale: Ref<Locale> = ref('uk' as Locale)
+
+    const setLocale = (newLocale: Locale) => {
+      locale.value = newLocale
+    }
 
     return {
       isThemeDark,
@@ -30,6 +35,8 @@ export const useSettingsStore = defineStore(
       getTheme,
       toggleTheme,
       locale,
+      localesForSelect,
+      setLocale,
     }
   },
   {
