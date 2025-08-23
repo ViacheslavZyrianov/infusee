@@ -1,7 +1,95 @@
 {
+  "general": {
+    "sign_out": "Sign out"
+  },
+  "index": {
+    "guest": {
+      "title": "Welcome to Infusee",
+      "subtitle": "Ready to brew some magic? ✨",
+      "sign_in_with_google": "Sign in with Google",
+      "sign_in_agreement": {
+        "title": "By signing in, you agree to our {terms_of_service} and {privacy_policy}.",
+        "terms_of_service": {
+          "title": "Terms of Service",
+          "link": "/terms-of-service"
+        },
+        "privacy_policy": {
+          "title": "Privacy Policy",
+          "link": "/privacy-policy"
+        }
+      }
+    },
+    "user": {
+      "title": "Welcome back, {displayName}! \uD83D\uDC4B",
+      "subtitle": "Good to see you again! Ready to brew?",
+      "actions": {
+        "brews": "Start brewing"
+      }
+    }
+  },
   "dashboard": {
     "widgets": {
       "brews_today": "Brews today | Brew today | Brews today"
+    }
+  },
+  "brews": {
+    "title": "Brews",
+    "empty_state": {
+      "title": "No brews yet",
+      "description": "Start your first brew to see it here."
+    },
+    "actions": {
+      "add": "Add brew"
+    }
+  },
+  "brew_methods": {
+    "espresso": {
+      "label": "Espresso",
+      "icon": "mdi-coffee",
+      "methods": {
+        "espresso": "Espresso",
+        "moka_pot": "Moka Pot",
+        "turkish": "Turkish",
+        "percolator": "Percolator"
+      }
+    },
+    "pour_over": {
+      "label": "Pour Over",
+      "icon": "mdi-filter",
+      "methods": {
+        "v60": "V60",
+        "chemex": "Chemex",
+        "kalita_wave": "Kalita Wave",
+        "hario_switch": "Hario Switch",
+        "clever_dripper": "Clever Dripper",
+        "soft_brew": "Soft Brew"
+      }
+    },
+    "immersion": {
+      "label": "Immersion",
+      "icon": "mdi-cup-water",
+      "methods": {
+        "french_press": "French Press",
+        "aeropress": "Aeropress",
+        "siphon": "Siphon",
+        "vacuum_pot": "Vacuum Pot"
+      }
+    },
+    "cold": {
+      "label": "Cold",
+      "icon": "mdi-snowflake",
+      "methods": {
+        "cold_brew": "Cold Brew",
+        "nitro_cold_brew": "Nitro Cold Brew",
+        "snap_coffee": "Snap Coffee"
+      }
+    },
+    "drip": {
+      "label": "Drip",
+      "icon": "mdi-water",
+      "methods": {
+        "drip": "Drip"
+      }
     }
   }
 }
