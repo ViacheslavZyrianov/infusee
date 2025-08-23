@@ -4,18 +4,18 @@ import type { SelectItem } from '@/types/types.ts'
 
 export default () => {
   const messages = i18n.global.messages.value[i18n.global.locale.value]
-  const brewMethods = messages.brew_methods as Record<string, BrewMethod>
+  const brewMethodsOptions = messages.brew_methods as Record<string, BrewMethod>
 
   const brewMethodsKeyValue = () =>
     Object.fromEntries(
-      Object.values(brewMethods).flatMap((category) => Object.entries(category.methods)),
+      Object.values(brewMethodsOptions).flatMap((category) => Object.entries(category.methods)),
     )
 
   const getBrewMethodTitleByValue = (key: string) => brewMethodsKeyValue()[key] || key
 
   const getBrewMethodsForSelect = (): SelectItem[] => {
     const result: SelectItem[] = []
-    const categories = Object.entries(brewMethods)
+    const categories = Object.entries(brewMethodsOptions)
 
     categories.forEach(([, categoryData], index) => {
       // Add subheader for category
@@ -43,7 +43,7 @@ export default () => {
   }
 
   return {
-    brewMethodsOptions: brewMethods,
+    brewMethodsOptions,
     getBrewMethodTitleByValue,
     getBrewMethodsForSelect,
   }
