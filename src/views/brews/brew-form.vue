@@ -10,7 +10,7 @@ import type { VForm } from 'vuetify/components'
 
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
-const { brewMethodsOptions } = useBrewMethods()
+const { getBrewMethodsForSelect } = useBrewMethods()
 const { required, composeRules } = useValidation()
 
 const form: Brew = reactive({
@@ -60,7 +60,11 @@ defineExpose({
         :rules="selectCoffeeRules"
         @update:modelValue="formRef?.resetValidation()"
       />
-      <v-select v-model="form.brew_method" label="Select brew method" :items="brewMethodsOptions">
+      <v-select
+        v-model="form.brew_method"
+        label="Select brew method"
+        :items="getBrewMethodsForSelect()"
+      >
         <template #subheader="{ props: { title, icon } }">
           <div class="d-flex align-center pa-4 opacity-50">
             <v-icon :icon="icon as string" size="18" class="mr-2" />
