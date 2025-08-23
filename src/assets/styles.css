@@ -60,3 +60,7 @@ body {
 ul {
   list-style: inside;
 }
+
+.whitespace-pre-line {
+  white-space: pre-line;
+}
