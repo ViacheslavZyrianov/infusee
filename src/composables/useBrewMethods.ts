@@ -1,104 +1,50 @@
-import { computed } from 'vue'
-import type { SelectItem } from '@/types/types'
-
-export const brewMethods = {
-  aeropress: 'Aeropress',
-  chemex: 'Chemex',
-  cleverDripper: 'Clever Dripper',
-  coldBrew: 'Cold Brew',
-  drip: 'Drip',
-  espresso: 'Espresso',
-  frenchPress: 'French Press',
-  harioSwitch: 'Hario Switch',
-  kalitaWave: 'Kalita Wave',
-  mokaPot: 'Moka Pot',
-  nitroColdBrew: 'Nitro Cold Brew',
-  percolator: 'Percolator',
-  siphon: 'Siphon',
-  snapCoffee: 'Snap Coffee',
-  softBrew: 'Soft Brew',
-  turkish: 'Turkish',
-  vacuumPot: 'Vacuum Pot',
-  v60: 'V60',
-} as const
-
-export type BrewMethodKey = keyof typeof brewMethods
-export type BrewMethodValue = (typeof brewMethods)[BrewMethodKey]
-
-export enum BrewCategory {
-  Espresso = 'Espresso',
-  PourOver = 'PourOver',
-  Immersion = 'Immersion',
-  Cold = 'Cold',
-  Drip = 'Drip',
-}
-
-// Гарні назви категорій
-export const categoryLabels: Record<BrewCategory, string> = {
-  [BrewCategory.Espresso]: 'Espresso',
-  [BrewCategory.PourOver]: 'Pour Over',
-  [BrewCategory.Immersion]: 'Immersion',
-  [BrewCategory.Cold]: 'Cold',
-  [BrewCategory.Drip]: 'Drip',
-}
-
-// Іконки для категорій
-const categoryIcons: Record<BrewCategory, string> = {
-  [BrewCategory.Espresso]: 'mdi-coffee',
-  [BrewCategory.PourOver]: 'mdi-filter',
-  [BrewCategory.Immersion]: 'mdi-cup-water',
-  [BrewCategory.Cold]: 'mdi-snowflake',
-  [BrewCategory.Drip]: 'mdi-water',
-}
-
-// Категорії з методами
-export const categories: Record<BrewCategory, BrewMethodKey[]> = {
-  [BrewCategory.Espresso]: ['espresso', 'mokaPot', 'turkish', 'percolator'],
-  [BrewCategory.PourOver]: [
-    'v60',
-    'chemex',
-    'kalitaWave',
-    'harioSwitch',
-    'cleverDripper',
-    'softBrew',
-  ],
-  [BrewCategory.Immersion]: ['frenchPress', 'aeropress', 'siphon', 'vacuumPot'],
-  [BrewCategory.Cold]: ['coldBrew', 'nitroColdBrew', 'snapCoffee'],
-  [BrewCategory.Drip]: ['drip'],
-}
+import i18n from '@/plugins/i18n/index.ts'
+import type { BrewMethod } from '@/types/brews.ts'
+import type { SelectItem } from '@/types/types.ts'
 
 export default () => {
-  const brewMethodsOptions = computed(() => {
-    const items: SelectItem[] = []
+  const messages = i18n.global.messages.value[i18n.global.locale.value]
+  const brewMethods = messages.brew_methods as Record<string, BrewMethod>
 
-    const categoryEntries = Object.entries(categories) as [BrewCategory, BrewMethodKey[]][]
+  const brewMethodsKeyValue = () =>
+    Object.fromEntries(
+      Object.values(brewMethods).flatMap((category) => Object.entries(category.methods)),
+    )
 
-    categoryEntries.forEach(([category, keys], index) => {
-      items.push({
+  const getBrewMethodTitleByValue = (key: string) => brewMethodsKeyValue()[key] || key
+
+  const getBrewMethodsForSelect = (): SelectItem[] => {
+    const result: SelectItem[] = []
+    const categories = Object.entries(brewMethods)
+
+    categories.forEach(([, categoryData], index) => {
+      // Add subheader for category
+      result.push({
         type: 'subheader',
-        title: categoryLabels[category],
-        icon: categoryIcons[category],
+        title: categoryData.label,
+        icon: categoryData.icon,
       })
 
-      keys.forEach((key) => {
-        items.push({
-          title: brewMethods[key],
-          value: key,
+      // Add each method as selectable item
+      Object.entries(categoryData.methods).forEach(([methodKey, methodLabel]) => {
+        result.push({
+          title: methodLabel,
+          value: methodKey,
         })
       })
 
-      if (index < categoryEntries.length - 1) {
-        items.push({ type: 'divider' })
+      // Add divider between categories (except after the last one)
+      if (index < categories.length - 1) {
+        result.push({ type: 'divider' })
       }
     })
 
-    return items
-  })
-
-  const getBrewMethodTitleByValue = (value: BrewMethodKey): BrewMethodValue => brewMethods[value]
+    return result
+  }
 
   return {
-    brewMethodsOptions,
+    brewMethodsOptions: brewMethods,
     getBrewMethodTitleByValue,
+    getBrewMethodsForSelect,
   }
 }
