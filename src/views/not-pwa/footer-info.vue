@@ -3,7 +3,7 @@
     <v-btn to="/terms-of-service" variant="text" class="text-decoration-underline">
       Terms Of Service
     </v-btn>
-    <v-btn to="/terms-of-service" variant="text" class="text-decoration-underline">
+    <v-btn to="/privacy-policy" variant="text" class="text-decoration-underline">
       Privacy Policy
     </v-btn>
   </v-footer>
