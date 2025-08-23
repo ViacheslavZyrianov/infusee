@@ -58,7 +58,10 @@ onMounted(async () => {
   </template>
   <div v-else class="d-flex flex-column ga-4 h-100">
     <template v-if="!isCoffeesEmpty">
-      <div v-if="!brews.length" class="d-flex flex-column justify-center align-center fill-height">
+      <div
+        v-if="!brews.length"
+        class="d-flex flex-column justify-center align-center fill-height text-center"
+      >
         <img
           :src="brewsEmptySVG"
           alt=""
@@ -67,7 +70,7 @@ onMounted(async () => {
           :height="emptyImageSize"
         />
         <div class="text-h4 font-weight-bold">{{ t('brews.empty_state.title') }}</div>
-        <div class="text-subtitle-1 grey--text text-center">
+        <div class="text-subtitle-1 grey--text text-center whitespace-pre-line">
           {{ t('brews.empty_state.subtitle') }}
         </div>
         <v-btn
