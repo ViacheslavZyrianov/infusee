@@ -3,6 +3,7 @@ import type { Brew, BrewLoading, BrewRead } from '@/store/brews/types.ts'
 import supabase from '@/plugins/supabase.ts'
 import string2number from '@/utilities/string2number.ts'
 import { reactive } from 'vue'
+import useUserStore from '@/store/user/user.ts'
 
 export default defineStore('brew', () => {
   const isLoading: BrewLoading = reactive({
@@ -11,6 +12,8 @@ export default defineStore('brew', () => {
     updateBrew: false,
     deleteBrew: false,
   })
+
+  const userStore = useUserStore()
 
   const getBrew = async (brewId: string): Promise<BrewRead> => {
     isLoading.getBrew = true
@@ -33,15 +36,12 @@ export default defineStore('brew', () => {
   const postBrew = async (form: Brew) => {
     isLoading.postBrew = true
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output']
 
     const payload = {
-      user_id: user.id,
+      user_id: userStore.user.id,
       ...form,
       ...numericFields.reduce(
         (acc, key) => {
@@ -65,13 +65,12 @@ export default defineStore('brew', () => {
   const updateBrew = async (id: string, form: Brew) => {
     isLoading.updateBrew = true
 
-    const { data } = await supabase.auth.getSession()
-    if (!data?.session?.user.id) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const numericFields: (keyof Brew)[] = ['channeling', 'dose', 'grind', 'output']
 
     const payload = {
-      user_id: data.session.user.id,
+      user_id: userStore.user.id,
       ...form,
       ...numericFields.reduce(
         (acc, key) => {
