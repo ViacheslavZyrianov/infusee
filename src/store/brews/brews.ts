@@ -4,6 +4,7 @@ import type { BrewRead, BrewsLoading } from '@/store/brews/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import dayjs from 'dayjs'
 import { reactive } from 'vue'
+import useUserStore from '@/store/user/user.ts'
 
 export default defineStore('brews', () => {
   const isLoading: BrewsLoading = reactive({
@@ -11,20 +12,19 @@ export default defineStore('brews', () => {
     getBrewsTodayCount: true,
   })
 
+  const userStore = useUserStore()
+
   const getBrews = async (): Promise<BrewRead[]> => {
     isLoading.getBrews = true
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const response = (await supabase
       .from('brews')
       .select(
         'id, user_id, coffees (name), brew_method, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
       )
-      .eq('user_id', user.id)
+      .eq('user_id', userStore.user.id)
       .order('created_at', { ascending: false })) as PostgrestSingleResponse<BrewRead[]>
 
     isLoading.getBrews = false
@@ -37,15 +37,12 @@ export default defineStore('brews', () => {
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const { count, error } = await supabase
       .from('brews')
       .select('*', { count: 'exact', head: true }) // head: true → no rows returned, just count
-      .eq('user_id', user.id)
+      .eq('user_id', userStore.user.id)
       .gte('created_at', dayjs().startOf('day').toISOString())
       .lte('created_at', dayjs().endOf('day').toISOString())
 

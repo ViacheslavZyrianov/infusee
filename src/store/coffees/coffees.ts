@@ -3,6 +3,7 @@ import supabase from '@/plugins/supabase.ts'
 import { reactive } from 'vue'
 import type { CoffeeRead, CoffeesLoading } from '@/store/coffees/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
+import useUserStore from '@/store/user/user.ts'
 
 export default defineStore('coffees', () => {
   const isLoading: CoffeesLoading = reactive({
@@ -10,18 +11,17 @@ export default defineStore('coffees', () => {
     getCoffeesTotalCount: true,
   })
 
+  const userStore = useUserStore()
+
   const getCoffees = async (query?: string): Promise<CoffeeRead[]> => {
     isLoading.getCoffees = true
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const response = (await supabase
       .from('coffees')
       .select(query || '*, roasters (title)')
-      .eq('user_id', user.id)
+      .eq('user_id', userStore.user.id)
       .order('name', { ascending: true })) as PostgrestSingleResponse<CoffeeRead[]>
 
     isLoading.getCoffees = false
@@ -36,15 +36,12 @@ export default defineStore('coffees', () => {
   const getCoffeesTotalCount = async (): Promise<number> => {
     isLoading.getCoffeesTotalCount = true
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const { count, error } = await supabase
       .from('coffees')
       .select('*', { count: 'exact', head: true }) // head: true → no rows returned, just count
-      .eq('user_id', user.id)
+      .eq('user_id', userStore.user.id)
 
     isLoading.getCoffeesTotalCount = false
 

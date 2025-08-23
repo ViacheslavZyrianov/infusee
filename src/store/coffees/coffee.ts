@@ -3,6 +3,7 @@ import type { Coffee, CoffeeRead, CoffeeLoading } from '@/store/coffees/types.ts
 import supabase from '@/plugins/supabase.ts'
 import { reactive } from 'vue'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
+import useUserStore from '@/store/user/user.ts'
 
 export default defineStore('coffee', () => {
   const isLoading: CoffeeLoading = reactive({
@@ -12,14 +13,13 @@ export default defineStore('coffee', () => {
     deleteCoffee: false,
   })
 
+  const userStore = useUserStore()
+
   const postCoffee = async (form: Coffee) => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    if (!user) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const payload = {
-      user_id: user.id,
+      user_id: userStore.user.id,
       ...form,
     }
 
@@ -51,11 +51,10 @@ export default defineStore('coffee', () => {
   const updateCoffee = async (id: string, form: Coffee) => {
     isLoading.updateCoffee = true
 
-    const { data } = await supabase.auth.getSession()
-    if (!data?.session?.user.id) throw new Error('Not logged in')
+    await userStore.getUser()
 
     const payload = {
-      user_id: data.session.user.id,
+      user_id: userStore.user.id,
       ...form,
     }
 
