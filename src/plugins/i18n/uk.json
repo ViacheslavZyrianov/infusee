@@ -1,7 +1,95 @@
 {
+  "general": {
+    "sign_out": "Вийти"
+  },
+  "index": {
+    "guest": {
+      "title": "Ласкаво просимо до Infusee",
+      "subtitle": "Готові заварити трохи магії? ✨",
+      "sign_in_with_google": "Вхід через Google",
+      "sign_in_agreement": {
+        "title": "Увійшовши, ви погоджуєтесь з нашими {terms_of_service} та {privacy_policy}.",
+        "terms_of_service": {
+          "title": "Умовами використання",
+          "link": "/terms-of-service"
+        },
+        "privacy_policy": {
+          "title": "Політикою конфіденційності",
+          "link": "/privacy-policy"
+        }
+      }
+    },
+    "user": {
+      "title": "Шо ти, {displayName}?",
+      "subtitle": "Давай заварювати кохфе",
+      "actions": {
+        "brews": "Почати заварювання"
+      }
+    }
+  },
   "dashboard": {
     "widgets": {
-      "brews_today": "Заварювань сьогодні | Заварювання сьогодні | Заварювань сьогодні"
+      "brews_today": "Заварювання сьогодні | Заварювання сьогодні | Заварювань сьогодні | Заварювань сьогодні"
+    }
+  },
+  "brews": {
+    "title": "Заварювання",
+    "empty_state": {
+      "title": "Досі жодного заварювання",
+      "description": "Додай свою першу заварку аби побачити її тут"
+    },
+    "actions": {
+      "add": "Додати заварку"
+    }
+  },
+  "brew_methods": {
+    "espresso": {
+      "label": "Еспресо",
+      "icon": "mdi-coffee",
+      "methods": {
+        "espresso": "Еспресо",
+        "moka_pot": "Мока-пот",
+        "turkish": "Турецька кава",
+        "percolator": "Перколятор"
+      }
+    },
+    "pour_over": {
+      "label": "Пуровер",
+      "icon": "mdi-filter",
+      "methods": {
+        "v60": "V60",
+        "chemex": "Кемекс",
+        "kalita_wave": "Каліта Вейв",
+        "hario_switch": "Харіо Свіч",
+        "clever_dripper": "Клевер Дріппер",
+        "soft_brew": "Софт Брю"
+      }
+    },
+    "immersion": {
+      "label": "Іммерсійні методи",
+      "icon": "mdi-cup-water",
+      "methods": {
+        "french_press": "Френч-прес",
+        "aeropress": "Аеропрес",
+        "siphon": "Сифон",
+        "vacuum_pot": "Вакуум-пот"
+      }
+    },
+    "cold": {
+      "label": "Холодні методи",
+      "icon": "mdi-snowflake",
+      "methods": {
+        "cold_brew": "Колод Брю",
+        "nitro_cold_brew": "Нітро Колд Брю",
+        "snap_coffee": "Снеп Кава"
+      }
+    },
+    "drip": {
+      "label": "Фільтр-кава",
+      "icon": "mdi-water",
+      "methods": {
+        "drip": "Фільтр"
+      }
     }
   }
 }
