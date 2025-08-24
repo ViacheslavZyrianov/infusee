@@ -1,7 +1,7 @@
 export default [
   {
     path: '/roasters',
-    name: 'Roasters',
+    name: 'roasters',
     component: () => import('@/views/roasters/index.vue'),
   },
   // {
