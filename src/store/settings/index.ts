@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, type Ref } from 'vue'
 import useCurrencies from '@/composables/useCurrencies.ts'
+import i18n from '@/plugins/i18n'
 
 export const useSettingsStore = defineStore(
   'settings',
@@ -15,18 +16,13 @@ export const useSettingsStore = defineStore(
       isThemeDark.value = !isThemeDark.value
     }
 
-    const localesForSelect = [
-      { title: 'English', value: 'en' },
-      { title: 'Українська', value: 'uk' },
-    ]
+    type Locale = typeof i18n.global.locale.value
 
-    // Union type of values
-    type Locale = (typeof localesForSelect)[number]['value'] // "en" | "uk"
-
-    const locale: Ref<Locale> = ref('uk' as Locale)
+    const locale: Ref<Locale> = ref(i18n.global.locale.value)
 
     const setLocale = (newLocale: Locale) => {
       locale.value = newLocale
+      i18n.global.locale.value = newLocale
     }
 
     return {
@@ -35,7 +31,6 @@ export const useSettingsStore = defineStore(
       getTheme,
       toggleTheme,
       locale,
-      localesForSelect,
       setLocale,
     }
   },
