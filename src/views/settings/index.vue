@@ -38,7 +38,7 @@ const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
       <template #append>
         <v-select
           v-model="settingsStore.currency"
-          :items="currencies.currencyOptions"
+          :items="currencies.currencyOptions.value"
           color="primary"
           hide-details
           density="compact"
