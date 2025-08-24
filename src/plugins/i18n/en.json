@@ -1,6 +1,8 @@
 {
-  "general": {
-    "sign_out": "Sign out"
+  "buttons": {
+    "sign_out": "Sign out",
+    "add": "Add",
+    "cancel": "Cancel"
   },
   "index": {
     "guest": {
@@ -28,6 +30,7 @@
     }
   },
   "dashboard": {
+    "title": "Dashboard",
     "widgets": {
       "brews_today": "Brews today | Brew today | Brews today"
     }
@@ -35,12 +38,43 @@
   "brews": {
     "title": "Brews",
     "empty_state": {
-      "title": "No brews yet",
-      "description": "Start your first brew to see it here."
-    },
-    "actions": {
-      "add": "Add brew"
+      "title": "Still no brews",
+      "subtitle": "Add your first brew\nto see it here"
     }
+  },
+  "brew": {
+    "title": "Brew"
+  },
+  "brew_add": {
+    "title": "New Brew"
+  },
+  "brew_edit": {
+    "title": "Edit Brew"
+  },
+  "coffees": {
+    "title": "Coffees",
+    "empty_state": {
+      "title": "No Coffees Yet",
+      "subtitle": "Add your first coffee\nto see it here"
+    }
+  },
+  "coffee": {
+    "title": "Coffee"
+  },
+  "coffee_add": {
+    "title": "New Coffee"
+  },
+  "coffee_edit": {
+    "title": "Edit Coffee"
+  },
+  "roasters": {
+    "title": "Roasters"
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "settings": {
+    "title": "Settings"
   },
   "brew_methods": {
     "espresso": {
@@ -95,5 +129,11 @@
   "locales": {
     "en": "English",
     "uk": "Ukrainian"
+  },
+  "currencies": {
+    "UAH": { "title": "Hryvnia", "symbol": "₴" },
+    "USD": { "title": "US Dollar", "symbol": "$" },
+    "EUR": { "title": "Euro", "symbol": "€" },
+    "CAD": { "title": "Canadian Dollar", "symbol": "C$" }
   }
 }
