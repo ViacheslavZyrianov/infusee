@@ -61,6 +61,12 @@ ul {
   list-style: inside;
 }
 
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  padding-left: 0;
+}
+
 .whitespace-pre-line {
   white-space: pre-line;
 }
