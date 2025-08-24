@@ -5,9 +5,11 @@ import { onMounted, ref, type Ref } from 'vue'
 import CoffeeItem from './coffee-item.vue'
 import type { CoffeeRead } from '@/store/coffees/types'
 import coffeesEmptySVG from '@/assets/img/coffees-empty.svg'
+import { useI18n } from 'vue-i18n'
 
 const coffeesStore = useCoffeesStore()
 const coffeeStore = useCoffeeStore()
+const { t } = useI18n()
 
 const coffees: Ref<CoffeeRead[]> = ref([])
 const emptyImageSize = 300
@@ -28,7 +30,7 @@ onMounted(async () => {
 
 <template>
   <teleport defer to="#app-bar-action--right">
-    <v-btn prepend-icon="mdi-plus" to="/coffees/add">Add coffee</v-btn>
+    <v-btn prepend-icon="mdi-plus" to="/coffees/add"> {{ t('buttons.add') }}</v-btn>
   </teleport>
   <div class="d-flex flex-column ga-4 h-100">
     <template v-if="coffeesStore.isLoading.getCoffees">
@@ -46,8 +48,10 @@ onMounted(async () => {
           :width="emptyImageSize"
           :height="emptyImageSize"
         />
-        <div class="text-h4 font-weight-bold">Still no coffees?</div>
-        <div class="text-subtitle-1 grey--text text-center">Add your first one right now!</div>
+        <div class="text-h4 font-weight-bold">{{ t('coffees.empty_state.title') }}</div>
+        <div class="text-subtitle-1 grey--text text-center">
+          {{ t('coffees.empty_state.subtitle') }}
+        </div>
         <v-btn
           prepend-icon="mdi-plus"
           to="/coffees/add"
@@ -56,7 +60,7 @@ onMounted(async () => {
           elevation="0"
           class="mt-4"
         >
-          Add coffee
+          {{ t('buttons.add') }}
         </v-btn>
       </div>
       <template v-else>
@@ -70,5 +74,3 @@ onMounted(async () => {
     </template>
   </div>
 </template>
-
-<style scoped></style>

@@ -50,7 +50,7 @@ onMounted(async () => {
 <template>
   <teleport defer to="#app-bar-action--right">
     <v-btn v-if="!isCoffeesEmpty" prepend-icon="mdi-plus" to="/brews/add">
-      {{ t('brews.actions.add') }}
+      {{ t('buttons.add') }}
     </v-btn>
   </teleport>
   <template v-if="isLoading">
@@ -81,7 +81,7 @@ onMounted(async () => {
           elevation="0"
           class="mt-4"
         >
-          {{ t('brews.actions.add') }}
+          {{ t('buttons.add') }}
         </v-btn>
       </div>
       <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
@@ -106,7 +106,7 @@ onMounted(async () => {
         elevation="0"
         class="mt-4"
       >
-        Add coffee
+        {{ t('buttons.add') }}
       </v-btn>
     </div>
   </div>
