@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { computed, type ComputedRef } from 'vue'
 import { useSettingsStore } from '@/store/settings'
 import useCurrencies from '@/composables/useCurrencies.ts'
+import i18n from '@/plugins/i18n'
+import type { SelectItem } from '@/types/types.ts'
 
 const settingsStore = useSettingsStore()
 const currencies = useCurrencies()
+
+const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
+  Object.entries(i18n.global.messages.value[i18n.global.locale.value].locales).map(
+    ([value, title]) => ({ title, value }),
+  ),
+)
 </script>
 
 <template>
@@ -40,10 +49,11 @@ const currencies = useCurrencies()
       <v-list-item-title>Language</v-list-item-title>
       <template #append>
         <v-select
-          v-model="settingsStore.locale"
-          :items="settingsStore.localesForSelect"
+          :model-value="settingsStore.locale"
+          :items="localesForSelect"
           density="compact"
           hide-details
+          @update:model-value="settingsStore.setLocale"
         />
       </template>
     </v-list-item>
