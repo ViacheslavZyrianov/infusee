@@ -41,9 +41,6 @@ export default defineConfig({
         theme_color: '#121212',
         icons,
       },
-      injectManifest: {
-        swSrc: 'src/sw.js',
-      },
       workbox: {
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [
@@ -51,7 +48,6 @@ export default defineConfig({
           /\/assets\//, // Vite build assets
           /\/icons\//, // PWA icons
           /\/favicon\.svg$/, // favicon
-          /\.json$/, // JSON files
           /\.ico$/, // favicons
           /\.png$/, // PNG images
           /\.jpg$/, // JPG images
