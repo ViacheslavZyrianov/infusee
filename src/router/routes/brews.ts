@@ -1,22 +1,22 @@
 export default [
   {
     path: '/brews',
-    name: 'Brews',
+    name: 'brews',
     component: () => import('@/views/brews/index.vue'),
   },
   {
     path: '/brews/:id',
-    name: 'Brew Details',
+    name: 'brew',
     component: () => import('@/views/brews/[id]/index.vue'),
   },
   {
     path: '/brews/add',
-    name: 'Add brew',
+    name: 'brew_add',
     component: () => import('@/views/brews/add/index.vue'),
   },
   {
     path: '/brews/edit/:id',
-    name: 'Edit brew',
+    name: 'brew_edit',
     component: () => import('@/views/brews/edit/[id]/index.vue'),
   },
 ]

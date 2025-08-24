@@ -12,17 +12,17 @@ export default [
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     component: () => import('@/views/dashboard/index.vue'),
   },
   {
     path: '/profile',
-    name: 'Profile',
+    name: 'profile',
     component: () => import('@/views/profile/index.vue'),
   },
   {
     path: '/settings',
-    name: 'Settings',
+    name: 'settings',
     component: () => import('@/views/settings/index.vue'),
   },
   ...brews,
@@ -30,7 +30,7 @@ export default [
   ...roasters,
   {
     path: '/privacy-policy',
-    name: 'PrivacyPolicy',
+    name: 'privacy_policy',
     meta: {
       layout: 'full-page',
     },
@@ -38,7 +38,7 @@ export default [
   },
   {
     path: '/terms-of-service',
-    name: 'TermsOfService',
+    name: 'terms_of_service',
     meta: {
       layout: 'full-page',
     },
@@ -46,7 +46,7 @@ export default [
   },
   {
     path: '/not-pwa',
-    name: 'NotPWA',
+    name: 'not_pwa',
     meta: {
       layout: 'full-page',
     },
