@@ -9,7 +9,7 @@ export const useSettingsStore = defineStore(
     const isThemeDark: Ref<boolean> = ref(window.matchMedia('(prefers-color-scheme: dark)').matches)
 
     const currencies = useCurrencies()
-    const currency: Ref<keyof typeof currencies.currencies> = ref(currencies.defaultCurrency)
+    const currency: Ref<keyof typeof currencies.currencies.value> = ref(currencies.defaultCurrency)
 
     const getTheme = computed(() => (isThemeDark.value ? 'dark' : 'light'))
     const toggleTheme = () => {
