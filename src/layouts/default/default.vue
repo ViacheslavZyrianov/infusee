@@ -11,6 +11,7 @@ const { t } = useI18n()
   <v-app>
     <v-app-bar app class="d-flex justify-space-between px-2">
       <div
+        v-if="route.name"
         class="position-absolute left-0 right-0 my-auto px-16 text-center text-truncate text-body-2"
       >
         {{ t(`${route.name as string}.title`) }}
