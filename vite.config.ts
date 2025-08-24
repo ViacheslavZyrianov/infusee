@@ -31,7 +31,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        id: 'infusee',
+        id: 'infusee-v1',
         name: 'Infusee',
         short_name: 'Infusee',
         start_url: '/',
