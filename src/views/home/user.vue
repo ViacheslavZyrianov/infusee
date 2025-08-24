@@ -68,7 +68,7 @@ const onSignOut = async () => {
           </v-btn>
 
           <v-btn class="flex-grow-1" color="error" prepend-icon="mdi-logout" @click="onSignOut">
-            {{ t('general.sign_out') }}
+            {{ t('buttons.sign_out') }}
           </v-btn>
         </div>
       </v-col>
