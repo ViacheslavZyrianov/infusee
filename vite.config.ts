@@ -42,6 +42,9 @@ export default defineConfig({
         icons,
       },
       workbox: {
+        clientsClaim: true, // Take control of all clients immediately
+        skipWaiting: true, // Activate new SW immediately
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'], // Include all assets
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [
           /^\/rest\/v1\//, // Supabase API
