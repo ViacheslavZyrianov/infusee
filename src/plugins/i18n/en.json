@@ -91,5 +91,9 @@
         "drip": "Drip"
       }
     }
+  },
+  "locales": {
+    "en": "English",
+    "uk": "Ukrainian"
   }
 }
