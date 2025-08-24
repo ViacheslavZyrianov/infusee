@@ -1,6 +1,8 @@
 {
-  "general": {
-    "sign_out": "Вийти"
+  "buttons": {
+    "sign_out": "Вийти",
+    "add": "Додати",
+    "cancel": "Відміна"
   },
   "index": {
     "guest": {
@@ -38,9 +40,6 @@
     "empty_state": {
       "title": "Досі жодного заварювання",
       "subtitle": "Додай свою першу заварку\nаби побачити її тут"
-    },
-    "actions": {
-      "add": "Додати"
     }
   },
   "brew": {
@@ -70,6 +69,15 @@
   },
   "coffee_edit": {
     "title": "Редагування кави"
+  },
+  "roasters": {
+    "title": "Обсмажники"
+  },
+  "profile": {
+    "title": "Профіль"
+  },
+  "settings": {
+    "title": "Налаштування"
   },
   "brew_methods": {
     "espresso": {
@@ -121,17 +129,14 @@
       }
     }
   },
-  "roasters": {
-    "title": "Обсмажники"
-  },
-  "profile": {
-    "title": "Профіль"
-  },
-  "settings": {
-    "title": "Налаштування"
-  },
   "locales": {
     "en": "Англійська",
     "uk": "Українська"
+  },
+  "currencies": {
+    "UAH": { "title": "Гривня", "symbol": "₴" },
+    "USD": { "title": "Долар США", "symbol": "$" },
+    "EUR": { "title": "Євро", "symbol": "€" },
+    "CAD": { "title": "Канадський долар", "symbol": "C$" }
   }
 }
