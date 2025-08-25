@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia'
-import type { Coffee, CoffeeRead, CoffeeLoading } from '@/store/coffees/types.ts'
+import type { Coffee, CoffeeLoading, CoffeeRead } from '@/store/coffees/types.ts'
 import supabase from '@/plugins/supabase.ts'
 import { reactive } from 'vue'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import useUserStore from '@/store/user/user.ts'
+import useAlertStore from '@/store/alert/alert.ts'
+import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('coffee', () => {
+  const { showAlert } = useAlertStore()
+
   const isLoading: CoffeeLoading = reactive({
     getCoffee: true,
     postCoffee: false,
@@ -26,7 +30,7 @@ export default defineStore('coffee', () => {
     const { error } = await supabase.from('coffees').insert([payload])
 
     if (error) {
-      throw new Error(`Error posting coffee: ${error.message}`)
+      showAlert(`Error posting coffee: ${error.message}`, AlertType.Error)
     }
   }
 
