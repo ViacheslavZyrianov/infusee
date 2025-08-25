@@ -26,7 +26,6 @@ const getCoffee = async () => {
   Object.assign(coffeeFormRef.value.form, {
     name: coffee.name,
     cupping_score: coffee.cupping_score,
-    is_public: coffee.is_public,
     country: coffee.country,
     processing: coffee.processing,
     roast_level: coffee.roast_level,
