@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { RoasterRead } from '@/store/roasters/types'
-import { useCountries } from '@/composables/useCountries.ts'
+import useCountries from '@/composables/useCountries/index.ts'
 
 defineProps({
   data: {
