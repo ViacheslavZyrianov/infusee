@@ -8,7 +8,7 @@ export type Coffee = {
   country: string | null
   processing: string | null
   notes: string
-  roast_date: string
+  roast_date: string | null
   price: number | null
   user_id?: string
 }
