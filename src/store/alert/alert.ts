@@ -2,12 +2,12 @@ import { defineStore } from 'pinia'
 import { type Ref, ref } from 'vue'
 import { AlertType } from '@/store/alert/types.ts'
 
-export const useAlertStore = defineStore('alert', () => {
+export default defineStore('alert', () => {
   const message = ref('')
   const type: Ref<AlertType> = ref(AlertType.Info)
   const isVisible: Ref<boolean> = ref(false)
 
-  const show = (msg: string, alertType: AlertType = AlertType.Info, duration = 3000) => {
+  const showAlert = (msg: string, alertType: AlertType = AlertType.Info, duration = 3000) => {
     message.value = msg
     type.value = alertType
     isVisible.value = true
@@ -17,9 +17,9 @@ export const useAlertStore = defineStore('alert', () => {
     }
   }
 
-  const hide = () => {
+  const hideAlert = () => {
     isVisible.value = false
   }
 
-  return { message, type, visible: isVisible, show, hide }
+  return { message, type, visible: isVisible, showAlert, hideAlert }
 })

@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import FullPageLayout from '@/layouts/full-page.vue'
 import DefaultLayout from '@/layouts/default/default.vue'
 import { useSettingsStore } from '@/store/settings'
-import { useAlertStore } from '@/store/alert/alert.ts'
+import useAlertStore from '@/store/alert/alert.ts'
 
 const route = useRoute()
 const settingsStore = useSettingsStore()
@@ -36,7 +36,7 @@ const layoutName: ComputedRef<string> = computed(() => (route.meta.layout as str
       elevation="2"
       class="global-alert"
       dismissible
-      @click:close="alert.hide"
+      @click:close="alert.hideAlert"
     >
       {{ alert.message }}
     </v-alert>
