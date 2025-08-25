@@ -4,9 +4,11 @@ import { useSettingsStore } from '@/store/settings'
 import useCurrencies from '@/composables/useCurrencies.ts'
 import i18n from '@/plugins/i18n'
 import type { SelectItem } from '@/types/types.ts'
+import { useI18n } from 'vue-i18n'
 
 const settingsStore = useSettingsStore()
 const currencies = useCurrencies()
+const { t } = useI18n()
 
 const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
   Object.entries(i18n.global.messages.value[i18n.global.locale.value].locales).map(
@@ -18,7 +20,7 @@ const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
 <template>
   <v-list rounded>
     <v-list-item>
-      <v-list-item-title>Theme</v-list-item-title>
+      <v-list-item-title>{{ t('settings.theme.title') }}</v-list-item-title>
       <template #append>
         <div class="d-flex align-center">
           <v-switch
@@ -29,12 +31,15 @@ const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
             inset
             true-icon="mdi-brightness-2"
             false-icon="mdi-brightness-5"
-          />
+          >
+            <template #prepend> {{ t('settings.theme.light') }} </template>
+            <template #append> {{ t('settings.theme.dark') }} </template>
+          </v-switch>
         </div>
       </template>
     </v-list-item>
     <v-list-item>
-      <v-list-item-title>Currency</v-list-item-title>
+      <v-list-item-title>{{ t('settings.currency.title') }}</v-list-item-title>
       <template #append>
         <v-select
           v-model="settingsStore.currency"
@@ -46,7 +51,7 @@ const localesForSelect: ComputedRef<SelectItem[]> = computed(() =>
       </template>
     </v-list-item>
     <v-list-item>
-      <v-list-item-title>Language</v-list-item-title>
+      <v-list-item-title>{{ t('settings.locales.title') }}</v-list-item-title>
       <template #append>
         <v-select
           :model-value="settingsStore.locale"

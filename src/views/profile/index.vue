@@ -2,8 +2,10 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/store/user/user'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
+const { t } = useI18n()
 
 const userStore = useUserStore()
 
@@ -31,7 +33,9 @@ onMounted(async () => {
 
     <p class="text-medium-emphasis mb-4">{{ userStore.user.email }}</p>
 
-    <v-btn color="error" prepend-icon="mdi-logout" @click="onSignOut">Sign out</v-btn>
+    <v-btn color="error" prepend-icon="mdi-logout" @click="onSignOut">
+      {{ t('buttons.sign_out') }}
+    </v-btn>
 
     <v-divider class="my-4" />
     <p class="text-caption text-medium-emphasis">ID: {{ userStore.user.id }}</p>
