@@ -1,57 +1,42 @@
-/**
- * Ratings definition: maps a friendly key to its model field and display label.
- */
-export const Ratings = {
-  Aroma: { model: 'rating_aroma', label: 'Aroma' },
-  Flavor: { model: 'rating_flavor', label: 'Flavor' },
-  Acidity: { model: 'rating_acidity', label: 'Acidity' },
-  Bitterness: { model: 'rating_bitterness', label: 'Bitterness' },
-  Body: { model: 'rating_body', label: 'Body' },
-  Aftertaste: { model: 'rating_aftertaste', label: 'Aftertaste' },
-  Sweetness: { model: 'rating_sweetness', label: 'Sweetness' },
-} as const
-
-/** Type for the rating keys, e.g., 'Aroma', 'Flavor', etc. */
-export type RatingKey = keyof typeof Ratings
-
-/** Type for the model fields, e.g., 'rating_aroma', 'rating_flavor', etc. */
-export type RatingModel = (typeof Ratings)[RatingKey]['model']
+import { computed, type ComputedRef } from 'vue'
+import i18n from '@/plugins/i18n'
+import type { RatingsObject } from '@/types/brews.ts'
 
 /**
  * Composable for working with coffee Brew ratings.
- * Provides helpers for iterating over ratings, retrieving labels, model fields, and computing averages.
+ * Fetches all ratings dynamically from i18n and provides helpers.
  */
 export function useRatings() {
-  /**
-   * Array of all rating keys for iteration.
-   * @type {RatingKey[]}
-   */
-  const ratingKeys: RatingKey[] = Object.keys(Ratings) as RatingKey[]
+  const ratings: ComputedRef<RatingsObject> = computed(() =>
+    Object.fromEntries(
+      Object.entries(
+        i18n.global.messages.value[i18n.global.locale.value].brew_form.ratings.items,
+      ).map(([key, { title, hint }]) => [
+        key,
+        {
+          model: `rating_${key}`,
+          label: title,
+          hint,
+        },
+      ]),
+    ),
+  )
 
-  /**
-   * Get the human-readable label for a rating key.
-   * @param {RatingKey} key - The rating key (e.g., 'Aroma').
-   * @returns {string} The label for display.
-   */
-  const ratingLabel = (key: RatingKey) => Ratings[key].label
+  /** Array of all rating keys for iteration */
+  const ratingKeys = computed(() => Object.keys(ratings.value))
 
-  /**
-   * Get the model field name for a rating key.
-   * Useful for binding v-model in Vue.
-   * @param {RatingKey} key - The rating key.
-   * @returns {RatingModel} The corresponding model field (e.g., 'rating_aroma').
-   */
-  const ratingModel = (key: RatingKey) => Ratings[key].model
+  /** Get the human-readable label for a rating key */
+  const ratingLabel = (key: string) => ratings.value[key]?.label ?? key
 
-  /**
-   * Compute the average rating from a form object.
-   * @param {Record<RatingModel, number>} form - The Brew form object containing rating fields.
-   * @returns {number} The average of all ratings.
-   */
-  const ratingAverage = (form: Record<RatingModel, number>) => {
-    const sum = ratingKeys.reduce((acc, key) => acc + form[Ratings[key].model], 0)
-    return parseFloat((sum / ratingKeys.length).toFixed(2))
+  /** Get the model field name for a rating key */
+  const ratingModel = (key: string) => ratings.value[key]?.model ?? key
+
+  /** Compute the average rating from a form object */
+  const ratingAverage = (form: Record<string, number>) => {
+    const keys = ratingKeys.value
+    const sum = keys.reduce((acc, key) => acc + (form[ratingModel(key)] ?? 0), 0)
+    return parseFloat((sum / keys.length).toFixed(2))
   }
 
-  return { Ratings, ratingKeys, ratingLabel, ratingModel, ratingAverage }
+  return { ratings, ratingKeys, ratingLabel, ratingModel, ratingAverage }
 }
