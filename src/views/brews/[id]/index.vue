@@ -37,6 +37,8 @@ const getBrew = async () => {
   brew.value = await brewStore.getBrew(route.params.id as string)
 }
 
+const getBrewLabelI18N = (key: string) => t(`brew_form.${key}.label`)
+
 onMounted(async () => {
   await getBrew()
 })
@@ -101,7 +103,7 @@ onMounted(async () => {
 
     <v-card-text>
       <v-row dense>
-        <v-col cols="6" md="4" v-for="ratingKey in ratingKeys" :key="ratingModel(ratingKey)">
+        <v-col cols="6" v-for="ratingKey in ratingKeys" :key="ratingModel(ratingKey)">
           <div class="font-weight-bold">{{ ratingLabel(ratingKey) }}:</div>
           <v-rating
             :model-value="brew[ratingModel(ratingKey)]"
@@ -117,22 +119,24 @@ onMounted(async () => {
         <v-divider class="my-3" />
 
         <v-row dense>
-          <v-col cols="6" md="4" v-if="brew.grind">
-            <strong>Grind:</strong> {{ brew.grind }}
+          <v-col cols="6" v-if="brew.grind">
+            <strong>{{ getBrewLabelI18N('grind') }}:</strong> {{ brew.grind }}
           </v-col>
-          <v-col cols="6" md="4" v-if="brew.dose"> <strong>Dose:</strong> {{ brew.dose }}g </v-col>
-          <v-col cols="6" md="4" v-if="brew.channeling">
-            <strong>Channeling:</strong> {{ brew.channeling }}s
+          <v-col cols="6" v-if="brew.dose">
+            <strong>{{ getBrewLabelI18N('dose') }}:</strong> {{ brew.dose }}g
           </v-col>
-          <v-col cols="6" md="4" v-if="brew.output">
-            <strong>Output:</strong> {{ brew.output }}ml
+          <v-col cols="6" v-if="brew.channeling">
+            <strong>{{ getBrewLabelI18N('channeling') }}:</strong> {{ brew.channeling }}s
+          </v-col>
+          <v-col cols="6" v-if="brew.output">
+            <strong>{{ getBrewLabelI18N('output') }}:</strong> {{ brew.output }}ml
           </v-col>
         </v-row>
       </template>
 
       <div v-if="brew.notes">
         <v-divider class="my-3" />
-        <strong>Notes:</strong>
+        <strong>{{ getBrewLabelI18N('notes') }}:</strong>
         <p>{{ brew.notes }}</p>
       </div>
     </v-card-text>
