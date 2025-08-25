@@ -30,7 +30,7 @@ const form: Coffee = reactive({
   processing: null,
   price: null,
   notes: '',
-  roast_date: '',
+  roast_date: null,
 })
 
 const formRef: Ref<InstanceType<typeof VForm> | null> = ref(null)
