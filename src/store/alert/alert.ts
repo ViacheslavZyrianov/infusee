@@ -4,22 +4,34 @@ import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('alert', () => {
   const message = ref('')
-  const type: Ref<AlertType> = ref(AlertType.Info)
+  const alertType: Ref<AlertType> = ref(AlertType.Info)
   const isVisible: Ref<boolean> = ref(false)
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
 
-  const showAlert = (msg: string, alertType: AlertType = AlertType.Info, duration = 3000) => {
-    message.value = msg
-    type.value = alertType
+  const show = (newMessage: string, newType: AlertType = AlertType.Info, duration = 3000) => {
+    if (newType === AlertType.Error) throw new Error(newMessage)
+
+    message.value = newMessage
+    alertType.value = newType
     isVisible.value = true
 
-    if (duration > 0) {
-      setTimeout(() => (isVisible.value = false), duration)
-    }
+    if (timeoutId) clearTimeout(timeoutId)
+
+    timeoutId = setTimeout(() => {
+      isVisible.value = false
+    }, duration)
   }
 
-  const hideAlert = () => {
+  const hide = () => {
     isVisible.value = false
+    if (timeoutId) clearTimeout(timeoutId)
   }
 
-  return { message, type, visible: isVisible, showAlert, hideAlert }
+  return {
+    message,
+    alertType,
+    isVisible,
+    show,
+    hide,
+  }
 })

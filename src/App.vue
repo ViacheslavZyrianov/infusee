@@ -8,7 +8,7 @@ import useAlertStore from '@/store/alert/alert.ts'
 
 const route = useRoute()
 const settingsStore = useSettingsStore()
-const alert = useAlertStore()
+const alertStore = useAlertStore()
 
 const layout: ComputedRef<unknown> = computed(() => {
   switch (route.meta.layout) {
@@ -29,16 +29,25 @@ const layoutName: ComputedRef<string> = computed(() => (route.meta.layout as str
     </component>
 
     <v-alert
-      v-if="alert.visible"
-      :type="alert.type"
+      v-show="alertStore.isVisible"
+      :type="alertStore.alertType"
       border="start"
-      colored-border
-      elevation="2"
-      class="global-alert"
-      dismissible
-      @click:close="alert.hideAlert"
+      class="alert"
+      :icon="false"
+      closable
+      @click:close="alertStore.hide"
     >
-      {{ alert.message }}
+      {{ alertStore.message }}
     </v-alert>
   </v-theme-provider>
 </template>
+
+<style scoped lang="scss">
+.alert {
+  position: fixed;
+  bottom: 86px;
+  left: 20px;
+  right: 20px;
+  z-index: 1;
+}
+</style>
