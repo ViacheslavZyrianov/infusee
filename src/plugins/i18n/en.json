@@ -2,7 +2,10 @@
   "buttons": {
     "sign_out": "Sign out",
     "add": "Add",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "index": {
     "guest": {
