@@ -1,44 +1,14 @@
 import type { SelectItem, SelectOption } from '@/types/types.ts'
+import i18n from '@/plugins/i18n'
+import { computed, type ComputedRef } from 'vue'
 
-export const processingOptions: SelectItem[] = [
-  {
-    title: 'Washed',
-    value: 'washed',
-  },
-  {
-    title: 'Natural',
-    value: 'natural',
-  },
-  {
-    title: 'Honey',
-    value: 'honey',
-  },
-  {
-    title: 'Wet-Hulled',
-    value: 'wet_hulled',
-  },
-  {
-    title: 'Anaerobic Fermentation',
-    value: 'anaerobic_fermentation',
-  },
-  {
-    title: 'Carbonic Maceration',
-    value: 'carbonic_maceration',
-  },
-  {
-    title: 'Experimental / Other',
-    value: 'other',
-  },
-]
+export const processingOptions: ComputedRef<SelectItem[]> = computed(
+  () => i18n.global.messages.value[i18n.global.locale.value].processing_options,
+)
 
-export const roastLevelOptions: SelectItem[] = [
-  { title: 'Light', value: 'light' },
-  { title: 'Light-Medium', value: 'light_medium' },
-  { title: 'Medium', value: 'medium' },
-  { title: 'Medium-Dark', value: 'medium_dark' },
-  { title: 'Dark', value: 'dark' },
-  { title: 'Very Dark', value: 'very_dark' },
-]
+export const roastLevelOptions: ComputedRef<SelectItem[]> = computed(
+  () => i18n.global.messages.value[i18n.global.locale.value].roast_level_options,
+)
 
 const findOptionByValue = (options: SelectItem[], value: string | number): string => {
   const option = options.find(
@@ -49,7 +19,7 @@ const findOptionByValue = (options: SelectItem[], value: string | number): strin
 }
 
 export const getProcessingOptionTitleByValue = (value: string): string =>
-  findOptionByValue(processingOptions, value)
+  findOptionByValue(processingOptions.value, value)
 
 export const getRoastLevelOptionTitleByValue = (value: string): string =>
-  findOptionByValue(roastLevelOptions, value)
+  findOptionByValue(roastLevelOptions.value, value)

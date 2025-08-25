@@ -160,6 +160,47 @@
   "coffee_edit": {
     "title": "Редагування кави"
   },
+  "coffee_form": {
+    "name": {
+      "label": "Назва",
+      "placeholder": "Введіть назву кави",
+      "errors": {
+        "required": "Назва кави обовʼязкова"
+      }
+    },
+    "select_roaster": {
+      "label": "Обсмажувальник"
+    },
+    "cupping_score": {
+      "label": "Оцінка якості (60–100)",
+      "placeholder": "Введіть число від 60 до 100",
+      "errors": {
+        "required": "Оцінка якості обовʼязкова",
+        "range": "Оцінка якості має бути від 60 до 100"
+      }
+    },
+    "select_roast_level": {
+      "label": "Рівень обсмаження"
+    },
+    "select_country_of_origin": {
+      "label": "Країна походження"
+    },
+    "select_processing": {
+      "label": "Метод обробки"
+    },
+    "select_roast_date": {
+      "label": "Дата обсмаження",
+      "placeholder": "Оберіть дату обсмаження"
+    },
+    "price": {
+      "label": "Ціна",
+      "placeholder": "Введіть ціну"
+    },
+    "notes": {
+      "label": "Нотатки",
+      "placeholder": "Додайте нотатки"
+    }
+  },
   "roasters": {
     "title": "Обсмажники"
   },
@@ -236,6 +277,48 @@
       }
     }
   },
+  "processing_options": [
+    {
+      "title": "Мита",
+      "value": "washed"
+    },
+    {
+      "title": "Натуральна",
+      "value": "natural"
+    },
+    {
+      "title": "Медова",
+      "value": "honey"
+    },
+    {
+      "title": "Вологе обрушування",
+      "value": "wet_hulled"
+    },
+    {
+      "title": "Анаеробне бродіння",
+      "value": "anaerobic_fermentation"
+    },
+    {
+      "title": "Вуглецеве мацерування",
+      "value": "carbonic_maceration"
+    },
+    {
+      "title": "Термічний шок",
+      "value": "thermal_shock"
+    },
+    {
+      "title": "Експериментальна / Інша",
+      "value": "other"
+    }
+  ],
+  "roast_level_options": [
+    { "title": "Світлий", "value": "light" },
+    { "title": "Світло-середній", "value": "light_medium" },
+    { "title": "Середній", "value": "medium" },
+    { "title": "Середньо-темний", "value": "medium_dark" },
+    { "title": "Темний", "value": "dark" },
+    { "title": "Дуже темний", "value": "very_dark" }
+  ],
   "locales": {
     "en": "Англійська",
     "uk": "Українська"
