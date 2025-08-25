@@ -3,10 +3,9 @@ import countries from './countries.json'
 import { computed, type ComputedRef } from 'vue'
 import type { Country } from '@/types/countries.ts'
 
-export const countriesTranslated: ComputedRef<Country[]> = computed(() => {
-  console.log('countries', countries)
-  return countries[i18n.global.locale.value]
-})
+export const countriesTranslated: ComputedRef<Country[]> = computed(
+  () => countries[i18n.global.locale.value],
+)
 
 export default () => {
   const getFlag = (countryCode: string): string => {
