@@ -128,7 +128,7 @@
     },
     "channeling": {
       "label": "Ченелінг",
-      "placeholder": "Тривалість у секундах",
+      "placeholder": "Тривалість",
       "suffix": "(с)"
     },
     "output": {

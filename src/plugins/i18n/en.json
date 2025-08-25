@@ -128,7 +128,7 @@
     },
     "channeling": {
       "label": "Channeling",
-      "placeholder": "Duration in seconds",
+      "placeholder": "Duration",
       "suffix": "(s)"
     },
     "output": {
