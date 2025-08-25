@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, type Ref } from 'vue'
+import { onMounted, reactive, ref, type Ref, toRefs, watch } from 'vue'
 import type { Brew } from '@/store/brews/types.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
 import type { CoffeeRead } from '@/store/coffees/types'
 import useValidation from '@/composables/useValidation'
+import useUnsavedChanges from '@/composables/useUnsavedChanges.ts'
 import type { VForm } from 'vuetify/components'
 import { useI18n } from 'vue-i18n'
 
 const { ratingKeys, ratingLabel, ratingHint, ratingModel } = useRatings()
+const { hasChanges } = toRefs(useUnsavedChanges())
 const coffeesStore = useCoffeesStore()
 const { getBrewMethodsForSelect } = useBrewMethods()
 const { required, composeRules } = useValidation()
 const { t } = useI18n()
 
+const initialForm = ref({})
 const form: Brew = reactive({
   coffee_id: null,
   brew_method: null,
@@ -40,13 +43,29 @@ const getCoffees = async () => {
   coffees.value = await coffeesStore.getCoffees('id, name')
 }
 
+const resetInitialForm = () => {
+  Object.assign(initialForm.value, form)
+}
+
 onMounted(async () => {
   await getCoffees()
+  resetInitialForm()
 })
+
+watch(
+  () => form,
+  () => {
+    hasChanges.value = JSON.stringify(initialForm.value) !== JSON.stringify(form)
+  },
+  {
+    deep: true,
+  },
+)
 
 defineExpose({
   form,
   validate: () => formRef.value?.validate(),
+  resetInitialForm,
 })
 </script>
 
