@@ -3,8 +3,12 @@ import { reactive } from 'vue'
 import supabase from '@/plugins/supabase.ts'
 import type { RoasterRead, RoastersLoading } from '@/store/roasters/types'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
+import { AlertType } from '@/store/alert/types.ts'
+import useAlertStore from '@/store/alert/alert.ts'
 
 export default defineStore('roasters', () => {
+  const alertStore = useAlertStore()
+
   const isLoading: RoastersLoading = reactive({
     getRoasters: true,
   })
@@ -20,7 +24,7 @@ export default defineStore('roasters', () => {
     isLoading.getRoasters = false
 
     if (error) {
-      throw new Error(`Error fetching roasters: ${error.message}`)
+      alertStore.show(`Error fetching roasters: ${error.message}`, AlertType.Error)
     }
 
     return data ?? []

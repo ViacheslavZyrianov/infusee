@@ -8,7 +8,7 @@ import useAlertStore from '@/store/alert/alert.ts'
 import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('coffee', () => {
-  const { showAlert } = useAlertStore()
+  const alertStore = useAlertStore()
 
   const isLoading: CoffeeLoading = reactive({
     getCoffee: true,
@@ -30,14 +30,14 @@ export default defineStore('coffee', () => {
     const { error } = await supabase.from('coffees').insert([payload])
 
     if (error) {
-      showAlert(`Error posting coffee: ${error.message}`, AlertType.Error)
+      alertStore.show(`Error posting coffee: ${error.message}`, AlertType.Error)
     }
   }
 
-  const getCoffee = async (coffeeId: string): Promise<CoffeeRead> => {
+  const getCoffee = async (coffeeId: string): Promise<CoffeeRead | null> => {
     isLoading.getCoffee = true
 
-    const response = (await supabase
+    const { data, error } = (await supabase
       .from('coffees')
       .select('*')
       .eq('id', coffeeId)
@@ -45,11 +45,11 @@ export default defineStore('coffee', () => {
 
     isLoading.getCoffee = false
 
-    if (response.error) {
-      throw new Error(`Error fetching coffee: ${response.error.message}`)
+    if (error) {
+      alertStore.show(`Error posting coffee: ${error.message}`, AlertType.Error)
     }
 
-    return response.data
+    return data
   }
 
   const updateCoffee = async (id: string, form: Coffee) => {
@@ -57,17 +57,18 @@ export default defineStore('coffee', () => {
 
     await userStore.getUser()
 
-    const payload = {
-      user_id: userStore.user.id,
-      ...form,
-    }
-
-    const { error } = await supabase.from('coffees').update(payload).eq('id', id)
+    const { error } = await supabase
+      .from('coffees')
+      .update({
+        user_id: userStore.user.id,
+        ...form,
+      })
+      .eq('id', id)
 
     isLoading.updateCoffee = false
 
     if (error) {
-      throw new Error(`Error updating coffee: ${error.message}`)
+      alertStore.show(`Error updating coffee: ${error.message}`, AlertType.Error)
     }
   }
 
