@@ -28,6 +28,9 @@ export function useRatings() {
   /** Get the human-readable label for a rating key */
   const ratingLabel = (key: string) => ratings.value[key]?.label ?? key
 
+  /** Get the human-readable label for a rating key */
+  const ratingHint = (key: string) => ratings.value[key]?.hint ?? key
+
   /** Get the model field name for a rating key */
   const ratingModel = (key: string) => ratings.value[key]?.model ?? key
 
@@ -38,5 +41,5 @@ export function useRatings() {
     return parseFloat((sum / keys.length).toFixed(2))
   }
 
-  return { ratings, ratingKeys, ratingLabel, ratingModel, ratingAverage }
+  return { ratings, ratingKeys, ratingLabel, ratingHint, ratingModel, ratingAverage }
 }
