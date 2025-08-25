@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import useBrewStore from '@/store/brews/brew'
 import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import type { BrewRead } from '@/store/brews/types.ts'
@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
+const router = useRouter()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const { getBrewMethodTitleByValue } = useBrewMethods()
 const { t } = useI18n()
@@ -39,6 +40,15 @@ const getBrew = async () => {
 
 const getBrewLabelI18N = (key: string) => t(`brew_form.${key}.label`)
 
+const onDelete = async () => {
+  if (!brew.value?.id) return
+
+  if (confirm(`Are you sure you want to delete this brew?`)) {
+    await brewStore.deleteBrew(brew.value.id)
+    router.push('/brews')
+  }
+}
+
 onMounted(async () => {
   await getBrew()
 })
@@ -67,7 +77,7 @@ onMounted(async () => {
           {{ t('buttons.edit') }}
         </v-list-item>
         <v-divider />
-        <v-list-item class="px-6 text-body-2 text-red">
+        <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">
           {{ t('buttons.delete') }}
         </v-list-item>
       </v-list>
