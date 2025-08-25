@@ -44,7 +44,6 @@
       ]
     }
   },
-
   "dashboard": {
     "title": "Дешборд",
     "widgets": {
@@ -93,7 +92,24 @@
     "title": "Профіль"
   },
   "settings": {
-    "title": "Налаштування"
+    "title": "Налаштування",
+    "theme": {
+      "title": "Тема",
+      "light": "Світла",
+      "dark": "Темна"
+    },
+    "currency": {
+      "title": "Валюта",
+      "currencies": {
+        "UAH": { "title": "Гривня", "symbol": "₴" },
+        "USD": { "title": "Долар США", "symbol": "$" },
+        "EUR": { "title": "Євро", "symbol": "€" },
+        "CAD": { "title": "Канадський долар", "symbol": "C$" }
+      }
+    },
+    "locales": {
+      "title": "Мова"
+    }
   },
   "brew_methods": {
     "espresso": {
@@ -148,11 +164,5 @@
   "locales": {
     "en": "Англійська",
     "uk": "Українська"
-  },
-  "currencies": {
-    "UAH": { "title": "Гривня", "symbol": "₴" },
-    "USD": { "title": "Долар США", "symbol": "$" },
-    "EUR": { "title": "Євро", "symbol": "€" },
-    "CAD": { "title": "Канадський долар", "symbol": "C$" }
   }
 }

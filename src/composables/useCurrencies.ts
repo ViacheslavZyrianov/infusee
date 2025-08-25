@@ -3,7 +3,9 @@ import i18n from '@/plugins/i18n'
 import { computed, type ComputedRef } from 'vue'
 
 export default () => {
-  const currencies = computed(() => i18n.global.messages.value[i18n.global.locale.value].currencies)
+  const currencies = computed(
+    () => i18n.global.messages.value[i18n.global.locale.value].settings.currency.currencies,
+  )
 
   const defaultCurrency: keyof typeof currencies.value = 'UAH'
 

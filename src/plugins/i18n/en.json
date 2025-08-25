@@ -89,7 +89,24 @@
     "title": "Profile"
   },
   "settings": {
-    "title": "Settings"
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "currency": {
+      "title": "Currency",
+      "currencies": {
+        "UAH": { "title": "Hryvnia", "symbol": "₴" },
+        "USD": { "title": "US Dollar", "symbol": "$" },
+        "EUR": { "title": "Euro", "symbol": "€" },
+        "CAD": { "title": "Canadian Dollar", "symbol": "C$" }
+      }
+    },
+    "locales": {
+      "title": "Language"
+    }
   },
   "brew_methods": {
     "espresso": {
@@ -144,11 +161,5 @@
   "locales": {
     "en": "English",
     "uk": "Ukrainian"
-  },
-  "currencies": {
-    "UAH": { "title": "Hryvnia", "symbol": "₴" },
-    "USD": { "title": "US Dollar", "symbol": "$" },
-    "EUR": { "title": "Euro", "symbol": "€" },
-    "CAD": { "title": "Canadian Dollar", "symbol": "C$" }
   }
 }
