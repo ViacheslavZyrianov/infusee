@@ -7,8 +7,10 @@ import {
   getProcessingOptionTitleByValue,
   getRoastLevelOptionTitleByValue,
 } from '@/views/coffees/data.ts'
+import { useI18n } from 'vue-i18n'
 
 const countries = useCountries()
+const { t } = useI18n()
 
 const props = defineProps({
   coffee: {
@@ -64,10 +66,12 @@ const onDelete = () => {
 
         <v-list class="pa-0" density="compact">
           <v-list-item class="px-6 text-body-2 text-blue" :to="`/coffees/edit/${coffee.id}`">
-            Edit
+            {{ t('buttons.edit') }}
           </v-list-item>
           <v-divider />
-          <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">Delete</v-list-item>
+          <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">
+            {{ t('buttons.delete') }}
+          </v-list-item>
         </v-list>
       </v-menu>
     </div>

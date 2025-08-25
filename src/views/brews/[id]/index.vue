@@ -6,10 +6,12 @@ import type { BrewRead } from '@/store/brews/types.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
 import dayjs from 'dayjs'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const { getBrewMethodTitleByValue } = useBrewMethods()
+const { t } = useI18n()
 
 const brewStore = useBrewStore()
 
@@ -60,10 +62,12 @@ onMounted(async () => {
 
       <v-list v-if="brew" class="pa-0" density="compact">
         <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`">
-          Edit
+          {{ t('buttons.edit') }}
         </v-list-item>
         <v-divider />
-        <v-list-item class="px-6 text-body-2 text-red">Delete</v-list-item>
+        <v-list-item class="px-6 text-body-2 text-red">
+          {{ t('buttons.delete') }}
+        </v-list-item>
       </v-list>
     </v-menu>
   </teleport>

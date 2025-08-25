@@ -4,9 +4,11 @@ import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
 import { computed, type ComputedRef } from 'vue'
 import dayjs from 'dayjs'
+import { useI18n } from 'vue-i18n'
 
 const { ratingAverage } = useRatings()
 const { getBrewMethodTitleByValue } = useBrewMethods()
+const { t } = useI18n()
 
 const props = defineProps({
   brew: {
@@ -48,13 +50,17 @@ const onDelete = () => {
         </template>
 
         <v-list class="pa-0" density="compact">
-          <v-list-item class="px-6 text-body-2" :to="`/brews/${brew.id}`">View</v-list-item>
-          <v-divider />
-          <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`">
-            Edit
+          <v-list-item class="px-6 text-body-2" :to="`/brews/${brew.id}`">
+            {{ t('buttons.view') }}
           </v-list-item>
           <v-divider />
-          <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">Delete</v-list-item>
+          <v-list-item class="px-6 text-body-2 text-blue" :to="`/brews/edit/${brew.id}`">
+            {{ t('buttons.edit') }}
+          </v-list-item>
+          <v-divider />
+          <v-list-item class="px-6 text-body-2 text-red" @click="onDelete">
+            {{ t('buttons.delete') }}
+          </v-list-item>
         </v-list>
       </v-menu>
     </div>
