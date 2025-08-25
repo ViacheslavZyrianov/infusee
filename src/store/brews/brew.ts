@@ -4,8 +4,12 @@ import supabase from '@/plugins/supabase.ts'
 import string2number from '@/utilities/string2number.ts'
 import { reactive } from 'vue'
 import useUserStore from '@/store/user/user.ts'
+import useAlertStore from '@/store/alert/alert.ts'
+import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('brew', () => {
+  const alertStore = useAlertStore()
+
   const isLoading: BrewLoading = reactive({
     getBrew: true,
     postBrew: false,
@@ -27,7 +31,7 @@ export default defineStore('brew', () => {
     isLoading.getBrew = false
 
     if (error) {
-      throw new Error(`Error fetching brew: ${error.message}`)
+      alertStore.show(`Error fetching brew: ${error.message}`, AlertType.Error)
     }
 
     return data
@@ -58,7 +62,7 @@ export default defineStore('brew', () => {
     isLoading.postBrew = false
 
     if (error) {
-      throw new Error(`Error posting brew: ${error.message}`)
+      alertStore.show(`Error posting brew: ${error.message}`, AlertType.Error)
     }
   }
 
@@ -87,7 +91,7 @@ export default defineStore('brew', () => {
     isLoading.updateBrew = false
 
     if (error) {
-      throw new Error(`Error updating brew: ${error.message}`)
+      alertStore.show(`Error updating brew: ${error.message}`, AlertType.Error)
     }
   }
 
@@ -99,7 +103,7 @@ export default defineStore('brew', () => {
     isLoading.deleteBrew = false
 
     if (error) {
-      throw new Error(`Error deleting brew: ${error.message}`)
+      alertStore.show(`Error deleting brew: ${error.message}`, AlertType.Error)
     }
   }
 

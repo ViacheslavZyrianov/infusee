@@ -5,8 +5,12 @@ import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import dayjs from 'dayjs'
 import { reactive } from 'vue'
 import useUserStore from '@/store/user/user.ts'
+import useAlertStore from '@/store/alert/alert.ts'
+import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('brews', () => {
+  const alertStore = useAlertStore()
+
   const isLoading: BrewsLoading = reactive({
     getBrews: true,
     getBrewsTodayCount: true,
@@ -19,7 +23,7 @@ export default defineStore('brews', () => {
 
     await userStore.getUser()
 
-    const response = (await supabase
+    const { data, error } = (await supabase
       .from('brews')
       .select(
         'id, user_id, coffees (name), brew_method, rating_aroma, rating_flavor, rating_acidity, rating_bitterness, rating_sweetness, rating_body, rating_aftertaste, created_at',
@@ -29,11 +33,11 @@ export default defineStore('brews', () => {
 
     isLoading.getBrews = false
 
-    if (response.error) {
-      throw new Error(`Error fetching brews: ${response.error.message}`)
+    if (error) {
+      alertStore.show(`Error fetching brews: ${error.message}`, AlertType.Error)
     }
 
-    return response.data || []
+    return data || []
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
@@ -46,7 +50,9 @@ export default defineStore('brews', () => {
       .gte('created_at', dayjs().startOf('day').toISOString())
       .lte('created_at', dayjs().endOf('day').toISOString())
 
-    if (error) throw error
+    if (error) {
+      alertStore.show(`Error fetching brews today count: ${error.message}`, AlertType.Error)
+    }
 
     return count || 0
   }

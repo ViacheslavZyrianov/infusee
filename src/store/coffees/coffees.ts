@@ -4,8 +4,12 @@ import { reactive } from 'vue'
 import type { CoffeeRead, CoffeesLoading } from '@/store/coffees/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import useUserStore from '@/store/user/user.ts'
+import useAlertStore from '@/store/alert/alert.ts'
+import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('coffees', () => {
+  const alertStore = useAlertStore()
+
   const isLoading: CoffeesLoading = reactive({
     getCoffees: true,
     getCoffeesTotalCount: true,
@@ -18,7 +22,7 @@ export default defineStore('coffees', () => {
 
     await userStore.getUser()
 
-    const response = (await supabase
+    const { data, error } = (await supabase
       .from('coffees')
       .select(query || '*, roasters (title)')
       .eq('user_id', userStore.user.id)
@@ -26,11 +30,11 @@ export default defineStore('coffees', () => {
 
     isLoading.getCoffees = false
 
-    if (response.error) {
-      throw new Error(`Error posting coffee: ${response.error.message}`)
+    if (error) {
+      alertStore.show(`Error fetching coffees: ${error.message}`, AlertType.Error)
     }
 
-    return response.data || []
+    return data || []
   }
 
   const getCoffeesTotalCount = async (): Promise<number> => {
@@ -45,7 +49,9 @@ export default defineStore('coffees', () => {
 
     isLoading.getCoffeesTotalCount = false
 
-    if (error) throw error
+    if (error) {
+      alertStore.show(`Error fetching coffees total count: ${error.message}`, AlertType.Error)
+    }
 
     return count || 0
   }

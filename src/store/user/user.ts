@@ -2,8 +2,12 @@ import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase'
 import type { User } from '@/store/user/types.ts'
 import { computed, type ComputedRef, ref, type Ref } from 'vue'
+import useAlertStore from '@/store/alert/alert.ts'
+import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('user', () => {
+  const alertStore = useAlertStore()
+
   const user: Ref<User> = ref({
     id: '',
     email: '',
@@ -19,7 +23,7 @@ export default defineStore('user', () => {
     const { data, error } = await supabase.auth.getSession()
 
     if (error) {
-      throw new Error(`Error in session: ${error.message}`)
+      alertStore.show(`Error in user session: ${error.message}`, AlertType.Error)
     }
 
     if (data.session) {
@@ -34,9 +38,11 @@ export default defineStore('user', () => {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut()
+
     if (error) {
-      throw new Error(`Error logging out: ${error.message}`)
+      alertStore.show(`Error signing out: ${error.message}`, AlertType.Error)
     }
+
     user.value = {
       id: '',
       email: '',
@@ -53,7 +59,7 @@ export default defineStore('user', () => {
     const { data, error } = await supabase.auth.getUser()
 
     if (error) {
-      throw new Error(`Error logging user: ${error.message}`)
+      alertStore.show(`Error signing in: ${error.message}`, AlertType.Error)
     }
 
     if (data.user) {
