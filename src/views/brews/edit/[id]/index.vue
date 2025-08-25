@@ -23,22 +23,8 @@ const getBrew = async () => {
   if (!brewFormRef.value?.form) return
 
   const brew = await brewStore.getBrew(id.value)
-  Object.assign(brewFormRef.value.form, {
-    coffee_id: brew.coffee_id,
-    brew_method: brew.brew_method,
-    rating_aroma: brew.rating_aroma,
-    rating_flavor: brew.rating_flavor,
-    rating_acidity: brew.rating_acidity,
-    rating_bitterness: brew.rating_bitterness,
-    rating_sweetness: brew.rating_sweetness,
-    rating_body: brew.rating_body,
-    rating_aftertaste: brew.rating_aftertaste,
-    grind: brew.grind,
-    dose: brew.dose,
-    channeling: brew.channeling,
-    output: brew.output,
-    notes: brew.notes,
-  })
+  Object.assign(brewFormRef.value.form, brew)
+  brewFormRef.value.resetInitialForm()
 }
 
 const onSave = async () => {
