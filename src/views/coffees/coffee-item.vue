@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, type ComputedRef } from 'vue'
 import type { CoffeeRead } from '@/store/coffees/types'
-import { useCountries } from '@/composables/useCountries.ts'
+import useCountries from '@/composables/useCountries/index.ts'
 import dayjs from 'dayjs'
 import {
   getProcessingOptionTitleByValue,
