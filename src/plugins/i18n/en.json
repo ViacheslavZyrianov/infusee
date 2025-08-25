@@ -157,6 +157,48 @@
   "coffee_edit": {
     "title": "Edit Coffee"
   },
+  "coffee_form": {
+    "name": {
+      "label": "Coffee name",
+      "placeholder": "Enter coffee name",
+      "errors": {
+        "required": "Coffee name is required"
+      }
+    },
+    "select_roaster": {
+      "label": "Select roaster"
+    },
+    "cupping_score": {
+      "label": "Cupping score (60–100)",
+      "placeholder": "Enter number from 60 to 100",
+      "errors": {
+        "required": "Cupping score is required",
+        "range": "Cupping score must be between 60 and 100"
+      }
+    },
+    "select_roast_level": {
+      "label": "Select roast level"
+    },
+    "select_country_of_origin": {
+      "label": "Select country of origin",
+      "placeholder": "Select country of origin"
+    },
+    "select_processing": {
+      "label": "Select processing method"
+    },
+    "select_roast_date": {
+      "label": "Roast date",
+      "placeholder": "Choose roast date"
+    },
+    "price": {
+      "label": "Price",
+      "placeholder": "Enter price in USD"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add tasting notes or comments"
+    }
+  },
   "roasters": {
     "title": "Roasters"
   },
@@ -233,6 +275,48 @@
       }
     }
   },
+  "processing_options": [
+    {
+      "title": "Washed",
+      "value": "washed"
+    },
+    {
+      "title": "Natural",
+      "value": "natural"
+    },
+    {
+      "title": "Honey",
+      "value": "honey"
+    },
+    {
+      "title": "Wet-Hulled",
+      "value": "wet_hulled"
+    },
+    {
+      "title": "Anaerobic fermentation",
+      "value": "anaerobic_fermentation"
+    },
+    {
+      "title": "Carbonic maceration",
+      "value": "carbonic_maceration"
+    },
+    {
+      "title": "Thermal shock",
+      "value": "thermal_shock"
+    },
+    {
+      "title": "Experimental / Other",
+      "value": "other"
+    }
+  ],
+  "roast_level_options": [
+    { "title": "Light", "value": "light" },
+    { "title": "Light-Medium", "value": "light_medium" },
+    { "title": "Medium", "value": "medium" },
+    { "title": "Medium-Dark", "value": "medium_dark" },
+    { "title": "Dark", "value": "dark" },
+    { "title": "Very Dark", "value": "very_dark" }
+  ],
   "locales": {
     "en": "English",
     "uk": "Ukrainian"
