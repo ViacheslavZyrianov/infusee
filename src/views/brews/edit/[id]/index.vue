@@ -69,7 +69,7 @@ onMounted(async () => {
       {{ t('buttons.save') }}
     </v-btn>
   </teleport>
-  <brew-form v-if="!brewStore.isLoading.getBrew" ref="brewFormRef" />
+  <brew-form ref="brewFormRef" />
 </template>
 
 <style scoped></style>
