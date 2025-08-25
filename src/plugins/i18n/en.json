@@ -67,6 +67,80 @@
   "brew_edit": {
     "title": "Edit Brew"
   },
+  "brew_form": {
+    "select_coffee": {
+      "label": "Select coffee",
+      "errors": {
+        "required": "Coffee is required"
+      }
+    },
+    "select_brew_method": {
+      "label": "Select brew method"
+    },
+    "ratings": {
+      "label": "Rating",
+      "items": {
+        "aroma": {
+          "title": "Aroma",
+          "hint": "The smell of the coffee before and after brewing",
+          "model": "rating_aroma"
+        },
+        "flavor": {
+          "title": "Flavor",
+          "hint": "The overall taste perception of the coffee",
+          "model": "rating_flavor"
+        },
+        "acidity": {
+          "title": "Acidity",
+          "hint": "Brightness and fruity notes in the cup",
+          "model": "rating_acidity"
+        },
+        "bitterness": {
+          "title": "Bitterness",
+          "hint": "The level of bitterness in the coffee",
+          "model": "rating_bitterness"
+        },
+        "sweetness": {
+          "title": "Sweetness",
+          "hint": "How much natural sweetness is perceived",
+          "model": "rating_sweetness"
+        },
+        "body": {
+          "title": "Body",
+          "hint": "The weight and texture of the coffee in the mouth",
+          "model": "rating_body"
+        },
+        "aftertaste": {
+          "title": "Aftertaste",
+          "hint": "The lingering taste after swallowing",
+          "model": "rating_aftertaste"
+        }
+      }
+    },
+    "grind": {
+      "label": "Grind",
+      "placeholder": "Enter griding"
+    },
+    "dose": {
+      "label": "Dose",
+      "placeholder": "Enter dose",
+      "suffix": "(g)"
+    },
+    "channeling": {
+      "label": "Channeling",
+      "placeholder": "Duration in seconds",
+      "suffix": "(s)"
+    },
+    "output": {
+      "label": "Output",
+      "placeholder": "Result",
+      "suffix":  "(ml)"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add some notes"
+    }
+  },
   "coffees": {
     "title": "Coffees",
     "empty_state": {

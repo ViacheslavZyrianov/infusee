@@ -67,6 +67,80 @@
   "brew_edit": {
     "title": "Редагування заварювання"
   },
+  "brew_form": {
+    "select_coffee": {
+      "label": "Виберіть каву",
+      "errors": {
+        "required": "Потрібно обрати каву"
+      }
+    },
+    "select_brew_method": {
+      "label": "Виберіть метод заварювання"
+    },
+    "ratings": {
+      "label": "Рейтинг",
+      "items": {
+        "aroma": {
+          "title": "Аромат",
+          "hint": "Запах кави до та після заварювання",
+          "model": "rating_aroma"
+        },
+        "flavor": {
+          "title": "Смак",
+          "hint": "Загальне сприйняття смаку кави",
+          "model": "rating_flavor"
+        },
+        "acidity": {
+          "title": "Кислинка",
+          "hint": "Яскравість і фруктові відтінки в напої",
+          "model": "rating_acidity"
+        },
+        "bitterness": {
+          "title": "Гіркота",
+          "hint": "Рівень гіркоти у смаку",
+          "model": "rating_bitterness"
+        },
+        "sweetness": {
+          "title": "Солодкість",
+          "hint": "Наскільки відчувається природна солодкість",
+          "model": "rating_sweetness"
+        },
+        "body": {
+          "title": "Тіло",
+          "hint": "Щільність і текстура кави в роті",
+          "model": "rating_body"
+        },
+        "aftertaste": {
+          "title": "Післясмак",
+          "hint": "Смакові відчуття, що залишаються після ковтка",
+          "model": "rating_aftertaste"
+        }
+      }
+    },
+    "grind": {
+      "label": "Помел",
+      "placeholder": "Введіть помел"
+    },
+    "dose": {
+      "label": "Доза",
+      "placeholder": "Введіть дозу",
+      "suffix": "(г)"
+    },
+    "channeling": {
+      "label": "Ченелінг",
+      "placeholder": "Тривалість у секундах",
+      "suffix": "(с)"
+    },
+    "output": {
+      "label": "Вихід",
+      "placeholder": "Результат",
+      "suffix": "(мл)"
+    },
+    "notes": {
+      "label": "Нотатки",
+      "placeholder": "Додайте нотатки"
+    }
+  },
   "coffees": {
     "title": "Кава",
     "empty_state": {
