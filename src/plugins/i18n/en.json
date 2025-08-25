@@ -320,5 +320,10 @@
   "locales": {
     "en": "English",
     "uk": "Ukrainian"
+  },
+  "general_messages": {
+    "has_unsaved_changes": {
+      "leave": "Are you sure you want to leave? You have unsaved changes."
+    }
   }
 }
