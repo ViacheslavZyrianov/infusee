@@ -3,9 +3,11 @@ import { computed, type ComputedRef, onMounted, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import CoffeeForm from '@/views/coffees/coffee-form.vue'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
 
 const coffeeStore = useCoffeeStore()
 
@@ -49,7 +51,7 @@ onMounted(async () => {
 
 <template>
   <teleport defer to="#app-bar-action--left">
-    <v-btn variant="outlined" @click="onCancel">Cancel</v-btn>
+    <v-btn variant="outlined" @click="onCancel">{{ t('buttons.cancel') }}</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
     <v-btn
@@ -58,7 +60,7 @@ onMounted(async () => {
       color="success"
       @click="onSave"
     >
-      Save
+      {{ t('buttons.save') }}
     </v-btn>
   </teleport>
   <coffee-form ref="coffeeFormRef" />

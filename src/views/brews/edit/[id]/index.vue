@@ -3,9 +3,11 @@ import { computed, type ComputedRef, onMounted, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BrewForm from '@/views/brews/brew-form.vue'
 import useBrewStore from '@/store/brews/brew.ts'
+import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const router = useRouter()
+const { t } = useI18n()
 
 const brewStore = useBrewStore()
 
@@ -55,7 +57,7 @@ onMounted(async () => {
 
 <template>
   <teleport defer to="#app-bar-action--left">
-    <v-btn variant="outlined" @click="onCancel">Cancel</v-btn>
+    <v-btn variant="outlined" @click="onCancel">{{ t('buttons.cancel') }}</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
     <v-btn
@@ -64,7 +66,7 @@ onMounted(async () => {
       color="success"
       @click="onSave"
     >
-      Save
+      {{ t('buttons.save') }}
     </v-btn>
   </teleport>
   <brew-form v-if="!brewStore.isLoading.getBrew" ref="brewFormRef" />
