@@ -7,11 +7,13 @@ import useBrewMethods from '@/composables/useBrewMethods.ts'
 import type { CoffeeRead } from '@/store/coffees/types'
 import useValidation from '@/composables/useValidation'
 import type { VForm } from 'vuetify/components'
+import { useI18n } from 'vue-i18n'
 
 const { ratingKeys, ratingLabel, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
 const { getBrewMethodsForSelect } = useBrewMethods()
 const { required, composeRules } = useValidation()
+const { t } = useI18n()
 
 const form: Brew = reactive({
   coffee_id: null,
@@ -32,7 +34,7 @@ const form: Brew = reactive({
 const formRef: Ref<InstanceType<typeof VForm> | null> = ref(null)
 const coffees: Ref<Pick<CoffeeRead, 'id' | 'name'>[]> = ref([])
 
-const selectCoffeeRules = composeRules(required('You must select coffee'))
+const selectCoffeeRules = composeRules(required(t('brew_form.select_coffee.errors.required')))
 
 const getCoffees = async () => {
   coffees.value = await coffeesStore.getCoffees('id, name')
@@ -53,7 +55,7 @@ defineExpose({
     <v-form ref="formRef" validate-on="submit">
       <v-autocomplete
         v-model="form.coffee_id"
-        label="Select coffee"
+        :label="t('brew_form.select_coffee.label')"
         item-title="name"
         item-value="id"
         :items="coffees"
@@ -62,7 +64,7 @@ defineExpose({
       />
       <v-select
         v-model="form.brew_method"
-        label="Select brew method"
+        :label="t('brew_form.select_brew_method.label')"
         :items="getBrewMethodsForSelect()"
       >
         <template #subheader="{ props: { title, icon } }">
@@ -74,7 +76,7 @@ defineExpose({
       </v-select>
 
       <div class="mb-4">
-        <v-label class="mb-2">Rating</v-label>
+        <v-label class="mb-2">{{ t('brew_form.ratings.label') }}</v-label>
         <div class="d-flex flex-column">
           <div
             v-for="ratingKey in ratingKeys"
@@ -95,35 +97,39 @@ defineExpose({
       <div class="d-flex gc-4">
         <v-text-field
           v-model="form.grind"
-          label="Grind"
-          placeholder="Enter grinding"
+          :label="t('brew_form.grind.label')"
+          :placeholder="t('brew_form.grind.placeholder')"
           type="number"
         />
         <v-text-field
           v-model="form.dose"
-          label="Dose"
-          placeholder="Enter dose (g)"
-          suffix="g"
+          :label="t('brew_form.dose.label')"
+          :placeholder="t('brew_form.dose.placeholder')"
+          :suffix="t('brew_form.dose.suffix')"
           type="number"
         />
       </div>
       <div class="d-flex gc-4">
         <v-text-field
           v-model="form.channeling"
-          label="Channeling"
-          placeholder="Enter channeling duration (s)"
-          suffix="s"
+          :label="t('brew_form.channeling.label')"
+          :placeholder="t('brew_form.channeling.placeholder')"
+          :suffix="t('brew_form.channeling.suffix')"
           type="number"
         />
         <v-text-field
           v-model="form.output"
-          label="Output"
-          placeholder="Enter output (ml)"
-          suffix="ml"
+          :label="t('brew_form.output.label')"
+          :placeholder="t('brew_form.output.placeholder')"
+          :suffix="t('brew_form.output.suffix')"
           type="number"
         />
       </div>
-      <v-textarea v-model="form.notes" label="Notes" placeholder="Add some notes" />
+      <v-textarea
+        v-model="form.notes"
+        :label="t('brew_form.notes.label')"
+        :placeholder="t('brew_form.notes.placeholder')"
+      />
     </v-form>
   </v-card>
 </template>
