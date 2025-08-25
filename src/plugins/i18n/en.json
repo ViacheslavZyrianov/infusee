@@ -2,6 +2,7 @@
   "buttons": {
     "sign_out": "Sign out",
     "add": "Add",
+    "save": "Save",
     "cancel": "Cancel",
     "view": "View",
     "edit": "Edit",

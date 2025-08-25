@@ -3,10 +3,11 @@ import { type Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CoffeeForm from '@/views/coffees/coffee-form.vue'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
+import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
-
 const coffeeStore = useCoffeeStore()
+const { t } = useI18n()
 
 const coffeeFormRef: Ref<InstanceType<typeof CoffeeForm> | null> = ref(null)
 
@@ -22,7 +23,7 @@ const onSave = async () => {
 
 <template>
   <teleport defer to="#app-bar-action--left">
-    <v-btn variant="outlined" to="/coffees">Cancel</v-btn>
+    <v-btn variant="outlined" to="/coffees">{{ t('buttons.cancel') }}</v-btn>
   </teleport>
   <teleport defer to="#app-bar-action--right">
     <v-btn
@@ -31,7 +32,7 @@ const onSave = async () => {
       color="success"
       @click="onSave"
     >
-      Save
+      {{ t('buttons.save') }}
     </v-btn>
   </teleport>
   <coffee-form ref="coffeeFormRef" />
