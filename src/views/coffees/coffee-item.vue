@@ -90,8 +90,8 @@ const onDelete = () => {
 
     <v-divider class="my-4" />
 
-    <div class="text-body-2 text-grey-darken-2 mb-2"><v-icon icon="mdi-fire" /> Roast details</div>
-    <div class="d-flex flex-wrap ga-2">
+    <div class="d-flex align-center flex-wrap ga-2">
+      <v-icon icon="mdi-fire" size="22" />
       <v-chip v-if="coffee.roasters?.title" size="small">
         {{ coffee.roasters.title }}
       </v-chip>
