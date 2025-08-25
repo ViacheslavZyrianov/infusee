@@ -9,7 +9,7 @@ import useValidation from '@/composables/useValidation'
 import type { VForm } from 'vuetify/components'
 import { useI18n } from 'vue-i18n'
 
-const { ratingKeys, ratingLabel, ratingModel } = useRatings()
+const { ratingKeys, ratingLabel, ratingHint, ratingModel } = useRatings()
 const coffeesStore = useCoffeesStore()
 const { getBrewMethodsForSelect } = useBrewMethods()
 const { required, composeRules } = useValidation()
@@ -77,23 +77,25 @@ defineExpose({
 
       <div class="mb-4">
         <v-label class="mb-2">{{ t('brew_form.ratings.label') }}</v-label>
-        <div class="d-flex flex-column">
-          <div
-            v-for="ratingKey in ratingKeys"
-            :key="ratingModel(ratingKey)"
-            class="d-flex align-center"
-          >
-            <div class="text-body-2 mr-auto">{{ ratingLabel(ratingKey) }}</div>
-            <v-rating
-              v-model="form[ratingModel(ratingKey)]"
-              :length="5"
-              :size="24"
-              clearable
-              active-color="primary"
-            />
+        <div class="d-flex flex-column gr-2">
+          <div v-for="ratingKey in ratingKeys" :key="ratingModel(ratingKey)">
+            <div class="d-flex align-center w-100">
+              <div class="text-body-2 mr-auto">{{ ratingLabel(ratingKey) }}</div>
+              <v-rating
+                v-model="form[ratingModel(ratingKey)]"
+                :length="5"
+                :size="24"
+                clearable
+                active-color="primary"
+              />
+            </div>
+            <div class="text-caption opacity-50">
+              {{ ratingHint(ratingKey) }}
+            </div>
           </div>
         </div>
       </div>
+
       <div class="d-flex gc-4">
         <v-text-field
           v-model="form.grind"
