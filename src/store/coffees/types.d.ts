@@ -5,7 +5,6 @@ export type Coffee = {
   roaster_id: string | null
   roast_level: string | null
   cupping_score: number | null
-  is_public: boolean
   country: string | null
   processing: string | null
   notes: string
