@@ -23,7 +23,9 @@ const getBrew = async () => {
   if (!brewFormRef.value?.form) return
 
   const brew = await brewStore.getBrew(id.value)
-  Object.assign(brewFormRef.value.form, brew)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { coffees, user_id, ...brewFormData } = brew
+  Object.assign(brewFormRef.value.form, brewFormData)
   brewFormRef.value.resetInitialForm()
 }
 
@@ -33,6 +35,9 @@ const onSave = async () => {
   if (!result?.valid || !brewFormRef.value) return
 
   await brewStore.updateBrew(id.value, brewFormRef.value.form)
+
+  brewFormRef.value.resetInitialForm()
+
   router.push(`/brews/${id.value}`)
 }
 
