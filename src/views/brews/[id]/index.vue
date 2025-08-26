@@ -152,5 +152,3 @@ onMounted(async () => {
     </v-card-text>
   </v-card>
 </template>
-
-<style scoped></style>

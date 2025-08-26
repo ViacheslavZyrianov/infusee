@@ -41,5 +41,3 @@ onMounted(async () => {
     <p class="text-caption text-medium-emphasis">ID: {{ userStore.user.id }}</p>
   </v-card>
 </template>
-
-<style scoped></style>

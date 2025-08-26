@@ -37,5 +37,3 @@ const onSave = async () => {
   </teleport>
   <coffee-form ref="coffeeFormRef" />
 </template>
-
-<style scoped></style>
