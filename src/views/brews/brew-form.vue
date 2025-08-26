@@ -53,7 +53,7 @@ onMounted(async () => {
 })
 
 watch(
-  () => form,
+  () => [form, initialForm.value],
   () => {
     hasChanges.value = JSON.stringify(initialForm.value) !== JSON.stringify(form)
   },
