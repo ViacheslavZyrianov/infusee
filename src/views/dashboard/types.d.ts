@@ -4,6 +4,7 @@ export type WidgetData = {
   component?: Component
   title?: string | number | Ref<string>
   subtitle?: string
+  label?: string
   size: 'half' | 'full'
   color?: string
   to?: string

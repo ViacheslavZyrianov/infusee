@@ -4,6 +4,7 @@ import { onMounted, ref, type Ref } from 'vue'
 import Widget from '@/views/dashboard/widget.vue'
 import useBrewsStore from '@/store/brews/brews.ts'
 import { useI18n } from 'vue-i18n'
+import CustomWidgetWeeklyBrews from './custom-widgets/weekly-brews.vue'
 
 const { t } = useI18n()
 const brewsStore = useBrewsStore()
@@ -68,9 +69,19 @@ const addWidgetEmoji = () => {
   })
 }
 
+const addWidgetWeeklyBrews = () => {
+  widgets.value.push({
+    component: CustomWidgetWeeklyBrews,
+    label: 'Brews this week',
+    size: 'full',
+    color: 'teal-darken-1',
+  })
+}
+
 const addWidgets = async () => {
   await addWidgetBrewsTodayCount()
   addWidgetEmoji()
+  addWidgetWeeklyBrews()
 }
 
 onMounted(() => {
@@ -79,12 +90,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="d-flex flex-wrap ga-4">
+  <div class="d-flex flex-wrap gc-4">
     <widget
       v-for="(widget, index) in widgets"
       :key="index"
       :data="widget"
+      class="mb-4"
       @click="widget.onClick"
-    />
+    >
+      <component v-if="widget.component" :is="widget.component" />
+    </widget>
   </div>
 </template>
