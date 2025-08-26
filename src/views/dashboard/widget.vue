@@ -25,14 +25,22 @@ const classList: ComputedRef<string> = computed(
     :ripple="false"
     @click="emit('click')"
   >
-    <h1 class="text-h1 font-weight-black">{{ data.title }}</h1>
-    <p class="text-body-2">{{ data.subtitle }}</p>
+    <slot v-if="data.component" />
+    <template v-else>
+      <h1 class="text-h1 font-weight-black">{{ data.title }}</h1>
+      <p class="text-body-2">{{ data.subtitle }}</p>
+    </template>
   </v-card>
 </template>
 
 <style scoped lang="scss">
 .widget-half {
   width: calc(50vw - 24px);
+  height: calc(50vw - 24px);
+}
+
+.widget-full {
+  width: 100%;
   height: calc(50vw - 24px);
 }
 </style>
