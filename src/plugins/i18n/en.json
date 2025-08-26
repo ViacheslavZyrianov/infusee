@@ -48,7 +48,10 @@
   "dashboard": {
     "title": "Dashboard",
     "widgets": {
-      "brews_today": "Brews today | Brew today | Brews today"
+      "brews_today": "Brews today | Brew today | Brews today",
+      "brews_this_week": {
+        "label": "Brews this week"
+      }
     }
   },
   "brews": {
@@ -328,5 +331,6 @@
     "has_unsaved_changes": {
       "leave": "Are you sure you want to leave? You have unsaved changes."
     }
-  }
+  },
+  "days_of_the_week": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 }
