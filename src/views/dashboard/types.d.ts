@@ -1,8 +1,8 @@
 import type { Component, Ref } from 'vue'
 
 export type WidgetData = {
-  title: string | number | Ref<string>
   component?: Component
+  title?: string | number | Ref<string>
   subtitle?: string
   size: 'half' | 'full'
   color?: string
