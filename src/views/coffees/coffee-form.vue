@@ -24,6 +24,7 @@ const { t } = useI18n()
 const roasters: Ref<RoasterRead[]> = ref([])
 const initialForm = ref({})
 const form: Coffee = reactive({
+  is_public: false,
   name: '',
   roaster_id: null,
   roast_level: null,
@@ -91,6 +92,15 @@ defineExpose({
 <template>
   <v-card class="pa-4">
     <v-form ref="formRef" validate-on="submit">
+      <v-list-item class="mb-2">
+        <v-list-item-title>{{ generateLabelI18N('is_public') }}</v-list-item-title>
+        <template #append>
+          <div class="d-flex align-center">
+            <v-switch v-model="form.is_public" color="primary" hide-details density="compact" />
+          </div>
+        </template>
+      </v-list-item>
+
       <v-text-field
         v-model="form.name"
         :label="generateLabelI18N('name')"

@@ -158,6 +158,9 @@
     "title": "Редагування кави"
   },
   "coffee_form": {
+    "is_public": {
+      "label": "Visible for all"
+    },
     "name": {
       "label": "Назва",
       "placeholder": "Введіть назву кави",
