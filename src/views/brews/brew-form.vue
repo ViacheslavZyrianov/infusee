@@ -154,5 +154,3 @@ defineExpose({
     </v-form>
   </v-card>
 </template>
-
-<style scoped></style>

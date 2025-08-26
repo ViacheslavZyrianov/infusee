@@ -38,5 +38,3 @@ const onSave = async () => {
   </teleport>
   <brew-form ref="brewFormRef" />
 </template>
-
-<style scoped></style>

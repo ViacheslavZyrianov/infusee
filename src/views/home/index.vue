@@ -30,5 +30,3 @@ onMounted(async () => {
   <user-view v-if="userData" :user="userData" @sign-out="onSignOut" />
   <guest-view v-else />
 </template>
-
-<style scoped></style>
