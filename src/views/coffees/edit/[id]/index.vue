@@ -23,15 +23,8 @@ const getCoffee = async () => {
   if (!coffeeFormRef.value) return
 
   const coffee = await coffeeStore.getCoffee(id.value)
-  Object.assign(coffeeFormRef.value.form, {
-    name: coffee.name,
-    cupping_score: coffee.cupping_score,
-    country: coffee.country,
-    processing: coffee.processing,
-    roast_level: coffee.roast_level,
-    notes: coffee.notes,
-    roaster_id: coffee.roaster_id,
-  })
+  Object.assign(coffeeFormRef.value.form, coffee)
+  coffeeFormRef.value.resetInitialForm()
 }
 
 const onSave = async () => {

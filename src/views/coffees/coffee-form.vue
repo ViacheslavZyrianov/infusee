@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, type ComputedRef, onMounted, reactive, ref, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, reactive, ref, type Ref, toRefs, watch } from 'vue'
 import type { Coffee } from '@/store/coffees/types'
 import dayjs from 'dayjs'
 import { processingOptions, roastLevelOptions } from '@/views/coffees/data.ts'
@@ -11,16 +11,18 @@ import type { RoasterRead } from '@/store/roasters/types'
 import useValidation from '@/composables/useValidation.ts'
 import type { VForm } from 'vuetify/components'
 import { useI18n } from 'vue-i18n'
+import useUnsavedChanges from '@/composables/useUnsavedChanges.ts'
 
 const countries = useCountries()
 const currencies = useCurrencies()
+const { hasChanges } = toRefs(useUnsavedChanges())
 const settingsStore = useSettingsStore()
 const roastersStore = useRoastersStore()
 const { required, numberRange, composeRules } = useValidation()
 const { t } = useI18n()
 
 const roasters: Ref<RoasterRead[]> = ref([])
-
+const initialForm = ref({})
 const form: Coffee = reactive({
   name: '',
   roaster_id: null,
@@ -61,13 +63,28 @@ const cuppingScoreRules = composeRules(
   numberRange(60, 100, generateErrorI18N('cupping_score', 'range')),
 )
 
+const resetInitialForm = () => {
+  Object.assign(initialForm.value, form)
+}
+
 onMounted(async () => {
   await getRoasters()
 })
 
+watch(
+  () => form,
+  () => {
+    hasChanges.value = JSON.stringify(initialForm.value) !== JSON.stringify(form)
+  },
+  {
+    deep: true,
+  },
+)
+
 defineExpose({
   form,
   validate: () => formRef.value?.validate(),
+  resetInitialForm,
 })
 </script>
 
