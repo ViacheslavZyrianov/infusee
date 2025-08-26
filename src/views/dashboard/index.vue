@@ -91,13 +91,7 @@ onMounted(() => {
 
 <template>
   <div class="d-flex flex-wrap gc-4">
-    <widget
-      v-for="(widget, index) in widgets"
-      :key="index"
-      :data="widget"
-      class="mb-4"
-      @click="widget.onClick"
-    >
+    <widget v-for="(widget, index) in widgets" :key="index" :data="widget" @click="widget.onClick">
       <component v-if="widget.component" :is="widget.component" />
     </widget>
   </div>

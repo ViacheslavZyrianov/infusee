@@ -11,9 +11,20 @@ const props = defineProps({
   },
 })
 
-const classList: ComputedRef<string> = computed(
-  () => `text-center d-flex flex-column align-center justify-center widget-${props.data.size}`,
-)
+const classList: ComputedRef<string> = computed((): string => {
+  const base = [
+    'text-center',
+    'd-flex',
+    'flex-column',
+    'align-center',
+    'justify-center',
+    `widget-${props.data.size}`,
+  ]
+
+  base.push(props.data.label ? 'mb-11' : 'mb-4')
+
+  return base.join(' ')
+})
 </script>
 
 <template>
