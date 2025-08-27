@@ -18,6 +18,9 @@ const onSave = async () => {
   if (!result?.valid || !brewFormRef.value) return
 
   await brewStore.postBrew(brewFormRef.value.form)
+
+  brewFormRef.value.resetInitialForm()
+
   router.push('/brews')
 }
 </script>
