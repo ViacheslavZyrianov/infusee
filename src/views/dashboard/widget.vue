@@ -29,6 +29,7 @@ const classList: ComputedRef<string> = computed((): string => {
 
 <template>
   <v-card
+    elevation="0"
     rounded="xl"
     :class="classList"
     :color="data.color"
