@@ -42,7 +42,8 @@ onMounted(async () => {
       :ripple="false"
     >
       <v-avatar size="24">
-        <v-img :src="avatar" alt="Profile" />
+        <img v-if="avatar" :src="avatar" alt="Profile" class="w-100 h-100" />
+        <v-icon v-else size="24">mdi-account-circle</v-icon>
       </v-avatar>
     </v-btn>
   </v-bottom-navigation>
