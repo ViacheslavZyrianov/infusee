@@ -94,9 +94,9 @@ onMounted(async () => {
         :width="emptyImageSize"
         :height="emptyImageSize"
       />
-      <div class="text-h4 font-weight-bold">No coffees added 😔</div>
+      <div class="text-h4 font-weight-bold">{{ t('brews.empty_state_coffee.title') }}</div>
       <div class="text-subtitle-1 grey--text text-center">
-        Please add at least one,<br />to create your magnificent brews.
+        {{ t('brews.empty_state_coffee.subtitle') }}
       </div>
       <v-btn
         prepend-icon="mdi-plus"
