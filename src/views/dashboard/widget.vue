@@ -19,6 +19,7 @@ const classList: ComputedRef<string> = computed((): string => {
     'align-center',
     'justify-center',
     `widget-${props.data.size}`,
+    'overflow-visible',
   ]
 
   base.push(props.data.label ? 'mb-11' : 'mb-4')
@@ -35,7 +36,6 @@ const classList: ComputedRef<string> = computed((): string => {
     :color="data.color"
     :to="data.to"
     :ripple="false"
-    style="overflow: visible"
     @click="emit('click')"
   >
     <slot v-if="data.component" />
