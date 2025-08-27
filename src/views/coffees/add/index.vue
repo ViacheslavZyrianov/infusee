@@ -17,6 +17,9 @@ const onSave = async () => {
   if (!result?.valid || !coffeeFormRef.value) return
 
   await coffeeStore.postCoffee(coffeeFormRef.value.form)
+
+  coffeeFormRef.value.resetInitialForm()
+
   router.push('/coffees')
 }
 </script>
