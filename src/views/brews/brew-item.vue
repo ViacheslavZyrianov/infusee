@@ -24,7 +24,7 @@ const formattedDate: ComputedRef<string> = computed(() =>
 )
 
 const onDelete = () => {
-  if (confirm(`Are you sure you want to delete this brew?`)) {
+  if (confirm(t('brew.confirm_delete'))) {
     emit('delete')
   }
 }

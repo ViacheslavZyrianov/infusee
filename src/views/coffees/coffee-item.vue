@@ -37,7 +37,7 @@ const chipCuppingScoreColor: ComputedRef<string> = computed(() =>
 )
 
 const onDelete = () => {
-  if (confirm(`Are you sure you want to delete "${props.coffee.name}"?`)) {
+  if (confirm(t('coffee.confirm_delete', { name: props.coffee.name }))) {
     emit('delete')
   }
 }
