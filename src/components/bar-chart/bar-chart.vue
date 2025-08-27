@@ -23,12 +23,14 @@ const generateBarHeightStyle = (value: number) => {
 
   return { height: `${heightPx}px` }
 }
-
-const totalColumns: ComputedRef<number> = computed(() => props.data.length + 1)
 </script>
 
 <template>
-  <div class="d-flex gc-2 w-100 h-100 bar-chart" ref="barChartRef">
+  <div
+    class="d-flex gc-2 w-100 h-100 bar-chart"
+    ref="barChartRef"
+    :style="{ '--total-columns': data.length }"
+  >
     <div v-for="(item, index) in data" :key="index" class="item">
       <div class="text-caption mb-auto">{{ item.value }}</div>
       <div class="bar" :style="generateBarHeightStyle(item.value)" />
@@ -49,7 +51,7 @@ $column-gap: 4px;
     display: flex;
     flex-direction: column;
     flex: 0 0
-      calc((100% - (#{$column-gap} * (v-bind(--totalColumns) - 1))) / v-bind(--totalColumns) - 4px);
+      calc((100% - (#{$column-gap} * (var(--total-columns) - 1))) / var(--total-columns) - 4px);
     height: 100%;
 
     .bar {
