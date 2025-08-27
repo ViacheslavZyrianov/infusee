@@ -1,9 +1,8 @@
-import type { BrewMethodKey } from '@/composables/useBrewMethods.ts'
 import type { CoffeeRead } from '@/store/coffees/types'
 
 export type Brew = {
   coffee_id: string | null
-  brew_method: BrewMethodKey | null
+  brew_method: string | null
   rating_aroma: number
   rating_flavor: number
   rating_acidity: number
