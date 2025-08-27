@@ -61,7 +61,7 @@ const classList: ComputedRef<string> = computed((): string => {
 
 .label {
   position: absolute;
-  bottom: -28px;
+  bottom: -26px;
   left: auto;
   right: auto;
   z-index: 1;
