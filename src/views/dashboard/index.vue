@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { WidgetData } from '@/views/dashboard/types'
-import { onMounted, ref, type Ref } from 'vue'
+import { markRaw, onMounted, ref, type Ref } from 'vue'
 import Widget from '@/views/dashboard/widget.vue'
 import useBrewsStore from '@/store/brews/brews.ts'
 import { useI18n } from 'vue-i18n'
@@ -71,7 +71,7 @@ const addWidgetEmoji = () => {
 
 const addWidgetWeeklyBrews = () => {
   widgets.value.push({
-    component: CustomWidgetWeeklyBrews,
+    component: markRaw(CustomWidgetWeeklyBrews),
     label: 'Brews this week',
     size: 'full',
     color: 'teal-darken-1',
