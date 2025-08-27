@@ -72,7 +72,7 @@ const addWidgetEmoji = () => {
 const addWidgetWeeklyBrews = () => {
   widgets.value.push({
     component: markRaw(CustomWidgetWeeklyBrews),
-    label: 'Brews this week',
+    label: t('dashboard.widgets.brews_this_week.label'),
     size: 'full',
     color: 'teal-darken-1',
   })
