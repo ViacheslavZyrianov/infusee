@@ -22,7 +22,6 @@ export type BrewRead = Brew & { id: string; coffees: Pick<CoffeeRead, 'name'>; c
 
 export type BrewsLoading = {
   getBrews: boolean
-  getBrewsTodayCount: boolean
 }
 
 export type BrewLoading = {
