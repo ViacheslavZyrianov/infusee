@@ -51,6 +51,9 @@
       "brews_today": "Brews today | Brew today | Brews today",
       "brews_this_week": {
         "label": "Brews this week"
+      },
+      "tap_me": {
+        "label": "Tap me!"
       }
     }
   },

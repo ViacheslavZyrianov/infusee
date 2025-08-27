@@ -32,7 +32,7 @@ const addWidgetBrewsTodayCount = async () => {
   widgetData.isLoading = false
 }
 
-const addWidgetEmoji = () => {
+const addWidgetTapMe = () => {
   const generateEmoji = () => {
     const coffeeEmojis = [
       '☕', // Coffee / hot beverage
@@ -71,6 +71,7 @@ const addWidgetEmoji = () => {
 
   widgets.value.push({
     title: emoji,
+    label: t('dashboard.widgets.tap_me.label'),
     size: 'half',
     color: 'deep-purple-lighten-1',
     onClick: generateEmoji,
@@ -88,7 +89,7 @@ const addWidgetWeeklyBrews = () => {
 
 const addWidgets = () => {
   addWidgetBrewsTodayCount()
-  addWidgetEmoji()
+  addWidgetTapMe()
   addWidgetWeeklyBrews()
 }
 
