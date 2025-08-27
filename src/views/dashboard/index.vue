@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { WidgetData } from '@/views/dashboard/types'
-import { markRaw, onMounted, ref, type Ref } from 'vue'
+import { markRaw, onMounted, reactive, ref, type Ref } from 'vue'
 import Widget from '@/views/dashboard/widget.vue'
 import useBrewsStore from '@/store/brews/brews.ts'
 import { useI18n } from 'vue-i18n'
@@ -14,14 +14,20 @@ const widgets: Ref<WidgetData[]> = ref([])
 const emoji: Ref<string> = ref('')
 
 const addWidgetBrewsTodayCount = async () => {
-  const brewsTodayCount = await brewsStore.getBrewsTodayCount()
-  widgets.value.push({
-    title: brewsTodayCount,
-    label: t('dashboard.widgets.brews_today', brewsTodayCount),
+  const widgetData: WidgetData = reactive({
+    title: '',
+    label: '',
     size: 'half',
     color: 'deep-orange-lighten-1',
     to: '/brews',
   })
+
+  const brewsTodayCount = await brewsStore.getBrewsTodayCount()
+
+  widgetData.title = `${brewsTodayCount}`
+  widgetData.label = t('dashboard.widgets.brews_today', brewsTodayCount)
+
+  widgets.value.push(widgetData)
 }
 
 const addWidgetEmoji = () => {
