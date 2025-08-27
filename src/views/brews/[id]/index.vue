@@ -43,7 +43,7 @@ const getBrewLabelI18N = (key: string) => t(`brew_form.${key}.label`)
 const onDelete = async () => {
   if (!brew.value?.id) return
 
-  if (confirm(`Are you sure you want to delete this brew?`)) {
+  if (confirm(t('brew.confirm_delete'))) {
     await brewStore.deleteBrew(brew.value.id)
     router.push('/brews')
   }
