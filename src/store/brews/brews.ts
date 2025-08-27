@@ -41,6 +41,8 @@ export default defineStore('brews', () => {
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
+    isLoading.getBrewsTodayCount = true
+
     await userStore.getUser()
 
     const { count, error } = await supabase
@@ -49,6 +51,8 @@ export default defineStore('brews', () => {
       .eq('user_id', userStore.user.id)
       .gte('created_at', dayjs().startOf('day').toISOString())
       .lte('created_at', dayjs().endOf('day').toISOString())
+
+    isLoading.getBrewsTodayCount = false
 
     if (error) {
       alertStore.show(`Error fetching brews today count: ${error.message}`, AlertType.Error)
