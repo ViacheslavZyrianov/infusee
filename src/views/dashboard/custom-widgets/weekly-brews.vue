@@ -9,6 +9,7 @@ const brewsStore = useBrewsStore()
 const { tm } = useI18n()
 
 const brewsWeeklyCount: Ref<number[]> = ref([])
+const isLoading: Ref<boolean> = ref(false)
 
 const barChartData: ComputedRef<BarChartItem[]> = computed(() =>
   tm('days_of_the_week').map((label: string, index: number) => ({
@@ -18,7 +19,13 @@ const barChartData: ComputedRef<BarChartItem[]> = computed(() =>
 )
 
 onMounted(async () => {
+  isLoading.value = true
   brewsWeeklyCount.value = await brewsStore.getBrewsWeeklyCount()
+  isLoading.value = false
+})
+
+defineExpose({
+  isLoading,
 })
 </script>
 

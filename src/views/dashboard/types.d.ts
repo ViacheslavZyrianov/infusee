@@ -8,5 +8,6 @@ export type WidgetData = {
   size: 'half' | 'full'
   color?: string
   to?: string
+  isLoading?: boolean
   onClick?: () => void
 }

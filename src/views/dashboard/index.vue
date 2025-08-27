@@ -20,14 +20,16 @@ const addWidgetBrewsTodayCount = async () => {
     size: 'half',
     color: 'deep-orange-lighten-1',
     to: '/brews',
+    isLoading: true,
   })
+
+  widgets.value.push(widgetData)
 
   const brewsTodayCount = await brewsStore.getBrewsTodayCount()
 
   widgetData.title = `${brewsTodayCount}`
   widgetData.label = t('dashboard.widgets.brews_today', brewsTodayCount)
-
-  widgets.value.push(widgetData)
+  widgetData.isLoading = false
 }
 
 const addWidgetEmoji = () => {
@@ -84,8 +86,8 @@ const addWidgetWeeklyBrews = () => {
   })
 }
 
-const addWidgets = async () => {
-  await addWidgetBrewsTodayCount()
+const addWidgets = () => {
+  addWidgetBrewsTodayCount()
   addWidgetEmoji()
   addWidgetWeeklyBrews()
 }
@@ -97,8 +99,11 @@ onMounted(() => {
 
 <template>
   <div class="d-flex flex-wrap gc-4 gr-10">
-    <widget v-for="(widget, index) in widgets" :key="index" :data="widget" @click="widget.onClick">
-      <component v-if="widget.component" :is="widget.component" />
-    </widget>
+    <widget
+      v-for="(widget, index) in widgets"
+      :key="index"
+      :data="widget"
+      @click="widget.onClick"
+    />
   </div>
 </template>
