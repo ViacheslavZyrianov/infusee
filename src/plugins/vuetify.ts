@@ -24,21 +24,6 @@ export default createVuetify({
       uk,
     },
   },
-  theme: {
-    themes: {
-      light: {
-        colors: {
-          primary: '#1976D2',
-          background: '#EEEEEE',
-        },
-      },
-      dark: {
-        colors: {
-          background: '#121212',
-        },
-      },
-    },
-  },
   defaults: {
     VBtn,
     VBtnGroup: {
