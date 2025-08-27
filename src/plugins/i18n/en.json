@@ -336,7 +336,8 @@
   "general_messages": {
     "has_unsaved_changes": {
       "leave": "Are you sure you want to leave? You have unsaved changes."
-    }
+    },
+    "loading": "Loading..."
   },
   "days_of_the_week": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 }
