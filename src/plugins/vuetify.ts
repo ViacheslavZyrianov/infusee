@@ -1,6 +1,7 @@
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import { createVuetify } from 'vuetify'
+import { en, uk } from 'vuetify/locale'
 
 const VBtn = {
   variant: 'tonal',
@@ -16,6 +17,13 @@ const field = {
 }
 
 export default createVuetify({
+  locale: {
+    locale: 'en',
+    messages: {
+      en,
+      uk,
+    },
+  },
   theme: {
     themes: {
       light: {

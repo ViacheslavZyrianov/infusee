@@ -22,6 +22,8 @@ app.use(vuetify)
 app.use(i18n)
 
 const store = useSettingsStore()
-i18n.global.locale.value = store.locale as 'en' | 'uk' // Type assertion to ensure correct type
+const locale = store.locale as 'en' | 'uk'
+i18n.global.locale.value = locale
+vuetify.locale.current.value = locale
 
 app.mount('#app')
