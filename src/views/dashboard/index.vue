@@ -17,7 +17,7 @@ const addWidgetBrewsTodayCount = async () => {
   const brewsTodayCount = await brewsStore.getBrewsTodayCount()
   widgets.value.push({
     title: brewsTodayCount,
-    subtitle: t('dashboard.widgets.brews_today', brewsTodayCount),
+    label: t('dashboard.widgets.brews_today', brewsTodayCount),
     size: 'half',
     color: 'deep-orange-lighten-1',
     to: '/brews',
