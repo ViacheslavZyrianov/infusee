@@ -69,5 +69,6 @@ const classList: ComputedRef<string> = computed((): string => {
   padding: 4px 16px;
   border-radius: 0 0 14px 14px;
   transform: translateY(100%);
+  color: rgb(var(--v-theme-on-background));
 }
 </style>
