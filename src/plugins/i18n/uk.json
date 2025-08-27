@@ -166,7 +166,7 @@
   },
   "coffee_form": {
     "is_public": {
-      "label": "Visible for all"
+      "label": "Видима для всіх"
     },
     "name": {
       "label": "Назва",
