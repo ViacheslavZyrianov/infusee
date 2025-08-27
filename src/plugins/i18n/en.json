@@ -59,6 +59,10 @@
     "empty_state": {
       "title": "Still no brews",
       "subtitle": "Add your first brew\nto see it here"
+    },
+    "empty_state_coffee": {
+      "title": "No coffee",
+      "subtitle": "At first add coffee, then you will be able to add brews"
     }
   },
   "brew": {
