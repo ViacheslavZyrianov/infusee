@@ -22,8 +22,6 @@ const classList: ComputedRef<string> = computed((): string => {
     'overflow-visible',
   ]
 
-  base.push(props.data.label ? 'mb-11' : 'mb-4')
-
   return base.join(' ')
 })
 </script>
