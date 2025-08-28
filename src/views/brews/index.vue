@@ -16,8 +16,10 @@ const { t } = useI18n()
 const emptyImageSize = 300
 const isLoading: Ref<boolean> = ref(false)
 
-const isCoffeesEmpty: ComputedRef<boolean> = computed(
-  () => !coffeesStore.isLoading.getCoffees && coffeesStore.coffeesTotalCount !== null,
+const isCoffeesEmpty: ComputedRef<boolean> = computed(() =>
+  coffeesStore.coffees !== null
+    ? coffeesStore.coffees.length === 0
+    : coffeesStore.coffeesTotalCount === 0,
 )
 
 const onDelete = async (id: string) => {
@@ -26,14 +28,14 @@ const onDelete = async (id: string) => {
 }
 
 const getCoffeesTotalCount = async () => {
-  if (coffeesStore.coffeesTotalCount !== null) {
+  if (coffeesStore.coffeesTotalCount === null) {
     isLoading.value = true
     await coffeesStore.getCoffeesTotalCount()
   }
 }
 
 const getBrews = async () => {
-  if (!isCoffeesEmpty.value && brewsStore.brews !== null) {
+  if (brewsStore.brews === null) {
     isLoading.value = true
     await brewsStore.getBrews()
   }
@@ -56,7 +58,30 @@ onMounted(async () => {
     <v-skeleton-loader v-for="i in 3" :key="i" type="article" height="136px" class="mb-4" />
   </template>
   <div v-else class="d-flex flex-column ga-4 h-100">
-    <template v-if="!isCoffeesEmpty">
+    <div v-if="isCoffeesEmpty" class="d-flex flex-column justify-center align-center fill-height">
+      <img
+        :src="coffeesEmptySVG"
+        alt=""
+        class="mt-n4 mb-4"
+        :width="emptyImageSize"
+        :height="emptyImageSize"
+      />
+      <div class="text-h4 font-weight-bold">{{ t('brews.empty_state_coffee.title') }}</div>
+      <div class="text-subtitle-1 grey--text text-center">
+        {{ t('brews.empty_state_coffee.subtitle') }}
+      </div>
+      <v-btn
+        prepend-icon="mdi-plus"
+        to="/coffees/add"
+        size="large"
+        variant="elevated"
+        elevation="0"
+        class="mt-4"
+      >
+        {{ t('buttons.add') }}
+      </v-btn>
+    </div>
+    <template v-else>
       <div
         v-if="!brewsStore.brews?.length"
         class="d-flex flex-column justify-center align-center fill-height text-center"
@@ -90,28 +115,5 @@ onMounted(async () => {
         @delete="onDelete(brew.id)"
       />
     </template>
-    <div v-else class="d-flex flex-column justify-center align-center fill-height">
-      <img
-        :src="coffeesEmptySVG"
-        alt=""
-        class="mt-n4 mb-4"
-        :width="emptyImageSize"
-        :height="emptyImageSize"
-      />
-      <div class="text-h4 font-weight-bold">{{ t('brews.empty_state_coffee.title') }}</div>
-      <div class="text-subtitle-1 grey--text text-center">
-        {{ t('brews.empty_state_coffee.subtitle') }}
-      </div>
-      <v-btn
-        prepend-icon="mdi-plus"
-        to="/coffees/add"
-        size="large"
-        variant="elevated"
-        elevation="0"
-        class="mt-4"
-      >
-        {{ t('buttons.add') }}
-      </v-btn>
-    </div>
   </div>
 </template>
