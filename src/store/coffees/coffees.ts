@@ -20,14 +20,14 @@ export default defineStore('coffees', () => {
 
   const userStore = useUserStore()
 
-  const getCoffees = async (query?: string) => {
+  const getCoffees = async () => {
     isLoading.getCoffees = true
 
     await userStore.getUser()
 
     const { data, error } = (await supabase
       .from('coffees')
-      .select(query || '*, roasters (title)')
+      .select('*, roasters (title)')
       .eq('user_id', userStore.user.id)
       .order('name', { ascending: true })) as PostgrestSingleResponse<CoffeeRead[]>
 
