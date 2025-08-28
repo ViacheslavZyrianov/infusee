@@ -31,3 +31,8 @@ coverage
 *.tsbuildinfo
 /.env
 /.vscode/
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
