@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import supabase from '@/plugins/supabase.ts'
-import { reactive } from 'vue'
+import { reactive, ref, type Ref } from 'vue'
 import type { CoffeeRead, CoffeesLoading } from '@/store/coffees/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import useUserStore from '@/store/user/user.ts'
@@ -9,6 +9,7 @@ import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('coffees', () => {
   const alertStore = useAlertStore()
+  const coffeesTotalCount: Ref<number | null> = ref(null)
 
   const isLoading: CoffeesLoading = reactive({
     getCoffees: true,
@@ -37,7 +38,7 @@ export default defineStore('coffees', () => {
     return data || []
   }
 
-  const getCoffeesTotalCount = async (): Promise<number> => {
+  const getCoffeesTotalCount = async () => {
     isLoading.getCoffeesTotalCount = true
 
     await userStore.getUser()
@@ -53,8 +54,8 @@ export default defineStore('coffees', () => {
       alertStore.show(`Error fetching coffees total count: ${error.message}`, AlertType.Error)
     }
 
-    return count || 0
+    coffeesTotalCount.value = count || 0
   }
 
-  return { isLoading, getCoffees, getCoffeesTotalCount }
+  return { isLoading, coffeesTotalCount, getCoffees, getCoffeesTotalCount }
 })
