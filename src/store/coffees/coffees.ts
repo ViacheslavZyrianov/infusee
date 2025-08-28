@@ -9,6 +9,8 @@ import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('coffees', () => {
   const alertStore = useAlertStore()
+
+  const coffees: Ref<CoffeeRead[] | null> = ref(null)
   const coffeesTotalCount: Ref<number | null> = ref(null)
 
   const isLoading: CoffeesLoading = reactive({
@@ -18,7 +20,7 @@ export default defineStore('coffees', () => {
 
   const userStore = useUserStore()
 
-  const getCoffees = async (query?: string): Promise<CoffeeRead[]> => {
+  const getCoffees = async (query?: string) => {
     isLoading.getCoffees = true
 
     await userStore.getUser()
@@ -35,7 +37,7 @@ export default defineStore('coffees', () => {
       alertStore.show(`Error fetching coffees: ${error.message}`, AlertType.Error)
     }
 
-    return data || []
+    coffees.value = data || []
   }
 
   const getCoffeesTotalCount = async () => {
@@ -57,5 +59,5 @@ export default defineStore('coffees', () => {
     coffeesTotalCount.value = count || 0
   }
 
-  return { isLoading, coffeesTotalCount, getCoffees, getCoffeesTotalCount }
+  return { isLoading, coffees, coffeesTotalCount, getCoffees, getCoffeesTotalCount }
 })

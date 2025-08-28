@@ -3,11 +3,13 @@ import { type Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import CoffeeForm from '@/views/coffees/coffee-form.vue'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
+import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
-const coffeeStore = useCoffeeStore()
 const { t } = useI18n()
+const coffeeStore = useCoffeeStore()
+const coffeesStore = useCoffeesStore()
 
 const coffeeFormRef: Ref<InstanceType<typeof CoffeeForm> | null> = ref(null)
 
@@ -19,6 +21,8 @@ const onSave = async () => {
   await coffeeStore.postCoffee(coffeeFormRef.value.form)
 
   coffeeFormRef.value.resetInitialForm()
+
+  await coffeesStore.getCoffees()
 
   router.push('/coffees')
 }

@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import useCoffeeStore from '@/store/coffees/coffee.ts'
-import { onMounted, ref, type Ref } from 'vue'
+import { onMounted } from 'vue'
 import CoffeeItem from './coffee-item.vue'
-import type { CoffeeRead } from '@/store/coffees/types'
 import coffeesEmptySVG from '@/assets/img/coffees-empty.svg'
 import { useI18n } from 'vue-i18n'
 
@@ -11,20 +10,15 @@ const coffeesStore = useCoffeesStore()
 const coffeeStore = useCoffeeStore()
 const { t } = useI18n()
 
-const coffees: Ref<CoffeeRead[]> = ref([])
 const emptyImageSize = 300
-
-const getCoffees = async () => {
-  coffees.value = await coffeesStore.getCoffees()
-}
 
 const onDelete = async (id: number) => {
   await coffeeStore.deleteCoffee(id)
-  await getCoffees()
+  await coffeesStore.getCoffees()
 }
 
 onMounted(async () => {
-  await getCoffees()
+  if (!coffeesStore.coffees) await coffeesStore.getCoffees()
 })
 </script>
 
@@ -38,7 +32,7 @@ onMounted(async () => {
     </template>
     <template v-else>
       <div
-        v-if="!coffees.length"
+        v-if="!coffeesStore.coffees?.length"
         class="d-flex flex-column justify-center align-center fill-height"
       >
         <img
@@ -65,7 +59,7 @@ onMounted(async () => {
       </div>
       <template v-else>
         <coffee-item
-          v-for="coffee in coffees"
+          v-for="coffee in coffeesStore.coffees"
           :key="coffee.id"
           :coffee="coffee"
           @delete="onDelete(coffee.id)"
