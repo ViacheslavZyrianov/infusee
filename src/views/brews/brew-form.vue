@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, type Ref, toRefs, watch } from 'vue'
+import { computed, type ComputedRef, onMounted, reactive, ref, type Ref, toRefs, watch } from 'vue'
 import type { Brew } from '@/store/brews/types.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { useRatings } from '@/composables/useRatings.ts'
 import useBrewMethods from '@/composables/useBrewMethods.ts'
-import type { CoffeeRead } from '@/store/coffees/types'
 import useValidation from '@/composables/useValidation'
 import useUnsavedChanges from '@/composables/useUnsavedChanges.ts'
 import type { VForm } from 'vuetify/components'
 import { useI18n } from 'vue-i18n'
+import type { CoffeeRead } from '@/store/coffees/types'
 
 const { ratingKeys, ratingLabel, ratingHint, ratingModel } = useRatings()
 const { hasChanges } = toRefs(useUnsavedChanges())
@@ -35,12 +35,13 @@ const form: Brew = reactive({
   notes: null,
 })
 const formRef: Ref<InstanceType<typeof VForm> | null> = ref(null)
-const coffees: Ref<Pick<CoffeeRead, 'id' | 'name'>[]> = ref([])
 
 const selectCoffeeRules = composeRules(required(t('brew_form.select_coffee.errors.required')))
 
+const items: ComputedRef<CoffeeRead[]> = computed(() => coffeesStore.coffees || [])
+
 const getCoffees = async () => {
-  coffees.value = await coffeesStore.getCoffees('id, name')
+  if (!coffeesStore.coffees) await coffeesStore.getCoffees()
 }
 
 const resetInitialForm = () => {
@@ -77,7 +78,7 @@ defineExpose({
         :label="t('brew_form.select_coffee.label')"
         item-title="name"
         item-value="id"
-        :items="coffees"
+        :items="items"
         :rules="selectCoffeeRules"
         @update:modelValue="formRef?.resetValidation()"
       />
