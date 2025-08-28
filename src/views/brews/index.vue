@@ -14,11 +14,10 @@ const coffeesStore = useCoffeesStore()
 const { t } = useI18n()
 
 const emptyImageSize = 300
-const coffeesTotalCount: Ref<number> = ref(0)
 const isLoading: Ref<boolean> = ref(false)
 
 const isCoffeesEmpty: ComputedRef<boolean> = computed(
-  () => !coffeesStore.isLoading.getCoffees && coffeesTotalCount.value === 0,
+  () => !coffeesStore.isLoading.getCoffees && coffeesStore.coffeesTotalCount !== null,
 )
 
 const onDelete = async (id: string) => {
@@ -26,16 +25,16 @@ const onDelete = async (id: string) => {
   await brewsStore.getBrews()
 }
 
-const getCoffeesTotalCount = async () => {
-  coffeesTotalCount.value = await coffeesStore.getCoffeesTotalCount()
-}
-
 onMounted(async () => {
-  isLoading.value = true
+  if (coffeesStore.coffeesTotalCount !== null) {
+    isLoading.value = true
+    await coffeesStore.getCoffeesTotalCount()
+  }
 
-  await getCoffeesTotalCount()
-
-  if (!isCoffeesEmpty.value && !brewsStore.brews.length) await brewsStore.getBrews()
+  if (!isCoffeesEmpty.value && !brewsStore.brews.length) {
+    isLoading.value = true
+    await brewsStore.getBrews()
+  }
 
   isLoading.value = false
 })

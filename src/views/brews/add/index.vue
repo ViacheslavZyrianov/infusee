@@ -3,12 +3,14 @@ import { type Ref, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BrewForm from '@/views/brews/brew-form.vue'
 import useBrewStore from '@/store/brews/brew.ts'
+import useBrewsStore from '@/store/brews/brews.ts'
 import { useI18n } from 'vue-i18n'
 
 const router = useRouter()
 const { t } = useI18n()
 
 const brewStore = useBrewStore()
+const brewsStore = useBrewsStore()
 
 const brewFormRef: Ref<InstanceType<typeof BrewForm> | null> = ref(null)
 
@@ -20,6 +22,8 @@ const onSave = async () => {
   await brewStore.postBrew(brewFormRef.value.form)
 
   brewFormRef.value.resetInitialForm()
+
+  await brewsStore.getBrews()
 
   router.push('/brews')
 }
