@@ -5,7 +5,12 @@ const publicURLs = ['/privacy-policy', '/terms-of-service', '/not-pwa']
 
 export default {
   beforeEach(to: RouteLocationNormalized, _: RouteLocationNormalized, next: NavigationGuardNext) {
-    if (!detectIsPWA() && !publicURLs.includes(to.path) && !import.meta.env.DEV) {
+    if (
+      !detectIsPWA() &&
+      !publicURLs.includes(to.path) &&
+      !import.meta.env.DEV &&
+      !import.meta.env.VITE_E2E
+    ) {
       next('/not-pwa')
     } else {
       next()
