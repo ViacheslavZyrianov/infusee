@@ -44,7 +44,7 @@ jobs:
 
       # 7️⃣ Wait for server to be ready
       - name: Wait for server
-        run: npx wait-on http://localhost:4173
+        run: npx wait-on http://localhost:5173
 
       # 8️⃣ Run Cypress E2E tests in parallel on Chrome
       - name: Run Cypress E2E
