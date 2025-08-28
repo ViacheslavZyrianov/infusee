@@ -18,8 +18,6 @@ export default defineStore('coffee', () => {
   const userStore = useUserStore()
 
   const postCoffee = async (form: Coffee) => {
-    isLoading.postCoffee = true
-
     await userStore.getUser()
 
     const payload = {
@@ -28,8 +26,6 @@ export default defineStore('coffee', () => {
     }
 
     const { error } = await supabase.from('coffees').insert([payload])
-
-    isLoading.postCoffee = false
 
     if (error) {
       alertStore.show(`Error posting coffee: ${error.message}`, AlertType.Error)
@@ -55,8 +51,6 @@ export default defineStore('coffee', () => {
   }
 
   const updateCoffee = async (id: string, form: Coffee) => {
-    isLoading.updateCoffee = true
-
     await userStore.getUser()
 
     const { error } = await supabase
@@ -66,8 +60,6 @@ export default defineStore('coffee', () => {
         ...form,
       })
       .eq('id', id)
-
-    isLoading.updateCoffee = false
 
     if (error) {
       alertStore.show(`Error updating coffee: ${error.message}`, AlertType.Error)
