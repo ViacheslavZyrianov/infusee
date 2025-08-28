@@ -18,10 +18,15 @@ const barChartData: ComputedRef<BarChartItem[]> = computed(() =>
   })),
 )
 
-onMounted(async () => {
+const getBrewsWeeklyCount = async () => {
+  if (dashboardStore.brewsWeeklyCount !== null) return
   isLoading.value = true
   await dashboardStore.getBrewsWeeklyCount()
   isLoading.value = false
+}
+
+onMounted(() => {
+  getBrewsWeeklyCount()
 })
 
 defineExpose({
