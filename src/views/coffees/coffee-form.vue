@@ -113,6 +113,8 @@ defineExpose({
         v-model="form.roaster_id"
         :label="generateLabelI18N('select_roaster')"
         :items="roasters"
+        :loading="roastersStore.isLoading.getRoasters"
+        :disabled="roastersStore.isLoading.getRoasters"
         item-value="id"
       />
 
