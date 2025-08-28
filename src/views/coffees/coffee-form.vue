@@ -7,11 +7,11 @@ import useCountries from '@/composables/useCountries/index.ts'
 import useCurrencies from '@/composables/useCurrencies.ts'
 import { useSettingsStore } from '@/store/settings'
 import useRoastersStore from '@/store/roasters/roasters.ts'
-import type { RoasterRead } from '@/store/roasters/types'
 import useValidation from '@/composables/useValidation.ts'
 import type { VForm } from 'vuetify/components'
 import { useI18n } from 'vue-i18n'
 import useUnsavedChanges from '@/composables/useUnsavedChanges.ts'
+import type { RoasterRead } from '@/store/roasters/types'
 
 const countries = useCountries()
 const currencies = useCurrencies()
@@ -21,7 +21,6 @@ const roastersStore = useRoastersStore()
 const { required, numberRange, composeRules } = useValidation()
 const { t } = useI18n()
 
-const roasters: Ref<RoasterRead[]> = ref([])
 const initialForm = ref({})
 const form: Coffee = reactive({
   is_public: false,
@@ -43,12 +42,14 @@ const formattedDate: ComputedRef<string> = computed(() =>
   form.roast_date ? dayjs(form.roast_date).format('DD.MM.YYYY') : '',
 )
 
+const roasters: ComputedRef<RoasterRead[]> = computed(() => roastersStore.roasters || [])
+
 const onSelectRoastDate = () => {
   isDatepickerOpened.value = false
 }
 
 const getRoasters = async () => {
-  roasters.value = await roastersStore.getRoasters()
+  if (!roastersStore.roasters) await roastersStore.getRoasters()
 }
 
 const generateLabelI18N = (key: string): string => t(`coffee_form.${key}.label`)
