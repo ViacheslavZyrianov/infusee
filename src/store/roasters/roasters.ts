@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
+import { reactive, ref, type Ref } from 'vue'
 import supabase from '@/plugins/supabase.ts'
 import type { RoasterRead, RoastersLoading } from '@/store/roasters/types'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
@@ -13,7 +13,9 @@ export default defineStore('roasters', () => {
     getRoasters: true,
   })
 
-  const getRoasters = async (query?: string): Promise<RoasterRead[]> => {
+  const roasters: Ref<RoasterRead[] | null> = ref(null)
+
+  const getRoasters = async (query?: string) => {
     isLoading.getRoasters = true
 
     const { data, error } = (await supabase
@@ -27,8 +29,8 @@ export default defineStore('roasters', () => {
       alertStore.show(`Error fetching roasters: ${error.message}`, AlertType.Error)
     }
 
-    return data ?? []
+    roasters.value = data || []
   }
 
-  return { isLoading, getRoasters }
+  return { isLoading, roasters, getRoasters }
 })
