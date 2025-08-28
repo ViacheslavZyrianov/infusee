@@ -36,6 +36,7 @@
     "vuetify": "^3.9.5"
   },
   "devDependencies": {
+    "@cypress/vite-dev-server": "^7.0.0",
     "@tsconfig/node22": "^22.0.2",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.16.5",
