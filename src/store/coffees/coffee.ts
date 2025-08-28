@@ -12,14 +12,14 @@ export default defineStore('coffee', () => {
 
   const isLoading: CoffeeLoading = reactive({
     getCoffee: true,
-    postCoffee: false,
-    updateCoffee: false,
     deleteCoffee: false,
   })
 
   const userStore = useUserStore()
 
   const postCoffee = async (form: Coffee) => {
+    isLoading.postCoffee = true
+
     await userStore.getUser()
 
     const payload = {
@@ -28,6 +28,8 @@ export default defineStore('coffee', () => {
     }
 
     const { error } = await supabase.from('coffees').insert([payload])
+
+    isLoading.postCoffee = false
 
     if (error) {
       alertStore.show(`Error posting coffee: ${error.message}`, AlertType.Error)
