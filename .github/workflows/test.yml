@@ -49,7 +49,7 @@ jobs:
 
       # 7️⃣ Run Cypress E2E tests
       - name: Run Cypress E2E
-        run: npx cypress run --e2e --browser chrome --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --parallel
+        run: npx cypress run --e2e --browser chrome
 
       # 8️⃣ Upload artifacts if tests fail
       - name: Upload Cypress screenshots
