@@ -1,0 +1,63 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4️⃣ Run unit tests with Vitest
+      - name: Run Unit Tests
+        run: npm run test:unit
+
+      # 5️⃣ Build the project for E2E
+      - name: Build project
+        run: npm run build
+
+      # 6️⃣ Start preview server in background
+      - name: Start server
+        run: npm run preview &
+
+      # 7️⃣ Wait for server to be ready
+      - name: Wait for server
+        run: npx wait-on http://localhost:4173
+
+      # 8️⃣ Run Cypress E2E tests in parallel on Chrome
+      - name: Run Cypress E2E
+        run: |
+          npx cypress run --e2e \
+            --browser chrome \
+            --record=false \
+            --parallel
+          
+      # 9️⃣ Upload artifacts if tests fail
+      - name: Upload Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
