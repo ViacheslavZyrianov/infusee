@@ -3,21 +3,22 @@ import supabase from '@/plugins/supabase.ts'
 import type { BrewRead, BrewsLoading } from '@/store/brews/types.ts'
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js'
 import dayjs from 'dayjs'
-import { reactive } from 'vue'
+import { reactive, ref, type Ref } from 'vue'
 import useUserStore from '@/store/user/user.ts'
 import useAlertStore from '@/store/alert/alert.ts'
 import { AlertType } from '@/store/alert/types.ts'
 
 export default defineStore('brews', () => {
   const alertStore = useAlertStore()
+  const userStore = useUserStore()
 
   const isLoading: BrewsLoading = reactive({
     getBrews: true,
   })
 
-  const userStore = useUserStore()
+  const brews: Ref<BrewRead[]> = ref([])
 
-  const getBrews = async (): Promise<BrewRead[]> => {
+  const getBrews = async () => {
     isLoading.getBrews = true
 
     await userStore.getUser()
@@ -36,7 +37,7 @@ export default defineStore('brews', () => {
       alertStore.show(`Error fetching brews: ${error.message}`, AlertType.Error)
     }
 
-    return data || []
+    brews.value = data || []
   }
 
   const getBrewsTodayCount = async (): Promise<number> => {
@@ -101,5 +102,5 @@ export default defineStore('brews', () => {
     return counts
   }
 
-  return { isLoading, getBrews, getBrewsTodayCount, getBrewsWeeklyCount }
+  return { isLoading, brews, getBrews, getBrewsTodayCount, getBrewsWeeklyCount }
 })

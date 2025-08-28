@@ -3,7 +3,6 @@ import useBrewsStore from '@/store/brews/brews.ts'
 import useBrewStore from '@/store/brews/brew.ts'
 import useCoffeesStore from '@/store/coffees/coffees.ts'
 import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
-import type { BrewRead } from '@/store/brews/types.ts'
 import BrewItem from './brew-item.vue'
 import brewsEmptySVG from '@/assets/img/brews-empty.svg'
 import coffeesEmptySVG from '@/assets/img/coffees-empty.svg'
@@ -14,7 +13,6 @@ const brewStore = useBrewStore()
 const coffeesStore = useCoffeesStore()
 const { t } = useI18n()
 
-const brews: Ref<BrewRead[]> = ref([])
 const emptyImageSize = 300
 const coffeesTotalCount: Ref<number> = ref(0)
 const isLoading: Ref<boolean> = ref(false)
@@ -25,11 +23,7 @@ const isCoffeesEmpty: ComputedRef<boolean> = computed(
 
 const onDelete = async (id: string) => {
   await brewStore.deleteBrew(id)
-  await getBrews()
-}
-
-const getBrews = async () => {
-  brews.value = await brewsStore.getBrews()
+  await brewsStore.getBrews()
 }
 
 const getCoffeesTotalCount = async () => {
@@ -41,7 +35,7 @@ onMounted(async () => {
 
   await getCoffeesTotalCount()
 
-  if (!isCoffeesEmpty.value) await getBrews()
+  if (!isCoffeesEmpty.value && !brewsStore.brews.length) await brewsStore.getBrews()
 
   isLoading.value = false
 })
@@ -59,7 +53,7 @@ onMounted(async () => {
   <div v-else class="d-flex flex-column ga-4 h-100">
     <template v-if="!isCoffeesEmpty">
       <div
-        v-if="!brews.length"
+        v-if="!brewsStore.brews.length"
         class="d-flex flex-column justify-center align-center fill-height text-center"
       >
         <img
@@ -84,7 +78,12 @@ onMounted(async () => {
           {{ t('buttons.add') }}
         </v-btn>
       </div>
-      <brew-item v-for="brew in brews" :key="brew.id" :brew="brew" @delete="onDelete(brew.id)" />
+      <brew-item
+        v-for="brew in brewsStore.brews"
+        :key="brew.id"
+        :brew="brew"
+        @delete="onDelete(brew.id)"
+      />
     </template>
     <div v-else class="d-flex flex-column justify-center align-center fill-height">
       <img
