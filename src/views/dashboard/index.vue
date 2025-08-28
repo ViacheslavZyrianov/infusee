@@ -3,11 +3,13 @@ import type { WidgetData } from '@/views/dashboard/types'
 import { markRaw, onMounted, reactive, ref, type Ref } from 'vue'
 import Widget from '@/views/dashboard/widget.vue'
 import useBrewsStore from '@/store/brews/brews.ts'
+import useDashboardStore from '@/store/dashboard/dashboard.ts'
 import { useI18n } from 'vue-i18n'
 import CustomWidgetWeeklyBrews from './custom-widgets/weekly-brews.vue'
 
 const { t } = useI18n()
 const brewsStore = useBrewsStore()
+const dashboardStore = useDashboardStore()
 
 const widgets: Ref<WidgetData[]> = ref([])
 
@@ -28,7 +30,7 @@ const addWidgetBrewsTodayCount = async () => {
   let brewsTodayCount: number
 
   if (brewsStore.brews) brewsTodayCount = brewsStore.brews.length
-  else brewsTodayCount = await brewsStore.getBrewsTodayCount()
+  else brewsTodayCount = await dashboardStore.getBrewsTodayCount()
 
   widgetData.title = `${brewsTodayCount}`
   widgetData.label = t('dashboard.widgets.brews_today', brewsTodayCount)
