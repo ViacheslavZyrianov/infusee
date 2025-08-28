@@ -107,7 +107,7 @@
   </v-container>
   <v-footer class="position-fixed bottom-0 right-0 left-0 flex justify-center">
     <v-btn to="/terms-of-service" variant="text" class="text-decoration-underline">
-      Terms Of Service
+      Terms of Service
     </v-btn>
     <v-btn to="/" variant="text" class="text-decoration-underline"> Home </v-btn>
   </v-footer>
