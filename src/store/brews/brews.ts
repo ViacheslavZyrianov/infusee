@@ -16,7 +16,7 @@ export default defineStore('brews', () => {
     getBrews: true,
   })
 
-  const brews: Ref<BrewRead[]> = ref([])
+  const brews: Ref<BrewRead[] | null> = ref(null)
 
   const getBrews = async () => {
     isLoading.getBrews = true

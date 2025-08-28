@@ -25,17 +25,23 @@ const onDelete = async (id: string) => {
   await brewsStore.getBrews()
 }
 
-onMounted(async () => {
+const getCoffeesTotalCount = async () => {
   if (coffeesStore.coffeesTotalCount !== null) {
     isLoading.value = true
     await coffeesStore.getCoffeesTotalCount()
   }
+}
 
-  if (!isCoffeesEmpty.value && !brewsStore.brews.length) {
+const getBrews = async () => {
+  if (!isCoffeesEmpty.value && brewsStore.brews !== null) {
     isLoading.value = true
     await brewsStore.getBrews()
   }
+}
 
+onMounted(async () => {
+  await getCoffeesTotalCount()
+  await getBrews()
   isLoading.value = false
 })
 </script>
@@ -52,7 +58,7 @@ onMounted(async () => {
   <div v-else class="d-flex flex-column ga-4 h-100">
     <template v-if="!isCoffeesEmpty">
       <div
-        v-if="!brewsStore.brews.length"
+        v-if="!brewsStore.brews?.length"
         class="d-flex flex-column justify-center align-center fill-height text-center"
       >
         <img
