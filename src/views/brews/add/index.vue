@@ -13,17 +13,22 @@ const brewStore = useBrewStore()
 const brewsStore = useBrewsStore()
 
 const brewFormRef: Ref<InstanceType<typeof BrewForm> | null> = ref(null)
+const isSubmitButtonLoading: Ref<boolean> = ref(false)
 
 const onSave = async () => {
   const result = await brewFormRef.value?.validate()
 
   if (!result?.valid || !brewFormRef.value) return
 
+  isSubmitButtonLoading.value = true
+
   await brewStore.postBrew(brewFormRef.value.form)
 
   brewFormRef.value.resetInitialForm()
 
   await brewsStore.getBrews()
+
+  isSubmitButtonLoading.value = false
 
   router.push('/brews')
 }
@@ -35,8 +40,8 @@ const onSave = async () => {
   </teleport>
   <teleport defer to="#app-bar-action--right">
     <v-btn
-      :loading="brewStore.isLoading.postBrew"
-      :disabled="brewStore.isLoading.postBrew"
+      :loading="isSubmitButtonLoading"
+      :disabled="isSubmitButtonLoading"
       color="success"
       @click="onSave"
     >
