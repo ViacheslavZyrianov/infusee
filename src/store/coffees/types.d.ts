@@ -23,8 +23,6 @@ export type CoffeesLoading = {
 
 export type CoffeeLoading = {
   getCoffees?: boolean
-  postCoffee?: boolean
   getCoffee?: boolean
-  updateCoffee?: boolean
   deleteCoffee?: boolean
 }

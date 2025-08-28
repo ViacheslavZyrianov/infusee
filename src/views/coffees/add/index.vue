@@ -12,17 +12,22 @@ const coffeeStore = useCoffeeStore()
 const coffeesStore = useCoffeesStore()
 
 const coffeeFormRef: Ref<InstanceType<typeof CoffeeForm> | null> = ref(null)
+const isSubmitButtonLoading: Ref<boolean> = ref(false)
 
 const onSave = async () => {
   const result = await coffeeFormRef.value?.validate()
 
   if (!result?.valid || !coffeeFormRef.value) return
 
+  isSubmitButtonLoading.value = true
+
   await coffeeStore.postCoffee(coffeeFormRef.value.form)
 
   coffeeFormRef.value.resetInitialForm()
 
   await coffeesStore.getCoffees()
+
+  isSubmitButtonLoading.value = false
 
   router.push('/coffees')
 }
@@ -34,8 +39,8 @@ const onSave = async () => {
   </teleport>
   <teleport defer to="#app-bar-action--right">
     <v-btn
-      :loading="coffeeStore.isLoading.postCoffee"
-      :disabled="coffeeStore.isLoading.postCoffee"
+      :loading="isSubmitButtonLoading"
+      :disabled="isSubmitButtonLoading"
       color="success"
       @click="onSave"
     >
