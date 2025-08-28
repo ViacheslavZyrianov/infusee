@@ -3,6 +3,7 @@ import { computed, type ComputedRef, onMounted, type Ref, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BrewForm from '@/views/brews/brew-form.vue'
 import useBrewStore from '@/store/brews/brew.ts'
+import useBrewsStore from '@/store/brews/brews.ts'
 import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
@@ -10,6 +11,7 @@ const router = useRouter()
 const { t } = useI18n()
 
 const brewStore = useBrewStore()
+const brewsStore = useBrewsStore()
 
 const brewFormRef: Ref<InstanceType<typeof BrewForm> | null> = ref(null)
 
@@ -37,6 +39,8 @@ const onSave = async () => {
   await brewStore.updateBrew(id.value, brewFormRef.value.form)
 
   brewFormRef.value.resetInitialForm()
+
+  await brewsStore.getBrews()
 
   router.push(`/brews/${id.value}`)
 }
