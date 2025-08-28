@@ -35,8 +35,8 @@ jobs:
 #        run: npm run test:unit
 
       # 5️⃣ Build the project for E2E
-      - name: Build project
-        run: npm run build
+      - name: Build project for E2E
+        run: npm run build:test
 
       # 6️⃣ Start preview server in background
       - name: Start server
@@ -44,7 +44,7 @@ jobs:
 
       # 7️⃣ Wait for server to be ready
       - name: Wait for server
-        run: npx wait-on http://localhost:5173
+        run: npx wait-on http://localhost:4173
 
       # 8️⃣ Run Cypress E2E tests in parallel on Chrome
       - name: Run Cypress E2E
