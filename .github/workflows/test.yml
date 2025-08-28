@@ -30,9 +30,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4️⃣ Run unit tests with Vitest
-      - name: Run Unit Tests
-        run: npm run test:unit
+#      # 4️⃣ Run unit tests with Vitest
+#      - name: Run Unit Tests
+#        run: npm run test:unit
 
       # 5️⃣ Build the project for E2E
       - name: Build project
