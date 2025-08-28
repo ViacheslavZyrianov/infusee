@@ -25,7 +25,10 @@ const addWidgetBrewsTodayCount = async () => {
 
   widgets.value.push(widgetData)
 
-  const brewsTodayCount = await brewsStore.getBrewsTodayCount()
+  let brewsTodayCount: number
+
+  if (brewsStore.brews) brewsTodayCount = brewsStore.brews.length
+  else brewsTodayCount = await brewsStore.getBrewsTodayCount()
 
   widgetData.title = `${brewsTodayCount}`
   widgetData.label = t('dashboard.widgets.brews_today', brewsTodayCount)
