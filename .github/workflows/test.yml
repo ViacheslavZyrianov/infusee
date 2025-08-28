@@ -34,13 +34,13 @@ jobs:
       - name: Build project for E2E
         run: npm run build:test
 
-      # 6️⃣ Start preview server in background
+      # 6️⃣ Start preview server on 5173 (background)
       - name: Start server
-        run: npm run preview &
+        run: npm run preview -- --port 5173 &
 
       # 7️⃣ Wait for server to be ready
       - name: Wait for server
-        run: npx wait-on http://localhost:4173
+        run: npx wait-on http://localhost:5173
 
       # 8️⃣ Run Cypress E2E tests in parallel on Chrome
       - name: Run Cypress E2E
