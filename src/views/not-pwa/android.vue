@@ -1,13 +1,17 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { VIcon } from 'vuetify/components'
+
+const { tm } = useI18n()
+</script>
+
 <template>
   <v-card class="text-body-1 text-left" variant="tonal" rounded="xl">
     <div class="d-flex align-center justify-center mb-2">
       <v-icon icon="mdi-android" size="48" />
     </div>
-    <ol class="pl-6">
-      <li>Open this app in <strong>Chrome</strong>.</li>
-      <li>Tap the <strong>⋮ menu</strong> in the top-right corner.</li>
-      <li>Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
-      <li>Confirm by tapping <strong>Install</strong>.</li>
+    <ol>
+      <li v-for="step in tm('not_pwa.android.steps')" :key="step" v-html="step" />
     </ol>
   </v-card>
 </template>
