@@ -324,12 +324,8 @@
     }
   ],
   "roast_level_options": [
-    { "title": "Світлий", "value": "light" },
-    { "title": "Світло-середній", "value": "light_medium" },
-    { "title": "Середній", "value": "medium" },
-    { "title": "Середньо-темний", "value": "medium_dark" },
-    { "title": "Темний", "value": "dark" },
-    { "title": "Дуже темний", "value": "very_dark" }
+    { "title": "Для еспресо", "value": "espresso" },
+    { "title": "Для фільтра", "value": "filter" }
   ],
   "locales": {
     "en": "Англійська",

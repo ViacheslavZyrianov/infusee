@@ -325,12 +325,8 @@
     }
   ],
   "roast_level_options": [
-    { "title": "Light", "value": "light" },
-    { "title": "Light-Medium", "value": "light_medium" },
-    { "title": "Medium", "value": "medium" },
-    { "title": "Medium-Dark", "value": "medium_dark" },
-    { "title": "Dark", "value": "dark" },
-    { "title": "Very Dark", "value": "very_dark" }
+    { "title": "For espresso", "value": "espresso" },
+    { "title": "For filter", "value": "filter" }
   ],
   "locales": {
     "en": "English",
