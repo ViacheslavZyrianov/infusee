@@ -132,7 +132,7 @@ defineExpose({
       <v-select
         v-model="form.roast_level"
         :items="roastLevelOptions"
-        :label="generateLabelI18N('select_roast_level')"
+        :label="generateLabelI18N('select_roast_type')"
         clearable
       />
 

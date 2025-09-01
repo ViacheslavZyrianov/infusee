@@ -191,8 +191,8 @@
         "range": "Cupping score must be between 60 and 100"
       }
     },
-    "select_roast_level": {
-      "label": "Select roast level"
+    "select_roast_type": {
+      "label": "Select roast type"
     },
     "select_country_of_origin": {
       "label": "Select country of origin",
@@ -325,12 +325,8 @@
     }
   ],
   "roast_level_options": [
-    { "title": "Light", "value": "light" },
-    { "title": "Light-Medium", "value": "light_medium" },
-    { "title": "Medium", "value": "medium" },
-    { "title": "Medium-Dark", "value": "medium_dark" },
-    { "title": "Dark", "value": "dark" },
-    { "title": "Very Dark", "value": "very_dark" }
+    { "title": "For espresso", "value": "espresso" },
+    { "title": "For filter", "value": "filter" }
   ],
   "locales": {
     "en": "English",
