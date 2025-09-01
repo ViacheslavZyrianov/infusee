@@ -49,6 +49,16 @@
         "Select <strong>Install app</strong> or <strong>Add to Home screen</strong>.",
         "Confirm by tapping <strong>Install</strong>."
       ]
+    },
+    "other": {
+      "p_1": "Installation is only supported on <strong>Safari (iOS)</strong> and <strong>Chrome (Android)</strong>.",
+      "list": {
+        "title": "If you’re using a different browser or desktop:",
+        "items": [
+          "<strong>Chrome / Edge (Desktop):</strong> Look for an <em>“Install App”</em> or\n<em>“Add to Home screen”</em> option in the address bar.",
+          "<strong>Firefox & others:</strong> PWA installation may not be supported."
+        ]
+      }
     }
   },
   "dashboard": {
