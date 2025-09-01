@@ -191,8 +191,8 @@
         "range": "Cupping score must be between 60 and 100"
       }
     },
-    "select_roast_level": {
-      "label": "Select roast level"
+    "select_roast_type": {
+      "label": "Select roast type"
     },
     "select_country_of_origin": {
       "label": "Select country of origin",

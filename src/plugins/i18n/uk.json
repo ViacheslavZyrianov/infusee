@@ -191,8 +191,8 @@
         "range": "Оцінка якості має бути від 60 до 100"
       }
     },
-    "select_roast_level": {
-      "label": "Рівень обсмаження"
+    "select_roast_type": {
+      "label": "Тип обсмаження"
     },
     "select_country_of_origin": {
       "label": "Країна походження"
