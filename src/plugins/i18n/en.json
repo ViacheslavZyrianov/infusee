@@ -187,7 +187,7 @@
   },
   "coffee_form": {
     "is_public": {
-      "label": "Видима для інших"
+      "label": "Visible for others"
     },
     "name": {
       "label": "Coffee name",
