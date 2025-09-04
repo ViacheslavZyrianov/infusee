@@ -1,7 +1,6 @@
 import type { RoasterRead } from '@/store/roasters/types'
 
 export type Coffee = {
-  is_public: boolean
   name: string
   roaster_id: string | null
   roast_level: string | null

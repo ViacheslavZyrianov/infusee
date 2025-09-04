@@ -48,7 +48,6 @@ const onDelete = () => {
     <div class="d-flex align-start justify-space-between">
       <v-card-title class="d-flex flex-column gr-1 text-truncate" style="width: calc(100% - 62px)">
         <div class="d-flex align-center">
-          <v-icon v-if="!coffee.is_public" icon="mdi-incognito" size="18" class="mr-2" />
           <v-chip
             v-if="coffee.cupping_score"
             :text="coffee.cupping_score"

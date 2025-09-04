@@ -186,9 +186,6 @@
     "title": "Edit Coffee"
   },
   "coffee_form": {
-    "is_public": {
-      "label": "Visible for others"
-    },
     "name": {
       "label": "Coffee name",
       "placeholder": "Enter coffee name",
